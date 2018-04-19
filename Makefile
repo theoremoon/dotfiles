@@ -1,11 +1,24 @@
 PKG=sudo pacman -S --noconfirm
 PWD=`pwd`
 
-all: i3 nvim zsh privates 
-
+all: i3 nvim zsh yaourt chrome privates japanese
 
 base:
 	$(PKG) curl git
+
+yaourt:
+	sudo echo -e '[archlinuxfr]\nSigLevel = Never\nServer = http://repo.archlinux.fr/$$arch' >> /etc/pacman.conf
+	sudo pacman -Syy --noconfirm
+	sudo pacman -S yaourt
+
+chrome:
+	yaourt -S --noconfirm google-chrome
+
+japanese:
+	$(PKG) fcitx-mozc fcitx-configtool fcitx-im
+	install -D $(PWD)/.config/fcitx/config $(HOME)/.config/fcitx/config
+	install -D $(PWD)/.config/fcitx/profile $(HOME)/.config/fcitx/profile
+	echo 'export DefaultImModule=fcitx\nexport GTK_IM_MODULE=fcitx\nexport QT_IM_MODULE=fcitx\nexport XMODIFIERS="@im=fcitx"' > $(HOME)/.profile
 
 i3:
 	$(PKG) i3-wm i3-status network-manager-applet pulseaudio rofi
