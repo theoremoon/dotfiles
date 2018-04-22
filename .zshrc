@@ -50,7 +50,6 @@ alias rm='gotrash'
 # alias
 alias vim='nvim'
 alias ls='ls --color=auto'
-alias diary="python3 $HOME/diary/diary.py"
 
 # fun fun function
 hoge() { echo 'HOGE' | toilet --gay -f smblock; }
@@ -67,5 +66,7 @@ setxkbmap -option ctrl:nocaps
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-diary check
 python $HOME/sada_scraping/sada.py
+
+# OPAM configuration
+. /home/theoldmoon0602/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
