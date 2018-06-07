@@ -1,0 +1,8 @@
+[user]
+	email = theoldmoon0602@gmail.com
+	name = theoldmoon0602
+[core]
+	editor = vim
+
+[url "ssh://"]
+	InsteadOf = https://
