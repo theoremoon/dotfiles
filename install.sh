@@ -63,14 +63,12 @@ BINARIES="i3 zsh nvim"
 
 if [ "$#" == 0 ]; then
   deploy_all
+elif [ "$1" == "check" ]; then
+  for b in "$BINARIES"; do
+    check_binary $b
+  done
 else
   for a in "$@"; do
-    if [ "$a" == "check" ]; then
-      for b in "$BINARIES"; do
-        check_binary $b
-      done
-    else
-      deploy_it $a $HOME
-    fi
+    deploy_it $a $HOME
   done
 fi
