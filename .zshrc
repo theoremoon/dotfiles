@@ -60,6 +60,7 @@ export PATH="/home/theoldmoon0602/anaconda3/bin:$PATH"
 export PATH=/home/theoldmoon0602/.config/composer/vendor/bin:$PATH
 
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.dub/packages/.bin:$PATH"
 
 setxkbmap -option ctrl:nocaps
 
@@ -70,3 +71,5 @@ python $HOME/sada_scraping/sada.py
 
 # OPAM configuration
 . /home/theoldmoon0602/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+export FZF_DEFAULT_COMMAND='ag -l -g ""'

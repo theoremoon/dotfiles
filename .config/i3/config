@@ -171,3 +171,4 @@ exec setxkbmap -layout jp
 exec setxkbmap -option ctrl:nocaps
 exec xfce4-terminal
 exec nm-applet
+exec --no-startup-id feh --bg-scale /etc/wallpaper.png

@@ -1,78 +1,54 @@
-" plugin manager 
-call plug#begin('~/.vim/plugged')
-  Plug 'junegunn/vim-easy-align'
-  Plug 'tpope/vim-surround' "select and S[surrounder], cs[from][to], ds[surrounder]
-  Plug 'tpope/vim-commentary'  "gcc -> comment in/out
-  Plug 'airblade/vim-gitgutter'
-  Plug 'w0rp/ale'
-  Plug 'haya14busa/incsearch.vim'
-  Plug 'haya14busa/incsearch-fuzzy.vim'
-  Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'js'] } "C-y , on insert mode
-  Plug 'sheerun/vim-polyglot'
-  Plug 'itchyny/lightline.vim'
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  Plug 'junegunn/fzf.vim'
-  Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'theoldmoon0602/fzf_outline.vim'
-  Plug 'soramugi/auto-ctags.vim'
-  Plug 'fatih/vim-go', {'for': 'go'}
-
-" colorscheme
-  Plug 'yamasy1549/gochiusa.vim'
-  Plug 'junegunn/seoul256.vim'
-  Plug 'romainl/Apprentice'
-call plug#end()
-
+""" options
+set nocompatible
+set whichwrap=b,s,h,l,<,>  " BS Space h l left right can move over line
+set path=.,/usr/include,/usr/local/include,,  " list of directory names used for file searching
+set noautochdir  " do not change directory when open file
+set wrapscan  " search from top when reached bottom
+set incsearch  " incremental search
+set regexpengine=0  " automatically select regexp engine
+set ignorecase  " non-case-sensitive search
+set nosmartcase  " non-case-sensitive search even Uppercase is included
+set tagbsearch  " use binary search for tags file
+set taglength=0  " whole of tag name has meaning
+" set tags  " use default value
+set tagcase=ignore  " ignore case when searching tags file
+set wrap  " wrap long line
+set linebreak  " wrap on specific characters (breakat)
+set nobreakindent  " dont insert visually space when wrap line
+let &showbreak = '+++ '  " show wrap string
+set display=truncate,uhex  " show @@@ as (displayed) last line's first character, show unprintable character as <xx> formatted
 set number
-set autoindent
-set smartindent
-" set lazyredraw 
-set laststatus=2
-set showcmd
-set visualbell
+set background=dark
+set spell  " shellcheck
+set spellsuggest=best
+set laststatus=2  " always show status line
+" set statusline  " managed by plugin
+set ruler 
+set belloff=all
+set undofile  " use undofile
+set undodir=~/.vim/undodir
+set textwidth=0  " dont break line (different with wrap line
 set backspace=indent,eol,start
-set timeoutlen=500  "for mapped key timeout
-set whichwrap=b,s  "for <BS>, <Space> move in normal mode
-set shortmess=aIT
-set hlsearch
-set incsearch
-set hidden  "use hidden buffer
-set ignorecase smartcase
-set wildmenu  "use tab completion on command-line mode
-set wildmode=full
+set complete=.,w,b,u,k,i,d,t  "current buffer, other buffers, buffer lists, dictionary, current file and includes, same, tagfiles
+set dictionary+=/usr/share/dict/words
 set tabstop=2
 set shiftwidth=2
-set expandtab smarttab
-set scrolloff=5
-set encoding=utf-8
-set list  "for display trailing whitespace
-set listchars=tab:\|\  "tab showed as |
-set virtualedit=block
-set nojoinspaces
-set diffopt=filler,vertical
-set autoread
-set clipboard=""
-set grepformat=%f:%l:%c:%m,%f:%l:%m  "parse format for external grep
-set completeopt=menuone,preview
-set nocursorline
-set nrformats=hex
-set formatoptions+=1j
-set nobreakindent
-if has('termguicolors')
-  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
-set backupdir=~/.vim/backupdir
+set smarttab  " insert number of shiftwidth spaces at head of line
+set softtabstop=0  " dont mix space and tab
+set shiftround  " align indent following shiftwidth when << and >>
+set expandtab  " use spaces instead of tab
+set smartindent
+set fileformat=unix  " default is LF
+set fileformats=unix,dos  " accept LF and CRLF
+set writebackup  " create backup file before overwriting and delete if write complete
+set swapfile
 set directory=~/.vim/swapdir
-set undodir=~/.vim/undodir
+set enc=utf-8
+set fileencodings=usc-bom,utf-8,default,latin1
 set viminfo+=n~/.vim/viminfo
-set complete=.,w,b,u,k,i,d,t  "current buffer, other buffers, buffer lists, dictionary, current file and includes, same, tagfiles
-set textwidth=0
-set isfname-==  "= is not filename
-set nofixeol
 set signcolumn=yes
+set wildmenu  " use tab completion on commandline mode
+set wildmode=full
 
 if !isdirectory(expand("~/.vim/backupdir"))
   call mkdir(expand("~/.vim/backupdir"))
@@ -84,91 +60,85 @@ if !isdirectory(expand("~/.vim/undodir"))
   call mkdir(expand("~/.vim/undodir"))
 endif
 
+""" plugins
+call plug#begin('~/.vim/plugged')
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
+
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/neosnippet.vim'
+  Plug 'Shougo/neosnippet-snippets'
+  Plug 'autozimu/LanguageClient-neovim', {
+        \ 'branch': 'next',
+        \ 'do': 'bash install.sh',
+        \ }
+
+  Plug 'itchyny/lightline.vim'
+
+  Plug 'JesseKPhillips/d.vim'
+  Plug 'idanarye/vim-dutyl'
+  Plug 'landaire/deoplete-d'
+
+  Plug 'junegunn/seoul256.vim'
+call plug#end()
+
+
+""" mappings
 let mapleader="\<Space>"
 let maplocalleader="\<Space>"
 
-""" mappings
-" Save
-nnoremap <Leader>w :w<CR>
-
-" Quit
-nnoremap <Leader>q :q<CR>
-nnoremap <Leader>Q :qa!<CR>
-
-" source $MYVIMRC
-nnoremap <Leader>e :source $MYVIMRC<CR>
-
 inoremap jk <Esc>
-
-" Move in insert mode 
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader><Leader>q :qa!<CR>
+nnoremap <Leader>e :source $MYVIMRC<CR>
 inoremap <C-h> <C-o>h
 inoremap <C-l> <C-o>a
 inoremap <C-j> <C-o>j
 inoremap <C-k> <C-o>k
 inoremap <C-a> <C-o>^
 inoremap <C-e> <C-o>$
-
-" QuickFix
-nnoremap ]q :cnext<CR>zz
-nnoremap [q :cprev<CR>zz
-nnoremap ]l :lnext<CR>zz
-nnoremap [l :lprev<CR>zz
-
-" Buffers
-nnoremap ]b :bnext<CR>
-nnoremap [b :bprev<CR>
-
-" Tabs
-nnoremap ]t :tabn<CR>
-nnoremap [t :tabp<CR>
-
-" Command Line mode
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
-
-" copy and paste
 vnoremap <Leader>y "+y
 vnoremap <Leader>p "+p
 nnoremap <Leader>p "+p
 
-" -- Plugins ---
-xmap ga <Plug>(EasyAlign)  "usage: ga=, ga2|
+" complete
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 
-map / <Plug>(incsearch-forward)
-map ? <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
-map z/ <Plug>(incsearch-fuzzy-/)
-map z? <Plug>(incsearch-fuzzy-?)
-map zg/ <Plug>(incsearch-fuzzy-stay)
-
-nnoremap <Leader>j :Ag<CR>
-nnoremap <Leader>f :Files<CR>
-nnoremap <Leader>t :Tags<CR>
-nnoremap <C-p> :Files<CR>
+""" fzf
+let g:fzf_buffers_jump = 1  " jump to existing window if possible
 let g:fzf_tags_command='ctags -R'
 
-let g:ale_set_loclist=0
-let g:ale_set_quickfix=1
+nnoremap \ :BLines<CR>
+nnoremap ; :Commands<CR>
+nnoremap <C-p> :Files<CR>
 
-let g:deoplete#enable_at_startup=1
+""" LSP
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 
-let g:LanguageClient_severCommands ={
-  \ 'd': ['serve-d'],
-  \ 'php': ['phps'],
-  \ }
-nnoremap <silent>gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent>rn :call LanguageClient#textDocument_rename()<CR>
+""" language specific settings
+let g:LanguageClient_serverCommands = {
+  \'d': ['serve-d'],
+  \}
 
-nnoremap <Leader>o :Outline<CR>
+let g:LanguageClient_rootMarkers = {
+  \ 'd': ['dub.json']
+  \}
 
-let g:auto_ctags = 1
+let g:deoplete#sources#d#dcd_server_autostart = 1
 
-augroup d_ctags
-  autocmd!
-  autocmd BufRead,BufNewFile *.d let g:auto_ctags_bin_path = 'dctags'
-  autocmd BufRead,BufNewFile *.d let g:auto_ctags_tags_args = ''
-augroup END
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('ignore_case', v:true)
+call deoplete#custom#option('sources', {
+  \'_': ['buffer'],
+  \})
 
-
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
 colorscheme seoul256
 syntax on
