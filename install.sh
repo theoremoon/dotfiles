@@ -42,24 +42,35 @@ function deploy_rec()
 }
 
 # -- main --
-function deploy_all()
+function deploy_it()
 {
-  fs=$(ls -a | grep -v '\.\+$' | grep -v -E '(util.sh|Makefile|.git)')
-  for f in $fs; do
-    if [ -f "$f" ]; then
-      deploy $f $HOME
-    elif [ -d "$f" ]; then
-      deploy_rec $f $HOME
-    fi
-  done
+  if [ -f "$1" ]; then
+    deploy $1 $2
+  elif [ -d "$1" ]; then
+    deploy_rec $1 $2
+  fi
+
 }
 
-case "$1" in
-  "all")
-    
-    ;;
-  *)
-    deploy_all
-    ;;
+function deploy_all()
+{
+  fs=$(ls -a | grep -v '\.\+$' | grep -v -E '(util.sh|Makefile|.git|README.md)')
+  for f in $fs; do
+    deploy_it $f $HOME
+  done
+}
+BINARIES="i3 zsh nvim"
 
-esac
+if [ "$#" == 0 ]; then
+  deploy_all
+else
+  for a in "$@"; do
+    if [ "$a" == "check" ]; then
+      for b in "$BINARIES"; do
+        check_binary $b
+      done
+    else
+      deploy_it $a $HOME
+    fi
+  done
+fi
