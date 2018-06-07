@@ -54,13 +54,12 @@ function deploy_all()
   done
 }
 
-BINARIES=zsh i3 nvim
-
 case "$1" in
   "all")
-    deploy_all
     
     ;;
   *)
-    echo "$<|1|> Didn't match anything"
+    deploy_all
+    ;;
+
 esac
