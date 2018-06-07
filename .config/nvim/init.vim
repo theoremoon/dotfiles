@@ -3,9 +3,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/vim-easy-align'
   Plug 'tpope/vim-surround' "select and S[surrounder], cs[from][to], ds[surrounder]
   Plug 'tpope/vim-commentary'  "gcc -> comment in/out
-  Plug 'mbbill/undotree'
-  Plug 'jiangmiao/auto-pairs'
-  Plug 'simnalamburt/vim-mundo'
   Plug 'airblade/vim-gitgutter'
   Plug 'w0rp/ale'
   Plug 'haya14busa/incsearch.vim'
@@ -15,12 +12,12 @@ call plug#begin('~/.vim/plugged')
   Plug 'itchyny/lightline.vim'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
-  Plug 'LeafCage/yankround.vim'
-  Plug 'autozimu/LanguageClient-neovim', {
-        \ 'branch': 'next',
-        \ 'do': 'bash install.sh',
-        \ }
+  Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'theoldmoon0602/fzf_outline.vim'
+  Plug 'soramugi/auto-ctags.vim'
+  Plug 'fatih/vim-go', {'for': 'go'}
+
 " colorscheme
   Plug 'yamasy1549/gochiusa.vim'
   Plug 'junegunn/seoul256.vim'
@@ -91,11 +88,6 @@ let mapleader="\<Space>"
 let maplocalleader="\<Space>"
 
 """ mappings
-
-" open new line 
-nnoremap <Leader>o o<Esc>
-nnoremap <Leader>O O<Esc>
-
 " Save
 nnoremap <Leader>w :w<CR>
 
@@ -113,7 +105,7 @@ inoremap <C-h> <C-o>h
 inoremap <C-l> <C-o>a
 inoremap <C-j> <C-o>j
 inoremap <C-k> <C-o>k
-inoremap <C-a> <C-o>0
+inoremap <C-a> <C-o>^
 inoremap <C-e> <C-o>$
 
 " QuickFix
@@ -142,15 +134,6 @@ nnoremap <Leader>p "+p
 " -- Plugins ---
 xmap ga <Plug>(EasyAlign)  "usage: ga=, ga2|
 
-nnoremap U :UndotreeToggle<CR>
-
-nmap p <Plug>(yankround-p)
-nmap P <Plug>(yankround-P)
-nmap gp <Plug>(yankround-gp)
-nmap gP <Plug>(yankround-gP)
-nmap <C-p> <Plug>(yankround-prev)
-nmap <C-n> <Plug>(yankround-next)
-
 map / <Plug>(incsearch-forward)
 map ? <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
@@ -163,7 +146,6 @@ nnoremap <Leader>f :Files<CR>
 nnoremap <Leader>t :Tags<CR>
 nnoremap <C-p> :Files<CR>
 let g:fzf_tags_command='ctags -R'
-autocmd Filetype d let g:fzf_tags_command='dscanner --ctags > tags'
 
 let g:ale_set_loclist=0
 let g:ale_set_quickfix=1
@@ -172,9 +154,20 @@ let g:deoplete#enable_at_startup=1
 
 let g:LanguageClient_severCommands ={
   \ 'd': ['serve-d'],
+  \ 'php': ['phps'],
   \ }
 nnoremap <silent>gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent>rn :call LanguageClient#textDocument_rename()<CR>
+
+nnoremap <Leader>o :Outline<CR>
+
+let g:auto_ctags = 1
+
+augroup d_ctags
+  autocmd!
+  autocmd BufRead,BufNewFile *.d let g:auto_ctags_bin_path = 'dctags'
+  autocmd BufRead,BufNewFile *.d let g:auto_ctags_tags_args = ''
+augroup END
 
 
 colorscheme seoul256
