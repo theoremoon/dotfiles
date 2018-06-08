@@ -1,3 +1,4 @@
+
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -10,8 +11,12 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
-local volume_control = require("volume-control")
 
+if not gears.filesystem.dir_readable("~/.config/awesome/volume-control") then
+  awful.spawn.with_shell("git clone https://github.com/deficient/volume-control ~/.config/awesome/volume-control")
+end
+
+local volume_control = require("volume-control")
 volumecfg = volume_control({})
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
@@ -571,6 +576,3 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 awful.spawn("fcitx-autostart")
 
-if not dir_readable("~/.config/awesome/volume_control") then
-  awful.spawn.with_shell("git clone https://github.com/deficient/volume-control ~/.config/awesome/volume_control")
-end
