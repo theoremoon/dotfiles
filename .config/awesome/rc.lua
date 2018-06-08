@@ -569,4 +569,8 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 --
 
-awful.util.spawn("fcitx-autostart")
+awful.spawn("fcitx-autostart")
+
+if not dir_readable("~/.config/awesome/volume_control") then
+  awful.spawn.with_shell("git clone https://github.com/deficient/volume-control ~/.config/awesome/volume_control")
+end

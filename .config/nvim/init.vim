@@ -121,6 +121,7 @@ nnoremap <C-p> :Files<CR>
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 
 """ language specific settings
+set hidden
 let g:LanguageClient_serverCommands = {
   \'d': ['serve-d'],
   \}
