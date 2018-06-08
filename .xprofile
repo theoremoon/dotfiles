@@ -1,0 +1,7 @@
+IM=fcitx
+export DefaultImModule=$IM
+export GTK_IM_MODULE=$IM
+export QT_IM_MODULE=$IM
+#uim-xim&
+#uim-toolbar-gtk-systray
+export XMODIFIERS="@im=$IM"
