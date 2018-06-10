@@ -73,3 +73,6 @@ python $HOME/sada_scraping/sada.py
 . /home/theoldmoon0602/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 export FZF_DEFAULT_COMMAND='ag -l -g ""'
+
+alias gitp="git push origin master"
+alias gits="git status"
