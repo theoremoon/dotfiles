@@ -68,10 +68,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'Shougo/neosnippet.vim'
   Plug 'Shougo/neosnippet-snippets'
-  Plug 'autozimu/LanguageClient-neovim', {
-        \ 'branch': 'next',
-        \ 'do': 'bash install.sh',
-        \ }
+  " Plug 'autozimu/LanguageClient-neovim', {
+  "       \ 'branch': 'next',
+  "       \ 'do': 'bash install.sh',
+  "       \ }
 
   Plug 'itchyny/lightline.vim'
 
@@ -118,22 +118,23 @@ nnoremap ; :Commands<CR>
 nnoremap <C-p> :Files<CR>
 
 """ LSP
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-
-""" language specific settings
-set hidden
-let g:LanguageClient_serverCommands = {
-  \'d': ['serve-d'],
-  \}
-
-let g:LanguageClient_rootMarkers = {
-  \ 'd': ['dub.json']
-  \}
+" nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+" 
+" """ language specific settings
+" set hidden
+" let g:LanguageClient_serverCommands = {
+"   \'d': ['serve-d'],
+"   \}
+" 
+" let g:LanguageClient_rootMarkers = {
+"   \ 'd': ['dub.json']
+"   \}
 
 let g:deoplete#sources#d#dcd_server_autostart = 1
 
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option('ignore_case', v:true)
+call deoplete#custom#option('auto_complete', v:true)
 call deoplete#custom#option('sources', {
   \'_': ['buffer'],
   \})
