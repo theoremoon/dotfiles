@@ -576,4 +576,5 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 awful.spawn("fcitx-autostart")
 awful.spawn("nm-applet")
+awful.spawn.with_shell("setxkbmap -option ctrl:nocaps")
 
