@@ -166,7 +166,7 @@ bindsym XF86AudioRaiseVolume exec amixer -q set Master '5%+' unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master '5%-' unmute
 bindsym XF86AudioMute exec amixer -q set Master toggle
 
-exec --no-startup-id fcitx
+# exec --no-startup-id fcitx-autostart
 exec setxkbmap -layout jp
 exec setxkbmap -option ctrl:nocaps
 exec xfce4-terminal

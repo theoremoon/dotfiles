@@ -77,7 +77,7 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'JesseKPhillips/d.vim'
   Plug 'idanarye/vim-dutyl'
-  Plug 'landaire/deoplete-d'
+  Plug 'landaire/deoplete-d', { 'for': 'd' }
 
   Plug 'junegunn/seoul256.vim'
 call plug#end()
