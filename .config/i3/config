@@ -48,8 +48,10 @@ bindsym $mod+p exec rofi -show window
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
-bindsym $mod+l focus up
+# bindsym $mod+l focus up
 bindsym $mod+semicolon focus right
+
+bindsym $mod+l exec i3lock -ten -i /opt/lock.png
 
 # alternatively, you can use the cursor keys:
 # bindsym $mod+Left focus left
@@ -171,4 +173,4 @@ exec setxkbmap -layout jp
 exec setxkbmap -option ctrl:nocaps
 exec xfce4-terminal
 exec nm-applet
-exec --no-startup-id feh --bg-scale /etc/wallpaper.png
+exec --no-startup-id "feh --bg-scale /opt/wallpaper.png"
