@@ -245,6 +245,7 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
+    awful.key({ modkey,           }, "l",      function() awful.spawn("i3lock -i /etc/wallpaper.png -ten ") end),
     awful.key({ modkey,           }, "d",      function() awful.spawn("rofi -show run") end),
     awful.key({}, "XF86AudioRaiseVolume", function() volumecfg:up() end),
     awful.key({}, "XF86AudioLowerVolume", function() volumecfg:down() end),
@@ -301,8 +302,8 @@ globalkeys = gears.table.join(
     -- awful.key({ modkey, "Shift"   }, "q", awesome.quit,
     --          {description = "quit awesome", group = "awesome"}),
 
-    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
-              {description = "increase master width factor", group = "layout"}),
+    -- awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
+    --           {description = "increase master width factor", group = "layout"}),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)          end,
               {description = "decrease master width factor", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
