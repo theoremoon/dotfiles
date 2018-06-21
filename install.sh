@@ -54,7 +54,7 @@ function deploy_it()
 
 function deploy_all()
 {
-  fs=$(ls -a | grep -v '\.\+$' | grep -v -E '(install.sh|Makefile|.git|README.md)')
+  fs=$(ls -a | grep -v '\.\+$' | grep -v -E '(install.sh|Makefile|^.git$|README.md)')
   for f in $fs; do
     deploy_it $f $HOME
   done

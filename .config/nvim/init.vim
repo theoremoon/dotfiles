@@ -81,6 +81,7 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'othree/html5.vim', { 'for': ['html', 'js', 'css' , 'php'] }
   Plug 'mattn/emmet-vim', { 'for': ['html', 'js', 'css' , 'php'] }
+  Plug 'fatih/vim-go', { 'for': 'go' }
 
   Plug 'junegunn/seoul256.vim'
 call plug#end()
