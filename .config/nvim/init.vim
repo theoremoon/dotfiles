@@ -79,6 +79,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'idanarye/vim-dutyl'
   Plug 'landaire/deoplete-d', { 'for': 'd' }
 
+  Plug 'othree/html5.vim', { 'for': ['html', 'js', 'css' , 'php'] }
+  Plug 'mattn/emmet-vim', { 'for': ['html', 'js', 'css' , 'php'] }
+
   Plug 'junegunn/seoul256.vim'
 call plug#end()
 
