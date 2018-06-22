@@ -6,8 +6,8 @@ set noautochdir  " do not change directory when open file
 set wrapscan  " search from top when reached bottom
 set incsearch  " incremental search
 set regexpengine=0  " automatically select regexp engine
-set ignorecase  " non-case-sensitive search
-set nosmartcase  " non-case-sensitive search even Uppercase is included
+set noignorecase  " case-sensitive search
+" set nosmartcase  " non-case-sensitive search even Uppercase is included
 set tagbsearch  " use binary search for tags file
 set taglength=0  " whole of tag name has meaning
 " set tags  " use default value
@@ -75,8 +75,8 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'itchyny/lightline.vim'
 
-  Plug 'JesseKPhillips/d.vim'
-  Plug 'idanarye/vim-dutyl'
+  Plug 'JesseKPhillips/d.vim', { 'for': 'd' }
+  Plug 'idanarye/vim-dutyl', { 'for': 'd' }
   Plug 'landaire/deoplete-d', { 'for': 'd' }
 
   Plug 'othree/html5.vim', { 'for': ['html', 'js', 'css' , 'php'] }
@@ -109,9 +109,9 @@ vnoremap <Leader>p "+p
 nnoremap <Leader>p "+p
 
 " complete
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 
 """ fzf
 let g:fzf_buffers_jump = 1  " jump to existing window if possible
@@ -134,14 +134,25 @@ nnoremap <C-p> :Files<CR>
 "   \ 'd': ['dub.json']
 "   \}
 
-let g:deoplete#sources#d#dcd_server_autostart = 1
+if executable("dcd-client") && executable("dcd-server")
+  let g:deoplete#sources#d#dcd_server_autostart = 1
+else
+  let g:deoplete#sources#d#dcd_server_autostart = 0
+endif
 
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option('ignore_case', v:true)
 call deoplete#custom#option('auto_complete', v:true)
+call deoplete#custom#source('_', 'min_pattern_length', 2)
 call deoplete#custom#option('sources', {
   \'_': ['buffer'],
+  \'d': ['deoplete-d', 'buffer'],
   \})
+call deoplete#custom#option('omni_patterns', {
+\ 'd': '[^. *\t]\.\w*',
+\})
+
+
 
 imap <C-r>     <Plug>(neosnippet_expand_or_jump)
 smap <C-r>     <Plug>(neosnippet_expand_or_jump)
