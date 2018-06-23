@@ -65,6 +65,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
 
+  Plug 'terryma/vim-multiple-cursors'  " <C-n> to select same, <C-x> skip
+
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'Shougo/neosnippet.vim'
   Plug 'Shougo/neosnippet-snippets'
@@ -77,7 +79,7 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'JesseKPhillips/d.vim', { 'for': 'd' }
   Plug 'idanarye/vim-dutyl', { 'for': 'd' }
-  Plug 'landaire/deoplete-d', { 'for': 'd' }
+  " Plug 'landaire/deoplete-d', { 'for': 'd' }
 
   Plug 'othree/html5.vim', { 'for': ['html', 'js', 'css' , 'php'] }
   Plug 'mattn/emmet-vim', { 'for': ['html', 'js', 'css' , 'php'] }
@@ -96,14 +98,15 @@ nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader><Leader>q :qa!<CR>
 nnoremap <Leader>e :source $MYVIMRC<CR>
-inoremap <C-h> <C-o>h
-inoremap <C-l> <C-o>a
-inoremap <C-j> <C-o>j
-inoremap <C-k> <C-o>k
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
 inoremap <C-a> <C-o>^
 inoremap <C-e> <C-o>$
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
+inoremap <C-b> <Left>
 vnoremap <Leader>y "+y
 vnoremap <Leader>p "+p
 nnoremap <Leader>p "+p
@@ -134,23 +137,26 @@ nnoremap <C-p> :Files<CR>
 "   \ 'd': ['dub.json']
 "   \}
 
-if executable("dcd-client") && executable("dcd-server")
-  let g:deoplete#sources#d#dcd_server_autostart = 1
-else
-  let g:deoplete#sources#d#dcd_server_autostart = 0
-endif
+" if executable("dcd-client") && executable("dcd-server")
+"   let g:deoplete#sources#d#dcd_server_autostart = 1
+" else
+"   let g:deoplete#sources#d#dcd_server_autostart = 0
+" endif
+
+augroup D
+  autocmd!
+  autocmd BufNewFile,BufRead *.d DUDCDstartServer
+augroup END
 
 let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option('ignore_case', v:true)
 call deoplete#custom#option('auto_complete', v:true)
-call deoplete#custom#source('_', 'min_pattern_length', 2)
 call deoplete#custom#option('sources', {
   \'_': ['buffer'],
-  \'d': ['deoplete-d', 'buffer'],
   \})
 call deoplete#custom#option('omni_patterns', {
-\ 'd': '[^. *\t]\.\w*',
+      \ 'd': '.',
 \})
+" 'd': '[^. *\t]\.\w*',
 
 
 
