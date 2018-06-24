@@ -19,7 +19,7 @@ let &showbreak = '+++ '  " show wrap string
 set display=truncate,uhex  " show @@@ as (displayed) last line's first character, show unprintable character as <xx> formatted
 set number
 set background=dark
-set spell  " shellcheck
+set nospell  " no shellcheck
 set spellsuggest=best
 set laststatus=2  " always show status line
 " set statusline  " managed by plugin
@@ -65,6 +65,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
 
+  Plug 'junegunn/vim-easy-align'
   Plug 'terryma/vim-multiple-cursors'  " <C-n> to select same, <C-x> skip
 
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -80,6 +81,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'JesseKPhillips/d.vim', { 'for': 'd' }
   Plug 'idanarye/vim-dutyl', { 'for': 'd' }
   " Plug 'landaire/deoplete-d', { 'for': 'd' }
+  
+  Plug 'qnighy/satysfi.vim', { 'for': ['satysfi'] }
 
   Plug 'othree/html5.vim', { 'for': ['html', 'js', 'css' , 'php'] }
   Plug 'mattn/emmet-vim', { 'for': ['html', 'js', 'css' , 'php'] }
@@ -159,6 +162,7 @@ call deoplete#custom#option('omni_patterns', {
 " 'd': '[^. *\t]\.\w*',
 
 
+vmap ga <Plug>(EasyAlign)
 
 imap <C-r>     <Plug>(neosnippet_expand_or_jump)
 smap <C-r>     <Plug>(neosnippet_expand_or_jump)
