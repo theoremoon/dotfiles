@@ -157,9 +157,8 @@ call deoplete#custom#option('sources', {
   \'_': ['buffer'],
   \})
 call deoplete#custom#option('omni_patterns', {
-      \ 'd': '...',
+      \ 'd': '[^.[:digit:] *\t]\%(\.\|->\)\|::',
 \})
-" \ 'd': '[^.[:digit:] *\t]\%(\.\|->\)\|::',
 
 
 vmap ga <Plug>(EasyAlign)

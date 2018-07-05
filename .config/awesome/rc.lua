@@ -15,8 +15,12 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 if not gears.filesystem.dir_readable("~/.config/awesome/volume-control") then
   awful.spawn.with_shell("git clone https://github.com/deficient/volume-control ~/.config/awesome/volume-control")
 end
+if not gears.filesystem.dir_readable("~/.config/awesome/vicious") then
+  awful.spawn.with_shell("git clone https://github.com/Mic92/vicious ~/.config/awesome/vicious")
+end
 
 local volume_control = require("volume-control")
+local vicious = require("vicious")
 volumecfg = volume_control({})
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
@@ -213,6 +217,8 @@ awful.screen.connect_for_each_screen(function(s)
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
 
+    battxtwidget = wibox.widget.textbox()
+    vicious.register(battxtwidget, vicious.widgets.bat, " Battery: <span color='#ffffff'>$2%</span> ", 60, "BAT0")
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
@@ -227,6 +233,7 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
             volumecfg.widget,
+            battextwidget,
             wibox.widget.systray(),
             mytextclock,
             s.mylayoutbox,
