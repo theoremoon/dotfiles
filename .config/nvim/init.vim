@@ -134,7 +134,7 @@ nnoremap <C-p> :Files<CR>
 """ LSP
 " nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 " 
-" """ language specific settings
+" "" language specific settings
 " set hidden
 " let g:LanguageClient_serverCommands = {
 "   \'d': ['serve-d'],
@@ -143,12 +143,12 @@ nnoremap <C-p> :Files<CR>
 " let g:LanguageClient_rootMarkers = {
 "   \ 'd': ['dub.json']
 "   \}
-
-" if executable("dcd-client") && executable("dcd-server")
-"   let g:deoplete#sources#d#dcd_server_autostart = 1
-" else
-"   let g:deoplete#sources#d#dcd_server_autostart = 0
-" endif
+ 
+if executable("dcd-client") && executable("dcd-server")
+  let g:deoplete#sources#d#dcd_server_autostart = 1
+else
+  let g:deoplete#sources#d#dcd_server_autostart = 0
+endif
 
 augroup D
   autocmd!
@@ -156,6 +156,7 @@ augroup D
 augroup END
 let g:completor_d_omni_trigger = '(\w\w\w|\.|, |)'
 
+<<<<<<< HEAD
 " let g:deoplete#enable_at_startup = 1
 " call deoplete#custom#option('auto_complete', v:true)
 " call deoplete#custom#option('sources', {
@@ -165,6 +166,17 @@ let g:completor_d_omni_trigger = '(\w\w\w|\.|, |)'
 "       \ 'd': '\w\w\w',
 " \})
 " " 'd': '[^. *\t]\.\w*',
+=======
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('auto_complete', v:true)
+call deoplete#custom#option('sources', {
+  \'_': ['buffer'],
+  \})
+call deoplete#custom#option('omni_patterns', {
+      \ 'd': '...',
+\})
+" \ 'd': '[^.[:digit:] *\t]\%(\.\|->\)\|::',
+>>>>>>> 35af729972b3f8ba0c2c1364ef9ddce88c6f3fd6
 
 
 vmap ga <Plug>(EasyAlign)
