@@ -68,13 +68,17 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/vim-easy-align'
   Plug 'terryma/vim-multiple-cursors'  " <C-n> to select same, <C-x> skip
 
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'Shougo/neosnippet.vim'
-  Plug 'Shougo/neosnippet-snippets'
-  "Plug 'autozimu/LanguageClient-neovim', {
-  "      \ 'branch': 'next',
-  "      \ 'do': 'bash install.sh',
-  "      \ }
+  Plug 'maralla/completor.vim'
+  Plug 'davidhalter/jedi-vim', { 'do': 'pip install -U jedi' }
+
+
+  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  " Plug 'Shougo/neosnippet.vim'
+  " Plug 'Shougo/neosnippet-snippets'
+  " Plug 'autozimu/LanguageClient-neovim', {
+  "       \ 'branch': 'next',
+  "       \ 'do': 'bash install.sh',
+  "       \ }
 
   Plug 'itchyny/lightline.vim'
 
@@ -150,21 +154,23 @@ augroup D
   autocmd!
   autocmd BufNewFile,BufRead *.d DUDCDstartServer
 augroup END
+let g:completor_d_omni_trigger = '(\w\w\w|\.|, |)'
 
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option('auto_complete', v:true)
-call deoplete#custom#option('sources', {
-  \'_': ['buffer'],
-  \})
-call deoplete#custom#option('omni_patterns', {
-      \ 'd': '[^.[:digit:] *\t]\%(\.\|->\)\|::',
-\})
+" let g:deoplete#enable_at_startup = 1
+" call deoplete#custom#option('auto_complete', v:true)
+" call deoplete#custom#option('sources', {
+"   \'_': ['buffer'],
+"   \})
+" call deoplete#custom#option('omni_patterns', {
+"       \ 'd': '\w\w\w',
+" \})
+" " 'd': '[^. *\t]\.\w*',
 
 
 vmap ga <Plug>(EasyAlign)
 
-imap <C-r>     <Plug>(neosnippet_expand_or_jump)
-smap <C-r>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-r>     <Plug>(neosnippet_expand_target)
+" imap <C-r>     <Plug>(neosnippet_expand_or_jump)
+" smap <C-r>     <Plug>(neosnippet_expand_or_jump)
+" xmap <C-r>     <Plug>(neosnippet_expand_target)
 colorscheme seoul256
 syntax on
