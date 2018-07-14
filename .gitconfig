@@ -4,5 +4,5 @@
 [core]
 	editor = vim
 
-[url "ssh://"]
-	InsteadOf = https://
+# [url "ssh://"]
+# 	InsteadOf = https://
