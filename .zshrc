@@ -54,10 +54,8 @@ alias ls='ls --color=auto'
 # fun fun function
 hoge() { echo 'HOGE' | toilet --gay -f smblock; }
 
-export LANG=en_US.UTF-8
+export LANG=ja_JP.UTF-8
 export EDITOR="vim"
-export PATH="/home/theoldmoon0602/anaconda3/bin:$PATH"
-export PATH=/home/theoldmoon0602/.config/composer/vendor/bin:$PATH
 
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.dub/packages/.bin:$PATH"
