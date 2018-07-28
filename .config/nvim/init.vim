@@ -60,8 +60,16 @@ if !isdirectory(expand("~/.vim/undodir"))
   call mkdir(expand("~/.vim/undodir"))
 endif
 
-if !filereadable(expand("~/.local/share/nvim/site/autoload/plug.vim"))
-  :! curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if has('vim')
+  if !filereadable(expand("~/.vim/autoload/plug.vim"))
+    :! curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  endif
+endif
+
+if has('nvim')
+  if !filereadable(expand("~/.local/share/nvim/site/autoload/plug.vim"))
+    :! curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  endif
 endif
 
 """ plugins
