@@ -27,8 +27,8 @@ setopt no_beep
 # prompt settings
 local PINK=200
 local RED=001
-PROMPT="%F{$PINK}%~>%f "
-RPROMPT="%(?..%F{$RED}[%?]%f)%*[${HOST}]"
+PROMPT="%F{$PINK}[${HOST}]%~>%f "
+RPROMPT="%(?..%F{$RED}[%?]%f)%*"
 
 # golang
 GOPATH="$HOME/go"
