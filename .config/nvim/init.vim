@@ -60,6 +60,10 @@ if !isdirectory(expand("~/.vim/undodir"))
   call mkdir(expand("~/.vim/undodir"))
 endif
 
+if !filereadable(expand("~/.local/share/nvim/site/autoload/plug.vim"))
+  :! curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
+
 """ plugins
 call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }

@@ -28,7 +28,7 @@ setopt no_beep
 local PINK=200
 local RED=001
 PROMPT="%F{$PINK}%~>%f "
-RPROMPT="%(?..%F{$RED}[%?]%f)%*"
+RPROMPT="%(?..%F{$RED}[%?]%f)%*[${HOST}]"
 
 # golang
 GOPATH="$HOME/go"
@@ -60,7 +60,7 @@ export EDITOR="vim"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.dub/packages/.bin:$PATH"
 
-setxkbmap -option ctrl:nocaps
+setxkbmap -option ctrl:nocaps 2>/dev/null
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
