@@ -20,10 +20,9 @@ if dein#load_state('~/.cache/dein')
     endif
 
     call dein#add('terryma/vim-expand-region')
+    call dein#add('terryma/vim-multiple-cursors')
+    call dein#add('maxbrunsfeld/vim-yankstack')
     call dein#add('w0rp/ale')
-    call dein#add('jiangmiao/auto-pairs')
-
-
     call dein#add('morhetz/gruvbox')
 
     call dein#end()
@@ -33,7 +32,7 @@ endif
 command! Deinstall call dein#install()
 
 "" denite
-nnoremap <C-p> :<C-u>Denite file_rec<CR>
+nnoremap <C-p> :<C-u>Denite -path=<c-r>=expand("%:p:h")<cr> file_rec<CR>
 
 "" deoplete
 let g:deoplete#enable_at_startup = 1
@@ -61,12 +60,12 @@ let g:expand_region_text_objects = {
       \ 'ie'  :0,
       \ }
 
+"" vim-yankstack
+nmap , <Plug>yankstack_substitute_older_paste
+nmap <C-,> <Plug>yankstack_substitute_newer_paste
+
 "" ale
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \}
-
-"" auto-pairs
-let g:AutoPairsFlyMode = 1
-let g:AutoPairsShortcutBackInsert = '<M-b>'

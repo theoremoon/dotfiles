@@ -15,7 +15,7 @@ bindkey -e
 autoload -Uz compinit
 compinit
 
-# push cd history to stack 
+# push cd history to stack
 setopt auto_pushd
 
 # check command name
@@ -74,3 +74,6 @@ export FZF_DEFAULT_COMMAND='ag -l -g ""'
 
 alias gitp="git push origin master"
 alias gits="git status"
+function cdg() {
+  cd "$(git rev-parse --show-toplevel)/$@"
+}

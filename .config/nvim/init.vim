@@ -8,7 +8,7 @@
 "  @theoldmoon0602
 """
 
-source basic.vim
-source keybind.vim
-source plugins.vim
-source colors.vim
+source $HOME/.config/nvim/basic.vim
+source $HOME/.config/nvim/keybind.vim
+source $HOME/.config/nvim/plugins.vim
+source $HOME/.config/nvim/colors.vim

@@ -22,6 +22,12 @@ vnoremap <Leader>p "+p
 nnoremap <Leader>p "+p
 nnoremap <Leader>e :source $MYVIMRC<CR>
 
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
+inoremap <C-e> <End>
+inoremap <C-a> <Home>
 
 " Smart way to move between windows
 map <C-j> <C-W>j
@@ -33,6 +39,7 @@ map <C-l> <C-W>l
 map <leader>n :tabnew<cr>
 " Opens a new tab with the current buffer's path
 " Super useful when editing files in the same directory
+map <silent><leader>cd :cd <C-r>=expand("%:p:h")<CR><CR>
 map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 
 " Bash like keys for the command line
@@ -66,7 +73,7 @@ endfunction
 
 function! CmdLine(str)
     call feedkeys(":" . a:str)
-endfunction 
+endfunction
 
 function! VisualSelection(direction, extra_filter) range
     let l:saved_reg = @"
