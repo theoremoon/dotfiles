@@ -25,6 +25,9 @@ if dein#load_state('~/.cache/dein')
     call dein#add('w0rp/ale')
     call dein#add('morhetz/gruvbox')
 
+    call dein#add('davidhalter/jedi-vim', {'on_ft': 'python', 'build': 'pip install jedi'})
+    call dein#add('zchee/deoplete-jedi', {'on_ft': 'python'})
+
     call dein#end()
     call dein#save_state()
 endif

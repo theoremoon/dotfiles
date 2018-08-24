@@ -40,7 +40,7 @@ set smarttab  " Be smart when using tabs ;)
 set shiftwidth=2  " 1 tab == 2 spaces
 set tabstop=2
 set lbr  " Linebreak on 500 characters
-set tw=500
+set tw=0
 set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
@@ -50,3 +50,21 @@ try " Specify the behavior when switching between buffers
 catch
 endtry
 set laststatus=2  " Always show the status line
+
+set viminfo+=n~/.vim/viminfo
+set writebackup
+set swapfile
+set directory=~/.vim/swapdir
+
+if !isdirectory(expand("~/.vim/"))
+  call mkdir(expand("~/.vim/"))
+endif
+if !isdirectory(expand("~/.vim/backupdir"))
+  call mkdir(expand("~/.vim/backupdir"))
+endif
+if !isdirectory(expand("~/.vim/swapdir"))
+  call mkdir(expand("~/.vim/swapdir"))
+endif
+if !isdirectory(expand("~/.vim/undodir"))
+  call mkdir(expand("~/.vim/undodir"))
+endif
