@@ -28,6 +28,12 @@ if dein#load_state('~/.cache/dein')
     call dein#add('davidhalter/jedi-vim', {'on_ft': 'python', 'build': 'pip install jedi'})
     call dein#add('zchee/deoplete-jedi', {'on_ft': 'python'})
 
+    call dein#add('mattn/emmet-vim', {'on_ft': ['html', 'js', 'css', 'twig', 'htmldjango']})
+    call dein#add('evidens/vim-twig', {'on_ft': ['html', 'js', 'css', 'twig']})
+
+    call dein#add('rust-lang/rust.vim', {'on_ft': 'rust'})
+    call dein#add('sebastianmarkow/deoplete-rust', {'on_ft': 'rust'})
+
     call dein#end()
     call dein#save_state()
 endif
@@ -36,6 +42,7 @@ command! Deinstall call dein#install()
 
 "" denite
 nnoremap <C-p> :<C-u>Denite -path=<c-r>=expand("%:p:h")<cr> file_rec<CR>
+nnoremap <Leader>o :<C-u>Denite file_rec<CR>
 
 "" deoplete
 let g:deoplete#enable_at_startup = 1

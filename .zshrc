@@ -77,3 +77,5 @@ alias gits="git status"
 function cdg() {
   cd "$(git rev-parse --show-toplevel)/$@"
 }
+
+export PATH="$HOME/.cargo/bin:$PATH"
