@@ -31,11 +31,12 @@ PROMPT="%F{$PINK}[${HOST}]%~>%f "
 RPROMPT="%(?..%F{$RED}[%?]%f)%*"
 
 # golang
-GOPATH="$HOME/go"
-PATH="$PATH:$GOPATH/bin"
+export GOPATH="$HOME/go"
+export GO111MODULE=on
+export PATH="$PATH:$GOPATH/bin"
 
 # path
-PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/bin"
 
 # replace rm with move
 gotrash() {
@@ -79,3 +80,22 @@ function cdg() {
 }
 
 export PATH="$HOME/.cargo/bin:$PATH"
+
+if [ ! -e $HOME/.zplug ]; then
+  echo 'Installing zplug...'
+  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+fi
+
+source $HOME/.zplug/init.zsh
+
+zplug "jhawthorn/fzy", as:command, rename-to:fzy, hook-build:"make && sudo make install"
+zplug "b4b4r07/enhancd"
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+# zplug check returns true if all packages are installed
+# Therefore, when it returns false, run zplug install
+if ! zplug check; then
+    zplug install
+fi
+
+# source plugins and add commands to the PATH
+zplug load
