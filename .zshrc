@@ -89,7 +89,7 @@ fi
 source $HOME/.zplug/init.zsh
 
 zplug "jhawthorn/fzy", as:command, rename-to:fzy, hook-build:"make && sudo make install"
-zplug "b4b4r07/enhancd"
+zplug "b4b4r07/enhancd", use:init.sh
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 # zplug check returns true if all packages are installed
 # Therefore, when it returns false, run zplug install
