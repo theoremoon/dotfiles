@@ -99,3 +99,5 @@ fi
 
 # source plugins and add commands to the PATH
 zplug load
+
+export PATH="/home/theoldmoon0602/.config/composer/vendor/bin:$PATH"
