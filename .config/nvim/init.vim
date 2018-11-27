@@ -47,6 +47,7 @@ set smarttab  " insert number of shiftwidth spaces at head of line
 set softtabstop=0  " dont mix space and tab
 set shiftround  " align indent following shiftwidth when << and >>
 set expandtab  " use spaces instead of tab
+set autoindent
 set smartindent
 set fileformat=unix  " default is LF
 set fileformats=unix,dos  " accept LF and CRLF
@@ -90,11 +91,16 @@ call plug#begin('~/.vim/plugged')
 
 
   Plug 'itchyny/lightline.vim'
-
+  Plug 'cohama/lexima.vim'
+  Plug 'sheerun/vim-polyglot'
   Plug 'davidhalter/jedi-vim', { 'do': 'pip install -U jedi' }
   Plug 'othree/html5.vim', { 'for': ['html', 'js', 'css' , 'php'] }
   Plug 'mattn/emmet-vim', { 'for': ['html', 'js', 'css' , 'php'] }
   Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
+  Plug 'qnighy/satysfi.vim', { 'for': 'satysfi' }
+
+  Plug 'theoldmoon0602/ale', { 'branch': 'satysfi' }
+  " Plug '/home/theoldmoon0602/space/ale'
 
   Plug 'junegunn/seoul256.vim'
 call plug#end()
@@ -129,7 +135,12 @@ nnoremap \ :BLines<CR>
 nnoremap ; :Commands<CR>
 nnoremap <C-p> :Files<CR>
 
+let b:ale_linters = {'satysfi': ['satysfi']}
+
 vmap ga <Plug>(EasyAlign)
 
 colorscheme seoul256
 syntax on
+filetype on
+filetype plugin on
+filetype indent on

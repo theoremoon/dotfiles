@@ -51,7 +51,7 @@ bindsym $mod+k focus down
 # bindsym $mod+l focus up
 bindsym $mod+semicolon focus right
 
-bindsym $mod+l exec i3lock -ten -i /opt/lock.png
+bindsym $mod+l exec i3lock -ten -i /opt/wallpaper.png
 
 # alternatively, you can use the cursor keys:
 # bindsym $mod+Left focus left
@@ -179,8 +179,6 @@ bindsym XF86MonBrightnessDown exec "sudo tee /sys/class/backlight/intel_backligh
 bindsym Print exec "bash -c 'A=$(mktemp --suffix .png); scrot -u $A -z; xclip -selection clipboard -t image/png $A'"
 bindsym $mod+Shift+Print exec "A=$(mktemp --suffix .png); sleep 0.1; scrot -s $A -z; xclip -selection clipboard -t image/png $A"
 exec --no-startup-id fcitx-autostart
-exec setxkbmap -layout jp
-exec setxkbmap -option ctrl:nocaps
+exec --no-startup-id nm-applet
 exec xfce4-terminal
-exec nm-applet
 exec --no-startup-id "feh --bg-scale /opt/wallpaper.png"
