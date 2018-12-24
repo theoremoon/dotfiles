@@ -1,8 +1,13 @@
 [user]
 	email = theoldmoon0602@gmail.com
-	name = furutsuki
+	name = theoldmoon0602
 [core]
-	editor = vim
+	editor = nvim
 
-[url "ssh://github.com"]
-	pushInsteadOf = https://github.com
+[url "github:"]
+    pushInsteadOf = https://github.com/
+    pushInsteadOf = git@github.com:
+
+[url "bitbucket:"]
+    insteadOf = https://theoldmoon0602@bitbucket.org/
+    insteadOf = git@bitbucket.org:
