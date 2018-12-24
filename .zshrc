@@ -25,8 +25,8 @@ setxkbmap -option ctrl:nocaps 2>/dev/null
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export PATH=$PATH:$HOME/.local/bin:$HOME/bin/:$HOME/.config/composer/vendor/bin/
 export GOPATH=$HOME/go
+export PATH=$PATH:$HOME/.local/bin:$HOME/bin/:$HOME/.config/composer/vendor/bin/:$GOPATH/bin
 
 source /home/theoldmoon0602/.local/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
 eval $(opam env)

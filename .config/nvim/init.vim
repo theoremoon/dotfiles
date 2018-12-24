@@ -92,12 +92,13 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'itchyny/lightline.vim'
   Plug 'cohama/lexima.vim'
+  Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
   Plug 'sheerun/vim-polyglot'
   Plug 'davidhalter/jedi-vim', { 'do': 'pip install -U jedi' }
   Plug 'othree/html5.vim', { 'for': ['html', 'js', 'css' , 'php'] }
-  Plug 'mattn/emmet-vim', { 'for': ['html', 'js', 'css' , 'php'] }
-  Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
-  Plug 'qnighy/satysfi.vim', { 'for': 'satysfi' }
+  Plug 'mattn/emmet-vim', { 'for': ['html', 'js', 'css' , 'php', 'htmldjango'] }
+  " Plug 'qnighy/satysfi.vim', { 'for': 'satysfi' }
+  Plug 'theoldmoon0602/satysfi.vim', { 'for': 'satysfi', 'branch': 'patch-1' }
 
   Plug 'theoldmoon0602/ale', { 'branch': 'satysfi' }
   " Plug '/home/theoldmoon0602/space/ale'
@@ -131,11 +132,17 @@ nnoremap <Leader><CR> :<C-u>noh<CR>
 let g:fzf_buffers_jump = 1  " jump to existing window if possible
 let g:fzf_tags_command='ctags -R'
 
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
+nnoremap <Leader>\ :GGrep<CR>
 nnoremap \ :BLines<CR>
 nnoremap ; :Commands<CR>
 nnoremap <C-p> :Files<CR>
 
 let b:ale_linters = {'satysfi': ['satysfi']}
+let g:polyglot_disabled = ['go']
 
 vmap ga <Plug>(EasyAlign)
 
