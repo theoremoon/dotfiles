@@ -10,4 +10,4 @@
 
 [url "bitbucket:"]
     insteadOf = https://theoldmoon0602@bitbucket.org/
-    insteadOf = git@bitbucket.org:
+    pushInsteadOf = git@bitbucket.org:

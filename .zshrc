@@ -15,11 +15,14 @@ zstyle :compinstall filename '/home/theoldmoon0602/.zshrc'
 
 autoload -Uz compinit
 compinit
+autoload -Uz colors
+colors
 # End of lines added by compinstall
 
 alias v=nvim
 alias vim=nvim
 alias ls='ls --color=auto'
+alias fsnew='dotnet new console -lang="F#" -o'
 setxkbmap -layout jp
 setxkbmap -option ctrl:nocaps 2>/dev/null
 
@@ -27,6 +30,16 @@ setxkbmap -option ctrl:nocaps 2>/dev/null
 
 export GOPATH=$HOME/go
 export PATH=$PATH:$HOME/.local/bin:$HOME/bin/:$HOME/.config/composer/vendor/bin/:$GOPATH/bin
-
-source /home/theoldmoon0602/.local/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
+export PROMPT="[%?]%{$fg[green]%}%3~ %{$reset_color%}% "
 eval $(opam env)
+python ~/sada_phrase/sada.py
+
+# zplug
+if [ ! -e ~/.zplug/init.zsh ]; then
+  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+fi
+source ~/.zplug/init.zsh
+
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-completions"
+zplug load
