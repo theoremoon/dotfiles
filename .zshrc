@@ -34,6 +34,11 @@ export PROMPT="[%?]%{$fg[green]%}%3~ %{$reset_color%}% "
 eval $(opam env)
 python ~/sada_phrase/sada.py
 
+# check dotfiles update
+if [[ `cd ~/dotfiles && git status --porcelain` ]]; then
+  echo -e "\e[41m ~/dotfiles is updated"
+fi
+
 # zplug
 if [ ! -e ~/.zplug/init.zsh ]; then
   curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
