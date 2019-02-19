@@ -23,6 +23,7 @@ alias v=nvim
 alias vim=nvim
 alias ls='ls --color=auto'
 alias fsnew='dotnet new console -lang="F#" -o'
+alias fsrun='dotnet run'
 setxkbmap -layout jp
 setxkbmap -option ctrl:nocaps 2>/dev/null
 
