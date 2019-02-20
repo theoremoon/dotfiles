@@ -98,15 +98,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'othree/html5.vim', { 'for': ['html', 'js', 'css' , 'php'] }
   Plug 'mattn/emmet-vim', { 'for': ['html', 'js', 'css' , 'php', 'htmldjango'] }
 
-  Plug 'Shougo/neco-vim'
-  Plug 'prabirshrestha/async.vim'
-  Plug 'prabirshrestha/asyncomplete.vim'
-  Plug 'prabirshrestha/vim-lsp'
-  Plug 'prabirshrestha/asyncomplete-buffer.vim'
-  Plug 'prabirshrestha/asyncomplete-lsp.vim'
-  Plug 'prabirshrestha/asyncomplete-necovim.vim'
-  Plug 'prabirshrestha/asyncomplete-file.vim'
-  Plug 'yami-beta/asyncomplete-omni.vim'
   " Plug 'qnighy/satysfi.vim', { 'for': 'satysfi' }
   " Plug 'theoldmoon0602/satysfi.vim', { 'for': 'satysfi', 'branch': 'patch-1' }
 
@@ -155,27 +146,6 @@ nnoremap <C-p> :Files<CR>
 let g:polyglot_disabled = ['go']
 
 vmap ga <Plug>(EasyAlign)
-
-let g:asyncomplete_remove_duplicates = 1
-let g:asyncomplete_smart_completion = 1
-let g:asyncomplete_auto_popup = 1
-
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
-    \ 'name': 'file',
-    \ 'whitelist': ['*'],
-    \ 'priority': 10,
-    \ 'completor': function('asyncomplete#sources#file#completor')
-    \ }))
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
-    \ 'name': 'buffer',
-    \ 'whitelist': ['*'],
-    \ 'completor': function('asyncomplete#sources#buffer#completor'),
-    \ }))
-au User call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
-      \ 'name': 'omni',
-      \ 'whitelist': ['*'],
-      \ 'completor': function('asyncomplete#sources#omni#completor')
-      \  }))
 
 colorscheme seoul256
 syntax on
