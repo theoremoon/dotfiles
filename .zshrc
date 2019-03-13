@@ -49,3 +49,12 @@ source ~/.zplug/init.zsh
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug load
+
+function neovimupdate() {
+  git fetch
+  for commit in $(git log --oneline HEAD..origin/master | awk '{print $1}'| tac); do
+    git show $commit
+  done
+  make
+  echo 'sudo make install'
+}
