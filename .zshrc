@@ -55,6 +55,7 @@ function neovimupdate() {
   for commit in $(git log --oneline HEAD..origin/master | awk '{print $1}'| tac); do
     git show $commit
   done
+  git merge master origin/master
   make
   echo 'sudo make install'
 }
