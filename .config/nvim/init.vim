@@ -94,11 +94,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'itchyny/lightline.vim'
   Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
   Plug 'sheerun/vim-polyglot'
+  Plug 'davidhalter/jedi-vim', { 'do': 'pip install -U jedi' }
   Plug 'othree/html5.vim', { 'for': ['html', 'js', 'css' , 'php'] }
   Plug 'mattn/emmet-vim', { 'for': ['html', 'js', 'css' , 'php', 'htmldjango'] }
-
-  Plug 'prabirshrestha/vim-lsp'
-  Plug 'prabirshrestha/async.vim'
 
   " Plug 'qnighy/satysfi.vim', { 'for': 'satysfi' }
   " Plug 'theoldmoon0602/satysfi.vim', { 'for': 'satysfi', 'branch': 'patch-1' }
@@ -146,16 +144,6 @@ nnoremap <C-p> :Files<CR>
 
 " let b:ale_linters = {'satysfi': ['satysfi']}
 let g:polyglot_disabled = ['go']
-
-if executable('pyls')
-    " pip install python-language-server
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ })
-    autocmd Filetype python setlocal omnifunc=lsp#complete
-endif
 
 vmap ga <Plug>(EasyAlign)
 
