@@ -57,7 +57,7 @@ set directory=~/.vim/swapdir
 set enc=utf-8
 set fileencodings=usc-bom,utf-8,default,latin1
 set viminfo+=n~/.vim/viminfo
-set signcolumn=yes
+set signcolumn=auto:4
 set wildmenu  " use tab completion on commandline mode
 set wildmode=full
 
