@@ -57,5 +57,5 @@ function neovimupdate() {
   done
   git merge master origin/master
   make
-  echo 'sudo make install'
+  sudo make install
 }
