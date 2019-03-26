@@ -40,6 +40,7 @@ set undodir=~/.vim/undodir
 set textwidth=0  " dont break line (different with wrap line
 set backspace=indent,eol,start
 set complete=.,w,b,u,k,i,d,t  "current buffer, other buffers, buffer lists, dictionary, current file and includes, same, tagfiles
+set completeopt=menu,longest,preview
 set dictionary+=/usr/share/dict/words
 set tabstop=2
 set shiftwidth=2
@@ -94,15 +95,13 @@ call plug#begin('~/.vim/plugged')
   Plug 'itchyny/lightline.vim'
   Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
   Plug 'sheerun/vim-polyglot'
-  Plug 'davidhalter/jedi-vim', { 'do': 'pip install -U jedi' }
   Plug 'othree/html5.vim', { 'for': ['html', 'js', 'css' , 'php'] }
   Plug 'mattn/emmet-vim', { 'for': ['html', 'js', 'css' , 'php', 'htmldjango'] }
 
-  " Plug 'qnighy/satysfi.vim', { 'for': 'satysfi' }
-  " Plug 'theoldmoon0602/satysfi.vim', { 'for': 'satysfi', 'branch': 'patch-1' }
-
-  " Plug 'theoldmoon0602/ale', { 'branch': 'satysfi' }
-  " Plug '/home/theoldmoon0602/space/ale'
+  Plug 'prabirshrestha/async.vim'
+  Plug 'prabirshrestha/vim-lsp'
+  Plug 'prabirshrestha/asyncomplete.vim'
+  Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
   Plug 'junegunn/seoul256.vim'
 call plug#end()
@@ -152,3 +151,18 @@ syntax on
 filetype on
 filetype plugin on
 filetype indent on
+
+if executable('pyls')
+    " pip install python-language-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ })
+endif
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+let g:asyncomplete_smart_completion = 1
+let g:asyncomplete_auto_popup = 1
