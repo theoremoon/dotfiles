@@ -94,6 +94,7 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'itchyny/lightline.vim'
   Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
+  Plug 'rust-lang/rust.vim', {'for': 'rust'}
   Plug 'sheerun/vim-polyglot'
   Plug 'othree/html5.vim', { 'for': ['html', 'js', 'css' , 'php'] }
   Plug 'mattn/emmet-vim', { 'for': ['html', 'js', 'css' , 'php', 'htmldjango'] }
@@ -161,8 +162,19 @@ if executable('pyls')
         \ })
 endif
 
+if executable('rls')
+    " pip install python-language-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'rls',
+        \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
+        \ 'whitelist': ['rust'],
+        \ })
+endif
+
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 let g:asyncomplete_smart_completion = 1
 let g:asyncomplete_auto_popup = 1
+
+let g:rustfmt_autosave = 1
