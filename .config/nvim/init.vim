@@ -8,59 +8,66 @@
 "  @theoldmoon0602
 """
 
-""" options 
 set nocompatible
-set whichwrap=b,s,h,l,<,>  " BS Space h l left right can move over line
-set path=.,/usr/include,/usr/local/include,,  " list of directory names used for file searching
-set noautochdir  " do not change directory when open file
-set wrapscan  " search from top when reached bottom
-set incsearch  " incremental search
-set regexpengine=0  " automatically select regexp engine
-set noignorecase  " case-sensitive search
-" set nosmartcase  " non-case-sensitive search even Uppercase is included
-set tagbsearch  " use binary search for tags file
-set taglength=0  " whole of tag name has meaning
-" set tags  " use default value
-set tagcase=ignore  " ignore case when searching tags file
-set wrap  " wrap long line
-set linebreak  " wrap on specific characters (breakat)
-set nobreakindent  " dont insert visually space when wrap line
-let &showbreak = '+++ '  " show wrap string
-set display=truncate,uhex  " show @@@ as (displayed) last line's first character, show unprintable character as <xx> formatted
+
 set number
-set background=dark
-set nospell  " no shellcheck
-set spellsuggest=best
-set laststatus=2  " always show status line
-" set statusline  " managed by plugin
-set ruler 
-set belloff=all
-set undofile  " use undofile
-set undodir=~/.vim/undodir
-set textwidth=0  " dont break line (different with wrap line
+set ruler
 set backspace=indent,eol,start
-set complete=.,w,b,u,k,i,d,t  "current buffer, other buffers, buffer lists, dictionary, current file and includes, same, tagfiles
-set completeopt=menu,longest,preview
-set dictionary+=/usr/share/dict/words
-set tabstop=2
+set background=dark
+set belloff=all
+
+set softtabstop=0                            " dont mix space and tab
+set tabstop=4
 set shiftwidth=2
-set smarttab  " insert number of shiftwidth spaces at head of line
-set softtabstop=0  " dont mix space and tab
-set shiftround  " align indent following shiftwidth when << and >>
-set expandtab  " use spaces instead of tab
-set autoindent
+set expandtab
+set smarttab                                 " insert number of shiftwidth spaces at head of line
 set smartindent
-set fileformat=unix  " default is LF
-set fileformats=unix,dos  " accept LF and CRLF
-set writebackup  " create backup file before overwriting and delete if write complete
-set swapfile
-set directory=~/.vim/swapdir
-set enc=utf-8
-set fileencodings=usc-bom,utf-8,default,latin1
-set viminfo+=n~/.vim/viminfo
-set signcolumn=auto:4
-set wildmenu  " use tab completion on commandline mode
+set autoindent
+
+set textwidth=0                              " dont break line (different with wrap line
+let &showbreak = '+++ '                      " show wrap string
+set display=truncate,uhex                    " show @@@ as (displayed) last line's first character, show unprintable character as <xx> formatted
+set linebreak                                " wrap on specific characters (breakat)
+set nobreakindent                            " dont insert visually space when wrap line
+set whichwrap=b,s,h,l,<,>                    " BS Space h l left right can move over line
+set wrap                                     " wrap long line
+
+set complete=.,w,b,u,k,i,d,t                 " current buffer, other buffers, buffer lists, dictionary, current file and includes, same, tagfiles
+set completeopt=menu,longest,preview
+set path=.,/usr/include,/usr/local/include,, " list of directory names used for file searching
+set dictionary+=/usr/share/dict/words
+set wildmenu                                 " use tab completion on commandline mode
 set wildmode=full
+
+set enc=utf-8
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=usc-bom,utf-8,default,latin1
+set fileformat=unix                          " default is LF
+set fileformats=unix,dos,mac
+
+set hlsearch
+set ignorecase
+set incsearch                                " incremental search
+set smartcase
+set wrapscan                                 " search from top when reached bottom
+
+set laststatus=2                             " always show status line
+set signcolumn=auto
+
+set directory=~/.vim/swapdir
+set swapfile
+set undodir=~/.vim/undodir
+set undofile                                 " use undofile
+set viminfo+=n~/.vim/viminfo
+set writebackup                              " create backup file before overwriting and delete if write complete
+
+if exists('$SHELL')
+    set shell=$SHELL
+else
+    set shell=/bin/sh
+endif
+
 
 if !isdirectory(expand("~/.vim/backupdir"))
   call mkdir(expand("~/.vim/backupdir"))
@@ -86,27 +93,48 @@ endif
 call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-surround'
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  Plug 'junegunn/fzf.vim'
-
+  Plug 'bronson/vim-trailing-whitespace'
+  Plug 'Raimondi/delimitMate'
   Plug 'junegunn/vim-easy-align'
-  Plug 'terryma/vim-multiple-cursors'  " <C-n> to select same, <C-x> skip
 
-  Plug 'itchyny/lightline.vim'
-  Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
-  Plug 'rust-lang/rust.vim', {'for': 'rust'}
+  Plug 'scrooloose/nerdtree'
+  Plug 'jistr/vim-nerdtree-tabs'
+  Plug 'terryma/vim-multiple-cursors'
+
+  Plug 'tomasiser/vim-code-dark'
+  Plug 'vim-scripts/CSApprox'
+
+  Plug 'w0rp/ale'
+  Plug 'vim-scripts/grep.vim'
+  Plug 'SirVer/ultisnips'
+  Plug 'honza/vim-snippets'
+
   Plug 'sheerun/vim-polyglot'
-  Plug 'othree/html5.vim', { 'for': ['html', 'js', 'css' , 'php'] }
-  Plug 'mattn/emmet-vim', { 'for': ['html', 'js', 'css' , 'php', 'htmldjango'] }
+  Plug 'hail2u/vim-css3-syntax'
+  Plug 'gorodinskiy/vim-coloresque'
+  Plug 'tpope/vim-haml'
+  Plug 'mattn/emmet-vim'
 
-  Plug 'prabirshrestha/async.vim'
-  Plug 'prabirshrestha/vim-lsp'
-  Plug 'prabirshrestha/asyncomplete.vim'
-  Plug 'prabirshrestha/asyncomplete-lsp.vim'
+  Plug 'jelera/vim-javascript-syntax'
 
-  Plug 'junegunn/seoul256.vim'
+  Plug 'davidhalter/jedi-vim'
+  Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
+  Plug 'plytophogy/vim-virtualenv'
+  Plug 'PieterjanMontens/vim-pipenv'
+
+  if isdirectory('/usr/local/opt/fzf')
+          Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+  else
+          Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+          Plug 'junegunn/fzf.vim'
+  endif
+
 call plug#end()
-""" mappings
+
+filetype plugin indent on
+syntax on
+colorscheme codedark
+
 let mapleader="\<Space>"
 let maplocalleader="\<Space>"
 
@@ -115,6 +143,7 @@ nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader><Leader>q :qa!<CR>
 nnoremap <Leader>e :source $MYVIMRC<CR>
+
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 inoremap <C-j> <Down>
@@ -124,57 +153,163 @@ inoremap <C-e> <C-o>$
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 inoremap <C-b> <Left>
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+noremap <C-h> <C-w>h
+
 vnoremap <Leader>y "+y
 vnoremap <Leader>p "+p
 nnoremap <Leader>p "+p
 nnoremap <Leader><CR> :<C-u>noh<CR>
-
-""" fzf
-let g:fzf_buffers_jump = 1  " jump to existing window if possible
-let g:fzf_tags_command='ctags -R'
-
-command! -bang -nargs=* GGrep
-  \ call fzf#vim#grep(
-  \   'git grep --line-number '.shellescape(<q-args>), 0,
-  \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
-nnoremap <Leader>\ :GGrep<CR>
-nnoremap \ :BLines<CR>
-nnoremap ; :Commands<CR>
 nnoremap <C-p> :Files<CR>
+nnoremap <leader>b :Buffers<CR>
 
-" let b:ale_linters = {'satysfi': ['satysfi']}
-let g:polyglot_disabled = ['go']
+noremap <Leader>h :<C-u>split<CR>
+noremap <Leader>v :<C-u>vsplit<CR>
+nnoremap <Tab> gt
+nnoremap <S-Tab> gT
+nnoremap <leader>. :lcd %:p:h<CR>
+vmap < <gv
+vmap > >gv
 
-vmap ga <Plug>(EasyAlign)
+set hidden
 
-colorscheme seoul256
-syntax on
-filetype on
-filetype plugin on
-filetype indent on
+" Search mappings: These will make it so that going to the next one in a
+" search will center on the line it's found in.
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
-if executable('pyls')
-    " pip install python-language-server
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ })
+"" Easy Align
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
+"" NERDTree configuration
+let g:NERDTreeChDirMode=2
+let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
+let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
+let g:NERDTreeShowBookmarks=1
+let g:nerdtree_tabs_focus_on_files=1
+let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
+let g:NERDTreeWinSize = 50
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
+nnoremap <silent> <F2> :NERDTreeFind<CR>
+nnoremap <silent> <F3> :NERDTreeToggle<CR>
+
+" grep.vim
+nnoremap <silent> <leader>f :Rgrep<CR>
+let Grep_Default_Options = '-IR'
+let Grep_Skip_Files = '*.log *.db'
+let Grep_Skip_Dirs = '.git node_modules'
+
+"*****************************************************************************
+"" Functions
+"*****************************************************************************
+if !exists('*s:setupWrapping')
+  function s:setupWrapping()
+    set wrap
+    set wm=2
+    set textwidth=79
+  endfunction
 endif
 
-if executable('rls')
-    " pip install python-language-server
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'rls',
-        \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
-        \ 'whitelist': ['rust'],
-        \ })
+"*****************************************************************************
+"" Autocmd Rules
+"*****************************************************************************
+"" The PC is fast enough, do syntax highlight syncing from start unless 200 lines
+augroup vimrc-sync-fromstart
+  autocmd!
+  autocmd BufEnter * :syntax sync maxlines=200
+augroup END
+
+"" Remember cursor position
+augroup vimrc-remember-cursor-position
+  autocmd!
+  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+augroup END
+
+"" txt
+augroup vimrc-wrapping
+  autocmd!
+  autocmd BufRead,BufNewFile *.txt call s:setupWrapping()
+augroup END
+
+"" make/cmake
+augroup vimrc-make-cmake
+  autocmd!
+  autocmd FileType make setlocal noexpandtab
+  autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
+augroup END
+
+set autoread
+"" fzf.vim
+set wildmode=list:longest,list:full
+set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
+let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
+
+" The Silver Searcher
+if executable('ag')
+  let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
+  set grepprg=ag\ --nogroup\ --nocolor
 endif
 
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
-let g:asyncomplete_smart_completion = 1
-let g:asyncomplete_auto_popup = 1
+" ripgrep
+if executable('rg')
+  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+  set grepprg=rg\ --vimgrep
+  command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+endif
 
-let g:rustfmt_autosave = 1
+" snippets
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+let g:UltiSnipsEditSplit="vertical"
+
+" ale
+let g:ale_linters = {}
+
+" html
+" for html files, 2 spaces
+autocmd Filetype html setlocal ts=2 sw=2 expandtab
+
+
+" javascript
+let g:javascript_enable_domhtmlcss = 1
+
+" vim-javascript
+augroup vimrc-javascript
+  autocmd!
+  autocmd FileType javascript setl tabstop=4|setl shiftwidth=4|setl expandtab softtabstop=4
+augroup END
+
+
+" python
+" vim-python
+augroup vimrc-python
+  autocmd!
+  autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8
+      \ formatoptions+=croq softtabstop=4
+      \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+augroup END
+
+" jedi-vim
+let g:jedi#popup_on_dot = 0
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_definitions_command = "<leader>d"
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<leader>n"
+let g:jedi#rename_command = "<leader>r"
+let g:jedi#show_call_signatures = "0"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#smart_auto_mappings = 0
+
+" ale
+:call extend(g:ale_linters, {
+    \'python': ['flake8'], })
+
+" Syntax highlight
+" Default highlight is better than polyglot
+let g:polyglot_disabled = ['python']
+let python_highlight_all = 1
+
