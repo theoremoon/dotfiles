@@ -117,7 +117,7 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'jelera/vim-javascript-syntax'
 
-  Plug 'davidhalter/jedi-vim'
+  Plug 'theoldmoon0602/jedi-vim', {'branch': 'theoldmoon0602', 'do': 'pip install --user -U jedi'}
   Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 
   if isdirectory('/usr/local/opt/fzf')
@@ -281,6 +281,19 @@ augroup vimrc-javascript
   autocmd FileType javascript setl tabstop=4|setl shiftwidth=4|setl expandtab softtabstop=4
 augroup END
 
+function! s:setPipenvPath()
+  let pipenv_dir = expand('%:p:h')
+  while pipenv_dir != '/'
+    if filereadable(l:pipenv_dir . '/Pipfile')
+      let venv_path = trim(system(printf("sh -c 'cd %s; pipenv --venv'", pipenv_dir)))
+      let g:jedi#virtualenv_path = venv_path
+      return
+    endif
+
+    let pipenv_dir = fnamemodify(pipenv_dir, ':h')
+  endwhile
+endfunction
+
 
 " python
 " vim-python
@@ -289,6 +302,7 @@ augroup vimrc-python
   autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8
       \ formatoptions+=croq softtabstop=4
       \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+  autocmd FileType python :call s:setPipenvPath()
 augroup END
 
 " jedi-vim
