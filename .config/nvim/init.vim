@@ -119,7 +119,7 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'jelera/vim-javascript-syntax'
 
-  Plug 'theoldmoon0602/jedi-vim', {'branch': 'theoldmoon0602', 'do': 'pip install --user -U jedi'}
+  Plug 'theoldmoon0602/jedi-vim', {'do': 'pip install --user -U jedi'}
   Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 
   if isdirectory('/usr/local/opt/fzf')
@@ -321,6 +321,7 @@ let g:jedi#smart_auto_mappings = 0
 " ale
 :call extend(g:ale_linters, {
     \'python': ['flake8'], })
+let g:ale_python_flake8_options = '--ignore=E'
 
 " mucomplete
 let g:mucomplete#enable_auto_at_startup = 1
