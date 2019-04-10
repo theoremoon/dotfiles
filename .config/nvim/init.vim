@@ -33,7 +33,8 @@ set whichwrap=b,s,h,l,<,>                    " BS Space h l left right can move 
 set wrap                                     " wrap long line
 
 set complete=.,w,b,u,k,i,d,t                 " current buffer, other buffers, buffer lists, dictionary, current file and includes, same, tagfiles
-set completeopt=menu,longest,preview
+set noinfercase
+set completeopt=menu,menuone,noselect
 set path=.,/usr/include,/usr/local/include,, " list of directory names used for file searching
 set dictionary+=/usr/share/dict/words
 set wildmenu                                 " use tab completion on commandline mode
@@ -104,7 +105,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'tomasiser/vim-code-dark'
   Plug 'vim-scripts/CSApprox'
 
-  Plug 'w0rp/ale'
+  Plug 'w0rp/ale', {'do': 'pip install --user -U flake8'}
+  Plug 'lifepillar/vim-mucomplete'
   Plug 'vim-scripts/grep.vim'
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
@@ -320,7 +322,14 @@ let g:jedi#smart_auto_mappings = 0
 :call extend(g:ale_linters, {
     \'python': ['flake8'], })
 
+" mucomplete
+let g:mucomplete#enable_auto_at_startup = 1
+imap <silent><unique><F7> <plug>(MUcompleteCycFwd)
+imap <silent><unique><F8> <plug>(MUcompleteCycBwd)
+
 " Syntax highlight
 " Default highlight is better than polyglot
 let g:polyglot_disabled = ['python']
 let python_highlight_all = 1
+
+
