@@ -119,8 +119,6 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'davidhalter/jedi-vim'
   Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
-  Plug 'plytophogy/vim-virtualenv'
-  Plug 'PieterjanMontens/vim-pipenv'
 
   if isdirectory('/usr/local/opt/fzf')
           Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -312,4 +310,3 @@ let g:jedi#smart_auto_mappings = 0
 " Default highlight is better than polyglot
 let g:polyglot_disabled = ['python']
 let python_highlight_all = 1
-
