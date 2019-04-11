@@ -149,7 +149,7 @@ inoremap <C-l> <Right>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-a> <C-o>^
-inoremap <C-e> <C-o>$
+inoremap <C-e> <End>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 inoremap <C-b> <Left>
