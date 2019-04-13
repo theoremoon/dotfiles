@@ -40,11 +40,12 @@ set dictionary+=/usr/share/dict/words
 set wildmenu                                 " use tab completion on commandline mode
 set wildmode=full
 
-set enc=utf-8
-set encoding=utf-8
-set fileencoding=utf-8
+if &modifiable 
+  set encoding=utf-8
+  set fileformat=unix                          " default is LF
+  set fileencoding=utf-8
+endif
 set fileencodings=usc-bom,utf-8,default,latin1
-set fileformat=unix                          " default is LF
 set fileformats=unix,dos,mac
 
 set hlsearch
@@ -179,6 +180,13 @@ set hidden
 " search will center on the line it's found in.
 nnoremap n nzzzv
 nnoremap N Nzzzv
+
+nnoremap <Leader>t :<C-u>vnew<CR>:term<CR>i
+tnoremap <Esc> <C-\><C-n>
+augroup vimrc-term
+  autocmd!
+  autocmd WinEnter * if &buftype ==# 'terminal' | normal i | endif
+augroup END
 
 "" Easy Align
 xmap ga <Plug>(EasyAlign)
@@ -325,8 +333,8 @@ let g:ale_python_flake8_options = '--ignore=E'
 
 " mucomplete
 let g:mucomplete#enable_auto_at_startup = 1
-imap <silent><unique><F7> <plug>(MUcompleteCycFwd)
-imap <silent><unique><F8> <plug>(MUcompleteCycBwd)
+imap <silent><F7> <plug>(MUcompleteCycFwd)
+imap <silent><F8> <plug>(MUcompleteCycBwd)
 
 " Syntax highlight
 " Default highlight is better than polyglot
