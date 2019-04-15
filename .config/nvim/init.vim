@@ -55,7 +55,7 @@ set smartcase
 set wrapscan                                 " search from top when reached bottom
 
 set laststatus=2                             " always show status line
-set signcolumn=auto
+set signcolumn=yes
 
 set directory=~/.vim/swapdir
 set swapfile
@@ -180,13 +180,6 @@ set hidden
 " search will center on the line it's found in.
 nnoremap n nzzzv
 nnoremap N Nzzzv
-
-nnoremap <Leader>t :<C-u>vnew<CR>:term<CR>i
-tnoremap <Esc> <C-\><C-n>
-augroup vimrc-term
-  autocmd!
-  autocmd WinEnter * if &buftype ==# 'terminal' | normal i | endif
-augroup END
 
 "" Easy Align
 xmap ga <Plug>(EasyAlign)
