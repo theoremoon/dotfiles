@@ -18,7 +18,7 @@ set belloff=all
 
 set softtabstop=0                            " dont mix space and tab
 set tabstop=4
-set shiftwidth=2
+set shiftwidth=4
 set expandtab
 set smarttab                                 " insert number of shiftwidth spaces at head of line
 set smartindent
@@ -323,6 +323,10 @@ let g:jedi#smart_auto_mappings = 0
 :call extend(g:ale_linters, {
     \'python': ['flake8'], })
 let g:ale_python_flake8_options = '--ignore=E'
+let g:ale_fixers = {
+      \'python': ['black'],
+      \}
+let g:ale_fix_on_save = 1
 
 " mucomplete
 let g:mucomplete#enable_auto_at_startup = 1
