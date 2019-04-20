@@ -47,7 +47,7 @@ bindsym $mod+p exec rofi -show window
 
 # change focus
 bindsym $mod+j focus left
-bindsym $mod+k focus down
+bindsym $mod+k focus right
 # bindsym $mod+l focus up
 bindsym $mod+semicolon focus right
 

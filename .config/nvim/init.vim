@@ -107,7 +107,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-scripts/CSApprox'
 
   Plug 'w0rp/ale', {'do': 'pip install --user -U flake8'}
-  Plug 'lifepillar/vim-mucomplete'
   Plug 'vim-scripts/grep.vim'
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
@@ -327,11 +326,6 @@ let g:ale_fixers = {
       \'python': ['black'],
       \}
 let g:ale_fix_on_save = 1
-
-" mucomplete
-let g:mucomplete#enable_auto_at_startup = 1
-imap <silent><F7> <plug>(MUcompleteCycFwd)
-imap <silent><F8> <plug>(MUcompleteCycBwd)
 
 " Syntax highlight
 " Default highlight is better than polyglot
