@@ -123,12 +123,20 @@ call plug#begin('~/.vim/plugged')
   Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 
   if isdirectory('/usr/local/opt/fzf')
-          Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+      Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
   else
-          Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-          Plug 'junegunn/fzf.vim'
+      Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+      Plug 'junegunn/fzf.vim'
   endif
 
+  if has('nvim')
+      Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  else
+      Plug 'Shougo/deoplete.nvim'
+      Plug 'roxma/nvim-yarp'
+      Plug 'roxma/vim-hug-neovim-rpc'
+  endif
+  Plug 'landaire/deoplete-d'
 call plug#end()
 
 filetype plugin indent on
@@ -332,4 +340,4 @@ let g:ale_fix_on_save = 1
 let g:polyglot_disabled = ['python']
 let python_highlight_all = 1
 
-
+let g:deoplete#enable_at_startup = 1
