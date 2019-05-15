@@ -128,15 +128,6 @@ call plug#begin('~/.vim/plugged')
       Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
       Plug 'junegunn/fzf.vim'
   endif
-
-  if has('nvim')
-      Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  else
-      Plug 'Shougo/deoplete.nvim'
-      Plug 'roxma/nvim-yarp'
-      Plug 'roxma/vim-hug-neovim-rpc'
-  endif
-  Plug 'landaire/deoplete-d'
 call plug#end()
 
 filetype plugin indent on
@@ -339,5 +330,3 @@ let g:ale_fix_on_save = 1
 " Default highlight is better than polyglot
 let g:polyglot_disabled = ['python']
 let python_highlight_all = 1
-
-let g:deoplete#enable_at_startup = 1
