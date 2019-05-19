@@ -109,6 +109,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'justinmk/vim-dirvish'
     Plug 'easymotion/vim-easymotion'
     "}}}
+    "{{{statusline
+    Plug 'itchyny/lightline.vim'
+    "}}}
     "{{{colorscheme
     Plug 'tomasiser/vim-code-dark'
     Plug 'vim-scripts/CSApprox'
@@ -226,10 +229,10 @@ nnoremap <C-i> :<C-u>Files<CR>
 
 "}}}
 "{{{c
-if executable('cquery')
+if executable('clangd')
     au User lsp_setup call lsp#register_server({
-                \'name': 'cquery',
-                \'cmd': {server_info->['cquery']},
+                \'name': 'clangd',
+                \'cmd': {server_info->['clangd']},
                 \'whitelist': ['c', 'cpp'],
                 \})
 endif
@@ -275,6 +278,7 @@ let g:ale_linters = {
 "{{{vim-lsp
 let g:lsp_signs_enabled = 1
 let g:lsp_diagnositics_echo_cursor = 1
+set omnifunc=lsp#complete
 "}}}
 "{{{asyncomplete.vim
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -290,4 +294,26 @@ let g:polyglot_disabled = ['python']
 "}}}
 "{{{easymotion
 map <Leader> <Plug>(easymotion-prefix)
+"}}}
+"{{{lightline
+function! GetLSPServer()
+    let servers = lsp#get_whitelisted_servers()
+    let runnings = []
+    for s in l:servers
+        if lsp#get_server_status(s) == "running"
+            call add(l:runnings, s)
+        endif
+    endfor
+    return join(l:runnings, "/")
+endf
+let g:lightline = {
+      \ 'active': {
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'percent' ],
+      \              [ 'fileformat', 'fileencoding', 'filetype', 'lspserver' ] ]
+      \ },
+      \ 'component_function': {
+      \   'lspserver': 'GetLSPServer'
+      \ },
+      \ }
 "}}}
