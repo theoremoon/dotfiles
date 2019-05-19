@@ -225,7 +225,7 @@ endif
 
 
 " keymappings
-nnoremap <C-i> :<C-u>Files<CR>
+nnoremap <C-p> :<C-u>Files<CR>
 
 "}}}
 "{{{c
