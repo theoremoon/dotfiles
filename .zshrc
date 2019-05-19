@@ -32,8 +32,8 @@ setxkbmap -option ctrl:nocaps 2>/dev/null
 export GOPATH=$HOME/go
 export PATH=$PATH:$HOME/.local/bin:$HOME/bin/:$HOME/.config/composer/vendor/bin/:$GOPATH/bin
 export PROMPT="[%?]%{$fg[green]%}%3~ %{$reset_color%}% "
-eval $(opam env)
-python ~/sada_phrase/sada.py
+eval $(opam env 2>/dev/null)
+python ~/sada_phrase/sada.py 2>/dev/null
 
 # check dotfiles update
 if [[ `cd ~/dotfiles && git status --porcelain` ]]; then
