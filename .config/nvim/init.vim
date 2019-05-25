@@ -237,6 +237,15 @@ if executable('clangd')
                 \})
 endif
 "}}}
+"{{{d
+if executable('serve-d')
+    au User lsp_setup call lsp#register_server({
+                \'name': 'serve-d',
+                \'cmd': {server_info->['serve-d']},
+                \'whitelist': ['d'],
+                \})
+endif
+"}}}
 "{{{python
 if executable('pyls')
     au User lsp_setup call lsp#register_server({
