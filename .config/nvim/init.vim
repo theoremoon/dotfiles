@@ -276,8 +276,7 @@ let g:ale_linters = {
     \}
 "}}}
 "{{{vim-lsp
-let g:lsp_signs_enabled = 1
-let g:lsp_diagnositics_echo_cursor = 1
+let g:lsp_diagnostics_enabled = 0
 set omnifunc=lsp#complete
 "}}}
 "{{{asyncomplete.vim
