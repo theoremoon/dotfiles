@@ -125,11 +125,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'jelera/vim-javascript-syntax'
     "}}}
 
-    Plug 'prabirshrestha/asyncomplete.vim'
     "{{{vim-lsp
     Plug 'prabirshrestha/async.vim'
     Plug 'prabirshrestha/vim-lsp'
-    Plug 'prabirshrestha/asyncomplete-lsp.vim'
     "}}}
     "{{{fzf
     if isdirectory('/usr/local/opt/fzf')
@@ -287,11 +285,6 @@ let g:ale_linters = {
 "{{{vim-lsp
 let g:lsp_diagnostics_enabled = 0
 set omnifunc=lsp#complete
-"}}}
-"{{{asyncomplete.vim
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
 "}}}
 "{{{clever-f
 let g:clever_f_smart_case = 1
