@@ -98,8 +98,8 @@ endif
 
 call plug#begin('~/.vim/plugged')
     "{{{basic plugins
-    Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-sleuth'
     Plug 'bronson/vim-trailing-whitespace'
     Plug 'Raimondi/delimitMate'  " autoclose parentheses
     Plug 'junegunn/vim-easy-align'
@@ -311,10 +311,11 @@ let g:lightline = {
       \ 'active': {
       \   'right': [ [ 'lineinfo' ],
       \              [ 'percent' ],
-      \              [ 'fileformat', 'fileencoding', 'filetype', 'lspserver' ] ]
+      \              [ 'fileformat', 'fileencoding', 'filetype', 'lspserver', 'indentation' ] ]
       \ },
       \ 'component_function': {
-      \   'lspserver': 'GetLSPServer'
+      \   'lspserver': 'GetLSPServer',
+      \   'indentation': 'SleuthIndicator',
       \ },
       \ }
 "}}}
