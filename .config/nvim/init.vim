@@ -105,7 +105,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/vim-easy-align'
     Plug 'osyo-manga/vim-brightest'  " highlight words under cursor
     Plug 'terryma/vim-multiple-cursors'
-    Plug 'rhysd/clever-f.vim'
     Plug 'justinmk/vim-dirvish'
     Plug 'easymotion/vim-easymotion'
     "}}}
@@ -125,9 +124,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'jelera/vim-javascript-syntax'
     "}}}
 
-    "{{{vim-lsp
-    Plug 'prabirshrestha/async.vim'
-    Plug 'prabirshrestha/vim-lsp'
+    "{{{coc
+    Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
     "}}}
     "{{{fzf
     if isdirectory('/usr/local/opt/fzf')
@@ -226,33 +224,6 @@ endif
 nnoremap <C-p> :<C-u>Files<CR>
 
 "}}}
-"{{{c
-if executable('clangd')
-    au User lsp_setup call lsp#register_server({
-                \'name': 'clangd',
-                \'cmd': {server_info->['clangd']},
-                \'whitelist': ['c', 'cpp'],
-                \})
-endif
-"}}}
-"{{{d
-if executable('serve-d')
-    au User lsp_setup call lsp#register_server({
-                \'name': 'serve-d',
-                \'cmd': {server_info->['serve-d']},
-                \'whitelist': ['d'],
-                \})
-endif
-"}}}
-"{{{python
-if executable('pyls')
-    au User lsp_setup call lsp#register_server({
-                \'name': 'pyls',
-                \'cmd': {server_info->['pyls']},
-                \'whitelist': ['python'],
-                \})
-endif
-"}}}
 "{{{vimrc
 augroup vimrc-vim
     autocmd!
@@ -282,14 +253,6 @@ let g:ale_linters = {
     \'python': ['flake8']
     \}
 "}}}
-"{{{vim-lsp
-let g:lsp_diagnostics_enabled = 0
-set omnifunc=lsp#complete
-"}}}
-"{{{clever-f
-let g:clever_f_smart_case = 1
-let g:clever_f_across_no_line = 1
-"}}}
 "{{{vim-polyglot
 let g:polyglot_disabled = ['python']
 "}}}
@@ -297,24 +260,14 @@ let g:polyglot_disabled = ['python']
 map <Leader> <Plug>(easymotion-prefix)
 "}}}
 "{{{lightline
-function! GetLSPServer()
-    let servers = lsp#get_whitelisted_servers()
-    let runnings = []
-    for s in l:servers
-        if lsp#get_server_status(s) == "running"
-            call add(l:runnings, s)
-        endif
-    endfor
-    return join(l:runnings, "/")
-endf
 let g:lightline = {
       \ 'active': {
       \   'right': [ [ 'lineinfo' ],
       \              [ 'percent' ],
-      \              [ 'fileformat', 'fileencoding', 'filetype', 'lspserver', 'indentation' ] ]
+      \              [ 'fileformat', 'fileencoding', 'filetype', 'cocstatus', 'indentation' ] ]
       \ },
       \ 'component_function': {
-      \   'lspserver': 'GetLSPServer',
+      \   'lspserver': 'coc#status',
       \   'indentation': 'SleuthIndicator',
       \ },
       \ }
