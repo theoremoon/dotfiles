@@ -103,7 +103,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'bronson/vim-trailing-whitespace'
     Plug 'Raimondi/delimitMate'  " autoclose parentheses
     Plug 'junegunn/vim-easy-align'
-    Plug 'osyo-manga/vim-brightest'  " highlight words under cursor
     Plug 'terryma/vim-multiple-cursors'
     Plug 'justinmk/vim-dirvish'
     Plug 'easymotion/vim-easymotion'
