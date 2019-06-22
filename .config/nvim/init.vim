@@ -266,7 +266,7 @@ let g:lightline = {
       \              [ 'fileformat', 'fileencoding', 'filetype', 'cocstatus', 'indentation' ] ]
       \ },
       \ 'component_function': {
-      \   'lspserver': 'coc#status',
+      \   'cocstatus': 'coc#status',
       \   'indentation': 'SleuthIndicator',
       \ },
       \ }
