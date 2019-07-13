@@ -182,6 +182,7 @@ noremap <C-h> <C-w>h
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
 nnoremap <leader>. :<C-u>lcd %:p:h<CR>
+inoremap <silent><expr> <C-x><C-o> coc#refresh()
 "}}}
 """{{{Easy Align
 xmap ga <Plug>(EasyAlign)
@@ -249,7 +250,8 @@ let g:ale_fixers = {
       \'cpp': ['clang-format'],
       \}
 let g:ale_linters = {
-    \'python': ['flake8']
+    \'python': ['flake8'],
+	\ 'go': ['gopls'],
     \}
 "}}}
 "{{{vim-polyglot
