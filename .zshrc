@@ -64,7 +64,7 @@ function displayoptimize() {
   if xrandr | grep -q "HDMI-1 connected"; then
     xrandr --output eDP-1 --primary --mode 1366x768 --pos 157x1050 --rotate normal --output DP-1 --off --output HDMI-1 --mode 1680x1050 --pos 0x0 --rotate normal --output DP-2 --off --output HDMI-2 --off
   elif xrandr | grep -q "DP-1 connected"; then
-    xrandr --output HDMI-2 --off --output HDMI-1 --off --output DP-1 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1 --primary --mode 1366x768 --pos 1920x0 --rotate normal --output DP-2 --off
+  xrandr --output eDP-1 --primary --mode 1366x768 --pos 277x1080 --rotate normal --output DP-1 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1 --off --output DP-2 --off --output HDMI-2 --off
   fi
 }
 
