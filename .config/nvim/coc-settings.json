@@ -1,0 +1,17 @@
+{
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "args": [],
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"]
+    },
+    "dls": {
+      "command": "dls",
+      "args": [],
+      "rootPatterns": ["dub.json"],
+      "filetypes": ["d"]
+    }
+  },
+  "python.linting.pylintArgs": ["--load-plugins", "pylint_flask"]
+}

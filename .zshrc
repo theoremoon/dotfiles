@@ -30,7 +30,7 @@ setxkbmap -option ctrl:nocaps 2>/dev/null
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export GOPATH=$HOME/go
-export PATH=$PATH:$HOME/.local/bin:$HOME/bin/:$HOME/.config/composer/vendor/bin/:$GOPATH/bin
+export PATH=$PATH:$HOME/.local/bin:$HOME/bin/:$HOME/.config/composer/vendor/bin/:$GOPATH/bin:$HOME/.dub/packages/.bin/dls-latest
 export PROMPT="[%?]%{$fg[green]%}%3~ %{$reset_color%}% "
 eval $(opam env 2>/dev/null)
 python ~/sada_phrase/sada.py 2>/dev/null
