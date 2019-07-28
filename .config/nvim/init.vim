@@ -135,7 +135,8 @@ call plug#begin('~/.vim/plugged')
     endif
     "}}}
     "{{{ale
-    Plug 'w0rp/ale'
+    " Plug 'w0rp/ale'
+    Plug '~/space/ale'
     "}}}
     "{{{html/css/js
     Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'javascript', 'php']}
@@ -248,6 +249,7 @@ let g:ale_fixers = {
       \'python': ['black'],
       \'c': ['clang-format'],
       \'cpp': ['clang-format'],
+      \'d': ['dfmt'],
       \}
 let g:ale_linters = {
     \'python': ['flake8'],
