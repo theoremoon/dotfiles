@@ -6,7 +6,7 @@
 
 [url "github:"]
     pushInsteadOf = https://github.com/
-    pushInsteadOf = git@github.com:
+    insteadOf = git@github.com:
 
 [url "bitbucket:"]
     insteadOf = https://theoldmoon0602@bitbucket.org/
