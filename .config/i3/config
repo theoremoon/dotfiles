@@ -172,8 +172,8 @@ bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
 bindsym XF86MonBrightnessUp exec "sudo tee /sys/class/backlight/intel_backlight/brightness <<< $((`cat /sys/class/backlight/intel_backlight/brightness` + 50))"
 bindsym XF86MonBrightnessDown exec "sudo tee /sys/class/backlight/intel_backlight/brightness <<< $((`cat /sys/class/backlight/intel_backlight/brightness` - 50))"
 
-bindsym Print exec "bash -c 'A=$(mktemp --suffix .png); scrot -u $A -z; xclip -selection clipboard -t image/png $A'"
-bindsym $mod+Shift+Print exec "A=$(mktemp --suffix .png); sleep 0.1; scrot -s $A -z; xclip -selection clipboard -t image/png $A"
+bindsym Print exec scrot -u -z '/tmp/%Y-%m-%d_%H_%M_%S.png' -e 'xclip -selection clipboard -t image/png $f'
+bindsym $mod+Shift+Print exec "sleep 0.2; scrot --select -z '/tmp/%Y-%m-%d_%H_%M_%S.png' -e 'xclip -selection clipboard -t image/png $f' 2> /tmp/log"
 exec --no-startup-id fcitx-autostart
 exec --no-startup-id nm-applet
 exec xfce4-terminal
