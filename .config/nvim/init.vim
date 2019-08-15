@@ -136,7 +136,7 @@ call plug#begin('~/.vim/plugged')
     "}}}
     "{{{ale
     " Plug 'w0rp/ale'
-    Plug '~/space/ale'
+    Plug 'theoldmoon0602/ale'
     "}}}
     "{{{html/css/js
     Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'javascript', 'php']}
