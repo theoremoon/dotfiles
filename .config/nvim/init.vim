@@ -116,11 +116,12 @@ call plug#begin('~/.vim/plugged')
     "}}}
 
     "{{{filetype plugins
-    Plug 'sheerun/vim-polyglot'
+    " Plug 'sheerun/vim-polyglot'
     Plug 'hail2u/vim-css3-syntax'
     Plug 'gorodinskiy/vim-coloresque'  " colorcode like blue
     Plug 'tpope/vim-haml'
     Plug 'jelera/vim-javascript-syntax'
+    Plug 'fatih/vim-go'
     "}}}
 
     "{{{coc
@@ -257,7 +258,7 @@ let g:ale_linters = {
     \}
 "}}}
 "{{{vim-polyglot
-let g:polyglot_disabled = ['python']
+let g:polyglot_disabled = ['python', 'go']
 "}}}
 "{{{easymotion
 map <Leader> <Plug>(easymotion-prefix)
