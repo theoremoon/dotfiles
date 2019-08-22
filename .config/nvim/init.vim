@@ -122,6 +122,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-haml'
     Plug 'jelera/vim-javascript-syntax'
     Plug 'fatih/vim-go'
+    Plug 'jparise/vim-graphql'
     "}}}
 
     "{{{coc
@@ -280,4 +281,7 @@ let g:lightline = {
       \   'indentation': 'SleuthIndicator',
       \ },
       \ }
+"}}}
+"{{{graphql
+au BufNewFile,BufRead *.graphql setfiletype graphql
 "}}}
