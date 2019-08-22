@@ -125,7 +125,7 @@ call plug#begin('~/.vim/plugged')
     "}}}
 
     "{{{coc
-    Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+    Plug 'neoclide/coc.nvim', {'tag': '*'}
     "}}}
     "{{{fzf
     if isdirectory('/usr/local/opt/fzf')
@@ -183,8 +183,11 @@ noremap <C-h> <C-w>h
 
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
-nnoremap <leader>. :<C-u>lcd %:p:h<CR>
+nnoremap <Leader>. :<C-u>lcd %:p:h<CR>
 inoremap <silent><expr> <C-x><C-o> coc#refresh()
+nnoremap <Leader>i :<C-u>call CocActionAsync("doHover")<CR>
+nnoremap <Leader>r :<C-u>call CocActionAsync("jumpReferences")<CR>
+nnoremap <Leader>j :<C-u>call CocActionAsync("jumpImplementation")<CR>
 "}}}
 """{{{Easy Align
 xmap ga <Plug>(EasyAlign)
@@ -210,7 +213,6 @@ let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/
 if executable('ag')
   let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
   set grepprg=ag\ --nogroup\ --nocolor
-  nnoremap <Leader>f :<C-u>Ag<CR>
 endif
 
 " ripgrep
@@ -218,7 +220,6 @@ if executable('rg')
   let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
   set grepprg=rg\ --vimgrep
   command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-  nnoremap <Leader>f :<C-u>Rg<CR>
 endif
 
 
@@ -259,6 +260,10 @@ let g:ale_linters = {
 "}}}
 "{{{vim-polyglot
 let g:polyglot_disabled = ['python', 'go']
+"}}}
+"{{{vim-go
+let g:go_fmt_command = "goimports"
+let g:go_metalinter_autosave = 1
 "}}}
 "{{{easymotion
 map <Leader> <Plug>(easymotion-prefix)
