@@ -80,12 +80,12 @@ if !isdirectory(expand("~/.vim/undodir"))
   call mkdir(expand("~/.vim/undodir"))
 endif
 "}}}
+"{{{vim-plug
 if exists('$SHELL')
     set shell=$SHELL
 else
     set shell=/bin/sh
 endif
-"{{{plugins
 if has('nvim')
   if !filereadable(expand("~/.local/share/nvim/site/autoload/plug.vim"))
     :! curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -95,7 +95,8 @@ else
     :! curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   endif
 endif
-
+"}}}
+"{{{plugins
 call plug#begin('~/.vim/plugged')
     "{{{basic plugins
     Plug 'tpope/vim-surround'
@@ -106,6 +107,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'terryma/vim-multiple-cursors'
     Plug 'justinmk/vim-dirvish'
     Plug 'easymotion/vim-easymotion'
+    Plug 'theoldmoon0602/vim-eval'
     "}}}
     "{{{statusline
     Plug 'itchyny/lightline.vim'
@@ -116,17 +118,17 @@ call plug#begin('~/.vim/plugged')
     "}}}
 
     "{{{filetype plugins
-    " Plug 'sheerun/vim-polyglot'
+    Plug 'sheerun/vim-polyglot'
     Plug 'hail2u/vim-css3-syntax'
     Plug 'gorodinskiy/vim-coloresque'  " colorcode like blue
     Plug 'tpope/vim-haml'
     Plug 'jelera/vim-javascript-syntax'
-    Plug 'fatih/vim-go'
     Plug 'jparise/vim-graphql'
     "}}}
 
     "{{{coc
     Plug 'neoclide/coc.nvim', {'tag': '*'}
+    Plug 'theoldmoon0602/coc-plug'
     "}}}
     "{{{fzf
     if isdirectory('/usr/local/opt/fzf')
@@ -253,18 +255,15 @@ let g:ale_fixers = {
       \'c': ['clang-format'],
       \'cpp': ['clang-format'],
       \'d': ['dfmt'],
+      \'go': ['gofmt', 'goimports'],
       \}
 let g:ale_linters = {
     \'python': ['flake8'],
-	\ 'go': ['gopls'],
+	\ 'go': ['gofmt', 'goimports'],
     \}
 "}}}
 "{{{vim-polyglot
 let g:polyglot_disabled = ['python', 'go']
-"}}}
-"{{{vim-go
-let g:go_fmt_command = "goimports"
-let g:go_metalinter_autosave = 1
 "}}}
 "{{{easymotion
 map <Leader> <Plug>(easymotion-prefix)
@@ -284,4 +283,10 @@ let g:lightline = {
 "}}}
 "{{{graphql
 au BufNewFile,BufRead *.graphql setfiletype graphql
+"}}}
+"{{{coc plugins
+call coc_plug#begin()
+  CocPlug 'coc-python'
+  CocPlug 'coc-fsharp'
+call coc_plug#end()
 "}}}
