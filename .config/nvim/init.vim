@@ -143,7 +143,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'theoldmoon0602/ale'
     "}}}
     "{{{html/css/js
-    Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'javascript', 'php']}
+    Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'javascript', 'php', 'typescript']}
     "}}}
 call plug#end()
 "}}}
@@ -252,6 +252,8 @@ let g:ale_completion_enabled = 0
 let g:ale_python_flake8_options = '--ignore=E'
 let g:ale_fixers = {
       \'python': ['black'],
+      \'javascript': ['prettier'],
+      \'typescript': ['prettier'],
       \'c': ['clang-format'],
       \'cpp': ['clang-format'],
       \'d': ['dfmt'],
@@ -260,6 +262,8 @@ let g:ale_fixers = {
 let g:ale_linters = {
     \'python': ['flake8'],
 	\ 'go': ['gofmt', 'goimports'],
+    \'javascript': ['eslint'],
+    \'typescript': ['eslint'],
     \}
 "}}}
 "{{{vim-polyglot
