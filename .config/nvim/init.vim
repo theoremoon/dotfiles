@@ -126,9 +126,11 @@ call plug#begin('~/.vim/plugged')
     Plug 'jparise/vim-graphql'
     "}}}
 
-    "{{{coc
-    Plug 'neoclide/coc.nvim', {'tag': '*'}
-    Plug 'theoldmoon0602/coc-plug'
+    "{{{vim-lsp
+    Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'prabirshrestha/async.vim'
+    Plug 'prabirshrestha/vim-lsp'
+    Plug 'prabirshrestha/asyncomplete-lsp.vim'
     "}}}
     "{{{fzf
     if isdirectory('/usr/local/opt/fzf')
@@ -187,10 +189,11 @@ noremap <C-h> <C-w>h
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
 nnoremap <Leader>. :<C-u>lcd %:p:h<CR>
-inoremap <silent><expr> <C-x><C-o> coc#refresh()
-nnoremap <Leader>i :<C-u>call CocActionAsync("doHover")<CR>
-nnoremap <Leader>r :<C-u>call CocActionAsync("jumpReferences")<CR>
-nnoremap <Leader>j :<C-u>call CocActionAsync("jumpImplementation")<CR>
+imap <C-f> <Plug>(asyncomplete_force_refresh)
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 "}}}
 """{{{Easy Align
 xmap ga <Plug>(EasyAlign)
@@ -277,10 +280,9 @@ let g:lightline = {
       \ 'active': {
       \   'right': [ [ 'lineinfo' ],
       \              [ 'percent' ],
-      \              [ 'fileformat', 'fileencoding', 'filetype', 'cocstatus', 'indentation' ] ]
+      \              [ 'fileformat', 'fileencoding', 'filetype', 'indentation' ] ]
       \ },
       \ 'component_function': {
-      \   'cocstatus': 'coc#status',
       \   'indentation': 'SleuthIndicator',
       \ },
       \ }
@@ -288,9 +290,26 @@ let g:lightline = {
 "{{{graphql
 au BufNewFile,BufRead *.graphql setfiletype graphql
 "}}}
-"{{{coc plugins
-call coc_plug#begin()
-  CocPlug 'coc-python'
-  CocPlug 'coc-fsharp'
-call coc_plug#end()
+"{{{vim-lsp
+if executable('pyls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ })
+endif
+if executable('dls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'dls',
+        \ 'cmd': {server_info->['dls']},
+        \ 'whitelist': ['d'],
+        \ })
+endif
+if executable('gopls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'gopls',
+        \ 'cmd': {server_info->['gopls']},
+        \ 'whitelist': ['go'],
+        \ })
+endif
 "}}}
