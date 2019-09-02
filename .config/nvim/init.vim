@@ -312,4 +312,11 @@ if executable('gopls')
         \ 'whitelist': ['go'],
         \ })
 endif
+if executable('ocaml-language-server')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'ocaml-language-server',
+        \ 'cmd': {server_info->['ocaml-language-server', '--stdio']},
+        \ 'whitelist': ['ocaml'],
+        \ })
+endif
 "}}}
