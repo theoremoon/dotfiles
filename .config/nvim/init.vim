@@ -266,7 +266,7 @@ let g:ale_fixers = {
       \'go': ['gofmt', 'goimports'],
       \}
 let g:ale_linters = {
-    \'python': ['flake8'],
+    \'python': ['pyls'],
 	\ 'go': ['gofmt', 'goimports'],
     \'javascript': ['eslint'],
     \'typescript': ['eslint'],
@@ -294,6 +294,9 @@ let g:lightline = {
 au BufNewFile,BufRead *.graphql setfiletype graphql
 "}}}
 "{{{vim-lsp
+let g:lsp_diagnostics_enabled = 0
+let g:lsp_highlights_enabled = 0
+let g:lsp_textprop_enabled = 1
 if executable('pyls')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'pyls',
