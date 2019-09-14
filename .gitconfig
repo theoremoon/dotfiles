@@ -1,8 +1,11 @@
 [user]
 	email = theoldmoon0602@gmail.com
-	name = theoldmoon0602
+	name = theoremoon
 [core]
 	editor = nvim
+
+[credential]
+	helper = cache --timeout=3600
 
 [url "github:"]
     pushInsteadOf = https://github.com/
@@ -11,3 +14,4 @@
 [url "bitbucket:"]
     insteadOf = https://theoldmoon0602@bitbucket.org/
     pushInsteadOf = git@bitbucket.org:
+

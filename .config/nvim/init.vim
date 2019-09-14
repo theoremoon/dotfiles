@@ -212,6 +212,9 @@ augroup vimrc-make-cmake
   autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
 augroup END
 "}}}
+"cloudformation
+au BufRead,BufNewFile *template.yaml setfiletype cloudformation.yaml
+au BufRead,BufNewFile template.yml set ft=cloudformation.yaml
 """{{{fzf.vim
 let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
 
