@@ -242,11 +242,6 @@ augroup vimrc-vim
     autocmd FileType vim setlocal foldmethod=marker
 augroup END
 "}}}
-"{{{trailing-whitespace
-augroup trailing-whitespace
-    autocmd BufWritePre * :FixWhitespace
-augroup END
-"}}}
 "{{{ale
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 1
@@ -308,6 +303,13 @@ if executable('dls')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'dls',
         \ 'cmd': {server_info->['dls']},
+        \ 'whitelist': ['d'],
+        \ })
+endif
+if executable('serve-d')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'serve-d',
+        \ 'cmd': {server_info->['serve-d']},
         \ 'whitelist': ['d'],
         \ })
 endif
