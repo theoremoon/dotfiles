@@ -261,7 +261,7 @@ let g:ale_fixers = {
       \'go': ['gofmt', 'goimports'],
       \}
 let g:ale_linters = {
-    \'python': ['pyls'],
+    \'python': [],
 	\ 'go': ['gofmt', 'goimports'],
     \'javascript': ['eslint'],
     \'typescript': ['eslint'],
