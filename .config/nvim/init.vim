@@ -141,8 +141,7 @@ call plug#begin('~/.vim/plugged')
     endif
     "}}}
     "{{{ale
-    " Plug 'w0rp/ale'
-    Plug 'theoldmoon0602/ale'
+    Plug 'dense-analysis/ale'
     "}}}
     "{{{html/css/js
     Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'javascript', 'php', 'typescript']}
