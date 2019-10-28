@@ -14,7 +14,6 @@ set nocompatible
 set number
 set ruler
 set backspace=indent,eol,start
-set background=dark
 set belloff=all
 set laststatus=2                             " always show status line
 set signcolumn=yes
@@ -115,6 +114,7 @@ call plug#begin('~/.vim/plugged')
     "{{{colorscheme
     Plug 'tomasiser/vim-code-dark'
     Plug 'vim-scripts/CSApprox'
+    Plug 'NLKNguyen/papercolor-theme'
     "}}}
 
     "{{{filetype plugins
@@ -124,6 +124,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-haml'
     Plug 'jelera/vim-javascript-syntax'
     Plug 'jparise/vim-graphql'
+    Plug 'ElmCast/elm-vim', {'for': 'elm'}
     "}}}
 
     "{{{vim-lsp
@@ -150,11 +151,13 @@ call plug#end()
 "}}}
 
 filetype plugin indent on
+set t_Co=256
+set background=dark
 syntax on
-colorscheme codedark
+colorscheme PaperColor
 "{{{key mappings
 let mapleader="\<Space>"
-let maplocalleader="\<Space>"
+let maplocalleader=","
 
 inoremap jk <Esc>
 nnoremap <Leader>w :<C-u>w<CR>
@@ -325,5 +328,11 @@ if executable('ocaml-language-server')
         \ 'cmd': {server_info->['ocaml-language-server', '--stdio']},
         \ 'whitelist': ['ocaml'],
         \ })
+endif
+"}}}
+"{{{elm
+if &ft == "elm"
+    let g:ale_completion_enabled = 1
+    call ale#completion#Enable()
 endif
 "}}}
