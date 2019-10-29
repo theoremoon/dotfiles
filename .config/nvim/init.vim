@@ -125,6 +125,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'jelera/vim-javascript-syntax'
     Plug 'jparise/vim-graphql'
     Plug 'ElmCast/elm-vim', {'for': 'elm'}
+    Plug 'posva/vim-vue', {'for': 'vue'}
     "}}}
 
     "{{{vim-lsp
@@ -145,7 +146,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'dense-analysis/ale'
     "}}}
     "{{{html/css/js
-    Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'javascript', 'php', 'typescript']}
+    Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'javascript', 'php', 'typescript', 'vue']}
     "}}}
 call plug#end()
 "}}}
@@ -329,6 +330,14 @@ if executable('ocaml-language-server')
         \ 'whitelist': ['ocaml'],
         \ })
 endif
+if executable('vls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'vls',
+        \ 'cmd': {server_info->['vls']},
+        \ 'whitelist': ['vue'],
+        \ })
+endif
+
 "}}}
 "{{{elm
 if &ft == "elm"
