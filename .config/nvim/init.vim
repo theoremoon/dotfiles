@@ -317,13 +317,22 @@ if executable('serve-d')
         \ 'cmd': {server_info->['serve-d']},
         \ 'whitelist': ['d'],
         \ })
+    autocmd FileType go setlocal omnifunc=lsp#complete
 endif
 if executable('gopls')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'gopls',
         \ 'cmd': {server_info->['gopls']},
         \ 'whitelist': ['go'],
+        \ 'workspace_config': { 'gopls': {
+        \   'staticcheck': v:true,
+        \   'completionDocumentation': v:true,
+        \   'completeUnimported': v:true,
+        \   'hoverKind': "FullDocumentation",
+        \   'usePlaceholders': v:true,
+        \ }},
         \ })
+    autocmd FileType go setlocal omnifunc=lsp#complete
 endif
 if executable('ocaml-language-server')
     au User lsp_setup call lsp#register_server({
