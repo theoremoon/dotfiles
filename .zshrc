@@ -68,4 +68,15 @@ export GOPATH=$HOME/go
 export PATH="$PATH:$HOME/.local/bin:$HOME/bin/:$HOME/.config/composer/vendor/bin/:$GOPATH/bin:$HOME/.dub/packages/.bin/dls-latest:$PYENV_ROOT/bin:/usr/local/go/bin:$HOME/.poetry/bin"
 
 alias FIXCAPS="xdotool key Caps_Lock"
-alias gcd='cd $(ghq list --full-path | fzf)'
+function gcd() {
+  if [ $# -eq 1 ]; then
+    cd $(ghq list --full-path | grep "/$1\$")
+  else
+    cd $(ghq list --full-path | fzf)
+  fi
+}
+
+function _gcd() {
+  _values '' $(ghq list --full-path | xargs -I@ basename @)
+}
+compdef _gcd gcd
