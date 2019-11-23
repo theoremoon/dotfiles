@@ -356,6 +356,9 @@ if &ft == "elm"
     call ale#completion#Enable()
 endif
 "}}}
+"{{{dpp
+au BufNewFile,BufRead *dpp setfiletype d
+"}}}
 "{{{ parcel serve
 autocmd FileType html,javascript,css,vue setl backupcopy=yes
 "}}}
