@@ -297,6 +297,7 @@ let g:lsp_diagnostics_enabled = 0
 let g:lsp_highlights_enabled = 0
 let g:lsp_textprop_enabled = 1
 let g:lsp_text_edit_enabled = 0 "https://github.com/prabirshrestha/asyncomplete.vim/issues/156
+let g:lsp_log_file = expand('~/vim-lsp.log')
 if executable('pyls')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'pyls',
