@@ -128,6 +128,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'posva/vim-vue', {'for': 'vue'}
     "}}}
 
+    "{{{sonictemplate
+    Plug 'mattn/sonictemplate-vim'
+    "}}}
     "{{{vim-lsp
     Plug 'prabirshrestha/asyncomplete.vim'
     Plug 'prabirshrestha/async.vim'
@@ -349,6 +352,15 @@ if executable('vls')
         \ 'whitelist': ['vue'],
         \ })
 endif
+if executable('rls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'rls',
+        \ 'cmd': {server_info->['rls']},
+        \ 'workspace_config': {'rust': {'clippy_preference': 'on'}},
+        \ 'whitelist': ['rust'],
+        \ })
+    autocmd FileType go setlocal omnifunc=lsp#complete
+endif
 
 "}}}
 "{{{elm
@@ -362,4 +374,10 @@ au BufNewFile,BufRead *dpp setfiletype d
 "}}}
 "{{{ parcel serve
 autocmd FileType html,javascript,css,vue setl backupcopy=yes
+"}}}
+"{{{sonictemplate
+let g:sonictemplate_vim_template_dir = [
+\ '$HOME/.vim/template'
+\]
+
 "}}}
