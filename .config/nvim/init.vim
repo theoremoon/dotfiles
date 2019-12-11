@@ -307,6 +307,7 @@ if executable('pyls')
         \ 'cmd': {server_info->['pyls']},
         \ 'whitelist': ['python'],
         \ })
+    autocmd FileType python setlocal omnifunc=lsp#complete
 endif
 if executable('dls')
     au User lsp_setup call lsp#register_server({
@@ -314,6 +315,7 @@ if executable('dls')
         \ 'cmd': {server_info->['dls']},
         \ 'whitelist': ['d'],
         \ })
+    autocmd FileType d setlocal omnifunc=lsp#complete
 endif
 if executable('serve-d')
     au User lsp_setup call lsp#register_server({
@@ -321,7 +323,7 @@ if executable('serve-d')
         \ 'cmd': {server_info->['serve-d']},
         \ 'whitelist': ['d'],
         \ })
-    autocmd FileType go setlocal omnifunc=lsp#complete
+    autocmd FileType d setlocal omnifunc=lsp#complete
 endif
 if executable('gopls')
     au User lsp_setup call lsp#register_server({
@@ -359,7 +361,7 @@ if executable('rls')
         \ 'workspace_config': {'rust': {'clippy_preference': 'on'}},
         \ 'whitelist': ['rust'],
         \ })
-    autocmd FileType go setlocal omnifunc=lsp#complete
+    autocmd FileType rust setlocal omnifunc=lsp#complete
 endif
 
 "}}}
