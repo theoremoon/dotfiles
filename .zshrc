@@ -80,3 +80,4 @@ function _g() {
   _values '' $(ghq list --full-path | xargs -I@ basename @)
 }
 compdef _g g
+alias pyenvinit='eval "$(pyenv init -)"'

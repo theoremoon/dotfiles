@@ -113,8 +113,11 @@ call plug#begin('~/.vim/plugged')
     "}}}
     "{{{colorscheme
     Plug 'tomasiser/vim-code-dark'
-    Plug 'vim-scripts/CSApprox'
+    " Plug 'vim-scripts/CSApprox'
     Plug 'NLKNguyen/papercolor-theme'
+    Plug 'kamykn/dark-theme.vim'
+    Plug 'romainl/Apprentice'
+
     "}}}
 
     "{{{filetype plugins
