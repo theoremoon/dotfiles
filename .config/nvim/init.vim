@@ -117,7 +117,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'NLKNguyen/papercolor-theme'
     Plug 'kamykn/dark-theme.vim'
     Plug 'romainl/Apprentice'
-
     "}}}
 
     "{{{filetype plugins
@@ -304,6 +303,32 @@ let g:lsp_highlights_enabled = 0
 let g:lsp_textprop_enabled = 1
 let g:lsp_text_edit_enabled = 0 "https://github.com/prabirshrestha/asyncomplete.vim/issues/156
 let g:lsp_log_file = expand('~/vim-lsp.log')
+
+function! s:findRoot(target)
+  let dir = getcwd()
+  while 1
+    let files = split(globpath(l:dir, '*'), '\n')
+    for f in l:files
+        if a:target == fnamemodify(f, ':t')
+            return l:dir
+        endif
+    endfor
+    if l:dir == "/"
+      break
+    endif
+    let dir = fnamemodify(l:dir, ':h')
+  endwhile
+  return ""
+endfunction
+
+function! s:setVenv()
+  let dir = s:findRoot('Pipfile')
+  echo l:dir
+  if dir != ""
+    let $VIRTUAL_ENV = trim(system("cd " . l:dir . "; pipenv --venv"))
+  endif
+endfunction
+
 if executable('pyls')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'pyls',
@@ -311,6 +336,7 @@ if executable('pyls')
         \ 'whitelist': ['python'],
         \ })
     autocmd FileType python setlocal omnifunc=lsp#complete
+    autocmd FileType python call s:setVenv()
 endif
 if executable('dls')
     au User lsp_setup call lsp#register_server({
