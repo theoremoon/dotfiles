@@ -362,7 +362,6 @@ if executable('gopls')
         \ 'workspace_config': { 'gopls': {
         \   'staticcheck': v:true,
         \   'completionDocumentation': v:true,
-        \   'completeUnimported': v:true,
         \   'hoverKind': "FullDocumentation",
         \   'usePlaceholders': v:true,
         \ }},
