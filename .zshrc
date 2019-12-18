@@ -81,3 +81,4 @@ function _g() {
 }
 compdef _g g
 alias pyenvinit='eval "$(pyenv init -)"'
+alias d='cd $(find . -type d | fzf)'

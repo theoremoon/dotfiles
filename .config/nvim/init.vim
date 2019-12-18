@@ -24,8 +24,8 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set smarttab                                 " insert number of shiftwidth spaces at head of line
-set smartindent
 set autoindent
+set smartindent
 "}}}
 "{{{ text wrapping
 set textwidth=0                              " dont break line (different with wrap line{{{{{{
@@ -303,6 +303,7 @@ let g:lsp_highlights_enabled = 0
 let g:lsp_textprop_enabled = 1
 let g:lsp_text_edit_enabled = 0 "https://github.com/prabirshrestha/asyncomplete.vim/issues/156
 let g:lsp_log_file = expand('~/vim-lsp.log')
+nnoremap <Leader>r :<C-u>LspRename<CR>
 
 function! s:findRoot(target)
   let dir = getcwd()
