@@ -404,7 +404,7 @@ endif
 au BufNewFile,BufRead *dpp setfiletype d
 "}}}
 "{{{ parcel serve
-autocmd FileType html,javascript,css,vue setl backupcopy=yes
+autocmd FileType html,javascript,css,vue,elm setl backupcopy=yes
 "}}}
 "{{{sonictemplate
 let g:sonictemplate_vim_template_dir = [
