@@ -151,7 +151,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'dense-analysis/ale'
     "}}}
     "{{{html/css/js
-    Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'javascript', 'php', 'typescript', 'vue']}
+    Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'javascript', 'php', 'typescript', 'vue', 'svelte']}
     "}}}
 call plug#end()
 "}}}
@@ -404,7 +404,7 @@ endif
 au BufNewFile,BufRead *dpp setfiletype d
 "}}}
 "{{{ parcel serve
-autocmd FileType html,javascript,css,vue,elm setl backupcopy=yes
+autocmd FileType html,javascript,css,vue,elm,svelte setl backupcopy=yes
 "}}}
 "{{{sonictemplate
 let g:sonictemplate_vim_template_dir = [
