@@ -104,7 +104,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'Raimondi/delimitMate'  " autoclose parentheses
     Plug 'junegunn/vim-easy-align'
     Plug 'terryma/vim-multiple-cursors'
-    Plug 'justinmk/vim-dirvish'
     Plug 'easymotion/vim-easymotion'
     Plug 'theoldmoon0602/vim-eval'
     "}}}
@@ -117,8 +116,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'NLKNguyen/papercolor-theme'
     Plug 'kamykn/dark-theme.vim'
     Plug 'romainl/Apprentice'
+    Plug 'luochen1990/rainbow'
     "}}}
-
     "{{{filetype plugins
     Plug 'sheerun/vim-polyglot'
     Plug 'hail2u/vim-css3-syntax'
@@ -129,7 +128,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'ElmCast/elm-vim', {'for': 'elm'}
     Plug 'posva/vim-vue', {'for': 'vue'}
     "}}}
-
     "{{{sonictemplate
     Plug 'mattn/sonictemplate-vim'
     "}}}
