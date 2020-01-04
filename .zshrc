@@ -88,4 +88,3 @@ function build() {
 }
 
 alias d='cd $(find . -type d | fzf)'
-eval "$(direnv hook zsh)"
