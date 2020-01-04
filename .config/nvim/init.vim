@@ -386,3 +386,8 @@ let g:sonictemplate_vim_template_dir = [
 \]
 
 "}}}
+"{{{sagemath
+augroup sage
+  au! BufRead,BufNewFile *.sage setfiletype python
+augroup END
+"}}}

@@ -81,3 +81,7 @@ function _g() {
 }
 compdef _g g
 alias pyenvinit='eval "$(pyenv init -)"'
+
+function build() {
+  bash $(ls | grep "build")
+}
