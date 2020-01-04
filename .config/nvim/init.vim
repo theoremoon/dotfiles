@@ -24,8 +24,8 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set smarttab                                 " insert number of shiftwidth spaces at head of line
-set smartindent
 set autoindent
+set smartindent
 "}}}
 "{{{ text wrapping
 set textwidth=0                              " dont break line (different with wrap line{{{{{{
@@ -104,7 +104,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'Raimondi/delimitMate'  " autoclose parentheses
     Plug 'junegunn/vim-easy-align'
     Plug 'terryma/vim-multiple-cursors'
-    Plug 'justinmk/vim-dirvish'
     Plug 'easymotion/vim-easymotion'
     Plug 'theoldmoon0602/vim-eval'
     "}}}
@@ -117,9 +116,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'NLKNguyen/papercolor-theme'
     Plug 'kamykn/dark-theme.vim'
     Plug 'romainl/Apprentice'
-
+    Plug 'luochen1990/rainbow'
     "}}}
-
     "{{{filetype plugins
     Plug 'sheerun/vim-polyglot'
     Plug 'hail2u/vim-css3-syntax'
@@ -130,7 +128,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'ElmCast/elm-vim', {'for': 'elm'}
     Plug 'posva/vim-vue', {'for': 'vue'}
     "}}}
-
     "{{{sonictemplate
     Plug 'mattn/sonictemplate-vim'
     "}}}
@@ -152,7 +149,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'dense-analysis/ale'
     "}}}
     "{{{html/css/js
-    Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'javascript', 'php', 'typescript', 'vue']}
+    Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'javascript', 'php', 'typescript', 'vue', 'svelte']}
     "}}}
 call plug#end()
 "}}}
@@ -304,6 +301,33 @@ let g:lsp_highlights_enabled = 0
 let g:lsp_textprop_enabled = 1
 let g:lsp_text_edit_enabled = 0 "https://github.com/prabirshrestha/asyncomplete.vim/issues/156
 let g:lsp_log_file = expand('~/vim-lsp.log')
+nnoremap <Leader>r :<C-u>LspRename<CR>
+
+function! s:findRoot(target)
+  let dir = getcwd()
+  while 1
+    let files = split(globpath(l:dir, '*'), '\n')
+    for f in l:files
+        if a:target == fnamemodify(f, ':t')
+            return l:dir
+        endif
+    endfor
+    if l:dir == "/"
+      break
+    endif
+    let dir = fnamemodify(l:dir, ':h')
+  endwhile
+  return ""
+endfunction
+
+function! s:setVenv()
+  let dir = s:findRoot('Pipfile')
+  echo l:dir
+  if dir != ""
+    let $VIRTUAL_ENV = trim(system("cd " . l:dir . "; pipenv --venv"))
+  endif
+endfunction
+
 if executable('pyls')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'pyls',
@@ -311,6 +335,7 @@ if executable('pyls')
         \ 'whitelist': ['python'],
         \ })
     autocmd FileType python setlocal omnifunc=lsp#complete
+    autocmd FileType python call s:setVenv()
 endif
 if executable('dls')
     au User lsp_setup call lsp#register_server({
@@ -336,7 +361,6 @@ if executable('gopls')
         \ 'workspace_config': { 'gopls': {
         \   'staticcheck': v:true,
         \   'completionDocumentation': v:true,
-        \   'completeUnimported': v:true,
         \   'hoverKind': "FullDocumentation",
         \   'usePlaceholders': v:true,
         \ }},
@@ -378,7 +402,7 @@ endif
 au BufNewFile,BufRead *dpp setfiletype d
 "}}}
 "{{{ parcel serve
-autocmd FileType html,javascript,css,vue setl backupcopy=yes
+autocmd FileType html,javascript,css,vue,elm,svelte setl backupcopy=yes
 "}}}
 "{{{sonictemplate
 let g:sonictemplate_vim_template_dir = [

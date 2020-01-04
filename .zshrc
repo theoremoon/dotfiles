@@ -19,6 +19,7 @@ autoload -Uz colors
 colors
 # End of lines added by compinstall
 
+export EDITOR=nvim
 alias vim=nvim
 alias ls='ls --color=auto'
 alias fsnew='dotnet new console -lang="F#" -o'
@@ -85,3 +86,6 @@ alias pyenvinit='eval "$(pyenv init -)"'
 function build() {
   bash $(ls | grep "build")
 }
+
+alias d='cd $(find . -type d | fzf)'
+eval "$(direnv hook zsh)"
