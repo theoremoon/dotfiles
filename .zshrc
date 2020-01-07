@@ -11,7 +11,6 @@ setopt nobeep
 bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/theoldmoon0602/.zshrc'
 
 autoload -Uz compinit
 compinit
@@ -47,8 +46,8 @@ function displayoptimize() {
   fi
 }
 
-alias writeup='export PS1="$ "'
-export PROMPT="[%?]%{$fg[green]%}%3~ %{$reset_color%}% "
+alias writeup='export PROMPT="$ "'
+export PROMPT="[%?]%{$fg[green]%}%3~ %{$reset_color%}%"
 
 
 # check dotfiles update

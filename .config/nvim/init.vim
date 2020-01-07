@@ -201,6 +201,12 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 "}}}
+"{{{terminal mode settings
+tnoremap <Esc> <C-\><C-n>
+tnoremap jk <C-\><C-n>
+nnoremap <C-t> :<C-u>vsplit +terminal<CR>
+nnoremap <C-g> :<C-u>split +terminal<CR>
+"}}}
 """{{{Easy Align
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)

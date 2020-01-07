@@ -27,8 +27,12 @@ function deploy()
       return 1
     fi
   fi
-  
-  ln -sfnv $(realpath $1) $2
+
+  if [ -L "$1" ]; then
+    cp -vd $1 $2
+  else
+    ln -sfnv $(realpath $1) $2
+  fi
 }
 
 # deploy directory (recursive run deploy)
