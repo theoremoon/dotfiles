@@ -83,7 +83,13 @@ compdef _g g
 alias pyenvinit='eval "$(pyenv init -)"'
 
 function build() {
-  bash -v $(ls | grep "build")
+  cat $(ls | grep "^build") | bash /dev/stdin "$@" <<'DOC'
+if type "$1" 2>/dev/null >/dev/null; then
+    f="$1"
+    shift
+    "$f" "$@"
+fi
+DOC
 }
 
 alias d='cd $(find . -type d | fzf)'
