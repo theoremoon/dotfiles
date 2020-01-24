@@ -87,6 +87,7 @@ function build() {
 if type "$1" 2>/dev/null >/dev/null; then
     f="$1"
     shift
+    set -x
     "$f" "$@"
 fi
 DOC
