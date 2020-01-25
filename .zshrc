@@ -70,9 +70,13 @@ export PATH="$PATH:$HOME/.local/bin:$HOME/bin/:$HOME/.config/composer/vendor/bin
 alias FIXCAPS="xdotool key Caps_Lock"
 function g() {
   if [ $# -eq 1 ]; then
-    cd $(ghq list --full-path | grep "/$1\$")
+    dir=$(ghq list --full-path | grep "/$1\$")
   else
-    cd $(ghq list --full-path | fzf)
+    dir=$(ghq list --full-path | fzf)
+  fi
+
+  if [ -n "$dir" ]; then
+    cd "$dir"
   fi
 }
 
