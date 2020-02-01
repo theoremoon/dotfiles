@@ -281,7 +281,7 @@ let g:ale_linters = {
     \}
 "}}}
 "{{{vim-polyglot
-let g:polyglot_disabled = ['python', 'go']
+let g:polyglot_disabled = ['python', 'go', 'markdown']
 "}}}
 "{{{easymotion
 map <Leader> <Plug>(easymotion-prefix)
