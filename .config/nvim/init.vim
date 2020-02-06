@@ -136,6 +136,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'prabirshrestha/async.vim'
     Plug 'prabirshrestha/vim-lsp'
     Plug 'prabirshrestha/asyncomplete-lsp.vim'
+    Plug 'mattn/vim-lsp-settings'
     "}}}
     "{{{fzf
     if isdirectory('/usr/local/opt/fzf')
@@ -360,17 +361,6 @@ if executable('serve-d')
     autocmd FileType d setlocal omnifunc=lsp#complete
 endif
 if executable('gopls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'gopls',
-        \ 'cmd': {server_info->['gopls']},
-        \ 'whitelist': ['go'],
-        \ 'workspace_config': { 'gopls': {
-        \   'staticcheck': v:true,
-        \   'completionDocumentation': v:true,
-        \   'hoverKind': "FullDocumentation",
-        \   'usePlaceholders': v:true,
-        \ }},
-        \ })
     autocmd FileType go setlocal omnifunc=lsp#complete
 endif
 if executable('ocaml-language-server')
