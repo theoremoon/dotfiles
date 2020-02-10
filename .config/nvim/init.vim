@@ -137,6 +137,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'prabirshrestha/vim-lsp'
     Plug 'prabirshrestha/asyncomplete-lsp.vim'
     Plug 'mattn/vim-lsp-settings'
+    Plug 'mattn/vim-goimports'
     "}}}
     "{{{fzf
     if isdirectory('/usr/local/opt/fzf')
