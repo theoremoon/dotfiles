@@ -52,7 +52,7 @@ if &modifiable
   set fileformat=unix                          " default is LF
   set fileencoding=utf-8
 endif
-set fileencodings=usc-bom,utf-8,default,latin1
+set fileencodings=usc-bom,utf-8,euc-jp,default,latin1
 set fileformats=unix,dos,mac
 "}}}
 "{{{ search
