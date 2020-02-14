@@ -98,3 +98,4 @@ DOC
 }
 
 alias d='cd $(find . -type d | fzf)'
+alias goinit='go mod init $(pwd | grep -Po "\w+\.\w+\/.+\z")'
