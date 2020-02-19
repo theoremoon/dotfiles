@@ -15,6 +15,6 @@
     insteadOf = https://theoldmoon0602@bitbucket.org/
     pushInsteadOf = git@bitbucket.org:
 
-[url "gitlab:"]
-    pushInsteadOf = git@gitlab.com:
+# [url "gitlab:"]
+#     pushInsteadOf = git@gitlab.com:
 
