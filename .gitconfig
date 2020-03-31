@@ -18,3 +18,5 @@
 # [url "gitlab:"]
 #     pushInsteadOf = git@gitlab.com:
 
+[github]
+	user = theoremoon
