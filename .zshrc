@@ -39,11 +39,14 @@ zplug "zsh-users/zsh-completions"
 zplug load
 
 function displayoptimize() {
-  if xrandr | grep -q "HDMI-1 connected"; then
-    xrandr --output eDP-1 --primary --mode 1366x768 --pos 157x1050 --rotate normal --output DP-1 --off --output HDMI-1 --mode 1680x1050 --pos 0x0 --rotate normal --output DP-2 --off --output HDMI-2 --off
-  elif xrandr | grep -q "DP-1 connected"; then
-  xrandr --output eDP-1 --primary --mode 1366x768 --pos 277x1080 --rotate normal --output DP-1 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1 --off --output DP-2 --off --output HDMI-2 --off
+  primary=$(xrandr| grep "primary" | awk '{print $1}')
+  connected=$(xrandr  | grep " connected" | grep -v "primary" | awk '{print $1}')
+  nol=$(echo "${connected}" | wc -l)
+  if [[ "$nol" -gt 1 ]]; then
+    echo -e "\e[41m;TOO MANY NUMBERS OF DISPLAYS"
   fi
+
+  xrandr --output "$connected" --auto --above "$primary"
 }
 
 alias writeup='export PROMPT="$ "'
