@@ -169,6 +169,7 @@ bar {
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 '+5%'
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 '-5%'
 bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
+bindsym XF86Display exec pactl set-source-mute 1 toggle
 bindsym XF86MonBrightnessUp exec "sudo tee /sys/class/backlight/intel_backlight/brightness <<< $((`cat /sys/class/backlight/intel_backlight/brightness` + 50))"
 bindsym XF86MonBrightnessDown exec "sudo tee /sys/class/backlight/intel_backlight/brightness <<< $((`cat /sys/class/backlight/intel_backlight/brightness` - 50))"
 
