@@ -102,3 +102,46 @@ DOC
 
 alias d='cd $(find . -type d | fzf)'
 alias goinit='go mod init $(pwd | grep -Po "\w+\.\w+\/.+\z")'
+
+function set_windowtitle () {
+  echo -ne "\033]0;${1}\007"
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook preexec set_windowtitle
+
+
+function applog() {
+  TODAY=$(date "+%Y-%m-%d")
+  LOGDIR="${HOME}/applog"
+  LOGFILE="${LOGDIR}/${TODAY}"
+  LOCKFILE="/tmp/applog${TODAY}.lock"
+  INTERVAL=60
+
+  if [[ -f "${LOCKFILE}" ]]
+  then
+    return
+  fi
+
+  echo "START"
+
+  touch "${LOCKFILE}"
+  mkdir -p "${LOGDIR}"
+  touch "${LOGFILE}"
+
+  while : ;
+  do
+    echo "TICK"
+    sleep "${INTERVAL}"
+    WINDOW=$(xdotool getwindowfocus getwindowname)
+    PREV=$(tail -n1 "${LOGFILE}" | cut -d' ' -f2-)
+    echo "PREV=${PREV}"
+    if [[ "${WINDOW}" != "${PREV}" ]];
+    then
+      NOW=$(date "+%H:%M:%S")
+      echo "${NOW} ${WINDOW}" >> "${LOGFILE}"
+    fi
+  done
+}
+# instead of nohup
+(trap '' HUP INT
+applog) > "${HOME}/applog/nohup.out" &!
