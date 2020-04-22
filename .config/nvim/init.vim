@@ -334,17 +334,16 @@ function! s:setVenv()
   if dir != ""
     let $VIRTUAL_ENV = trim(system("cd " . l:dir . "; pipenv --venv"))
   endif
+
+  let dir = s:findRoot('poetry.lock')
+  echo l:dir
+  if dir != ""
+    let $VIRTUAL_ENV = trim(system("cd " . l:dir . "; poetry env list --full-path | awk '{print $1}'"))
+  endif
 endfunction
 
-if executable('pyls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ })
-    autocmd FileType python setlocal omnifunc=lsp#complete
-    autocmd FileType python call s:setVenv()
-endif
+autocmd FileType python setlocal omnifunc=lsp#complete
+autocmd FileType python call s:setVenv()
 if executable('dls')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'dls',
