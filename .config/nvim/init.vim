@@ -342,50 +342,8 @@ function! s:setVenv()
   endif
 endfunction
 
-autocmd FileType python setlocal omnifunc=lsp#complete
+setlocal omnifunc=lsp#complete
 autocmd FileType python call s:setVenv()
-if executable('dls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'dls',
-        \ 'cmd': {server_info->['dls']},
-        \ 'whitelist': ['d'],
-        \ })
-    autocmd FileType d setlocal omnifunc=lsp#complete
-endif
-if executable('serve-d')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'serve-d',
-        \ 'cmd': {server_info->['serve-d']},
-        \ 'whitelist': ['d'],
-        \ })
-    autocmd FileType d setlocal omnifunc=lsp#complete
-endif
-if executable('gopls')
-    autocmd FileType go setlocal omnifunc=lsp#complete
-endif
-if executable('ocaml-language-server')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'ocaml-language-server',
-        \ 'cmd': {server_info->['ocaml-language-server', '--stdio']},
-        \ 'whitelist': ['ocaml'],
-        \ })
-endif
-if executable('vls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'vls',
-        \ 'cmd': {server_info->['vls']},
-        \ 'whitelist': ['vue'],
-        \ })
-endif
-if executable('rls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'rls',
-        \ 'cmd': {server_info->['rls']},
-        \ 'workspace_config': {'rust': {'clippy_preference': 'on'}},
-        \ 'whitelist': ['rust'],
-        \ })
-    autocmd FileType rust setlocal omnifunc=lsp#complete
-endif
 
 "}}}
 "{{{elm
