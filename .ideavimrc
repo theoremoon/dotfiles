@@ -1,0 +1,91 @@
+"{{{ basic settings
+set nocompatible
+
+set number
+set ruler
+set backspace=indent,eol,start
+set visualbell
+set noerrorbells
+set laststatus=2                             " always show status line
+set signcolumn=yes
+"}}}
+"{{{ tab and indent
+set softtabstop=0                            " dont mix space and tab
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set smarttab                                 " insert number of shiftwidth spaces at head of line
+set autoindent
+set smartindent
+"}}}
+"{{{ text wrapping
+set textwidth=0                              " dont break line (different with wrap line{{{{{{
+let &showbreak = '+++ '                      " show wrap string
+set display=truncate,uhex                    " show @@@ as (displayed) last line's first character, show unprintable character as <xx> formatted
+set linebreak                                " wrap on specific characters (breakat)
+set nobreakindent                            " dont insert visually space when wrap line
+set whichwrap=b,s,h,l,<,>                    " BS Space h l left right can move over line
+set wrap                                     " wrap long line}}}}}}
+"}}}
+"{{{ completion
+set complete=.,w,b,u,k,i,d,t                 " current buffer, other buffers, buffer lists, dictionary, current file and includes, same, tagfiles
+set noinfercase
+set completeopt=menu,menuone,noselect
+set path=.,/usr/include,/usr/local/include,, " list of directory names used for file searching
+set dictionary+=/usr/share/dict/words
+set wildmenu                                 " use tab completion on commandline mode
+set wildmode=list:longest,list:full
+set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__,node_modules
+"}}}
+"{{{ encoding & newline marker
+if &modifiable
+  set encoding=utf-8
+  set fileformat=unix                          " default is LF
+  set fileencoding=utf-8
+endif
+set fileencodings=usc-bom,utf-8,euc-jp,default,latin1
+set fileformats=unix,dos,mac
+"}}}
+"{{{ search
+set hlsearch
+set ignorecase
+set incsearch                                " incremental search
+set smartcase
+set wrapscan                                 " search from top when reached bottom
+"}}}
+
+filetype plugin indent on
+
+let mapleader="\<Space>"
+let maplocalleader=","
+inoremap jk <Esc>
+nnoremap <Leader>w :<C-u>w<CR>
+nnoremap <Leader>q :<C-u>q<CR>
+nnoremap <Leader><Leader>q :<C-u>qa!<CR>
+nnoremap <Leader>e :<C-u>source $MYVIMRC<CR>
+vnoremap <Leader>y "+y
+vnoremap <Leader>p "+p
+nnoremap <Leader>p "+p
+nnoremap <Leader><CR> :<C-u>noh<CR>
+vmap < <gv
+vmap > >gv
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+nnoremap <C-a> <Home>
+nnoremap <C-e> <End>
+inoremap <C-h> <Left>
+inoremap <C-b> <Left>
+inoremap <C-l> <Right>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-a> <C-o>^
+inoremap <C-e> <End>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+set t_Co=256
+set background=dark
+syntax on

@@ -342,7 +342,7 @@ function! s:setVenv()
   endif
 endfunction
 
-setlocal omnifunc=lsp#complete
+set omnifunc=lsp#complete
 autocmd FileType python call s:setVenv()
 
 "}}}
