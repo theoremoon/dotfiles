@@ -106,6 +106,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'easymotion/vim-easymotion'
     Plug 'theoldmoon0602/vim-eval'
     Plug 'mattn/gist-vim' | Plug 'mattn/webapi-vim'
+    Plug 'blueyed/vim-auto-programming', {'branch': 'neovim'}
     "}}}
     "{{{statusline
     Plug 'itchyny/lightline.vim'
@@ -203,6 +204,9 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 "}}}
+"{{{autoprogramming
+set completefunc=autoprogramming#complete
+"}}}
 "{{{terminal mode settings
 tnoremap <Esc> <C-\><C-n>
 tnoremap jk <C-\><C-n>
@@ -283,7 +287,7 @@ let g:ale_linters = {
     \}
 "}}}
 "{{{vim-polyglot
-let g:polyglot_disabled = ['python', 'go', 'markdown']
+let g:polyglot_disabled = ['python', 'markdown']
 "}}}
 "{{{easymotion
 map <Leader> <Plug>(easymotion-prefix)
