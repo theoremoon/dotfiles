@@ -142,6 +142,8 @@ function applog() {
     fi
   done
 }
-# instead of nohup
-(trap '' HUP INT
-applog) > "${HOME}/applog/nohup.out" &!
+if [ -d "$HOME/applog" ]; then
+  # instead of nohup
+  (trap '' HUP INT
+  applog) > "${HOME}/applog/nohup.out" &!
+fi
