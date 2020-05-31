@@ -195,6 +195,7 @@ noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 noremap <C-h> <C-w>h
 
+noremap <Leader>t :<C-u>vs\|:term<CR>
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
 nnoremap <Leader>. :<C-u>lcd %:p:h<CR>
