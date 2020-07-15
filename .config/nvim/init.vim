@@ -133,12 +133,15 @@ call plug#begin('~/.vim/plugged')
     Plug 'mattn/sonictemplate-vim'
     "}}}
     "{{{vim-lsp
-    Plug 'prabirshrestha/asyncomplete.vim'
-    Plug 'prabirshrestha/async.vim'
-    Plug 'prabirshrestha/vim-lsp'
-    Plug 'prabirshrestha/asyncomplete-lsp.vim'
-    Plug 'mattn/vim-lsp-settings'
-    Plug 'mattn/vim-goimports'
+    " Plug 'prabirshrestha/asyncomplete.vim'
+    " Plug 'prabirshrestha/async.vim'
+    " Plug 'prabirshrestha/vim-lsp'
+    " Plug 'prabirshrestha/asyncomplete-lsp.vim'
+    " Plug 'mattn/vim-lsp-settings'
+    " Plug 'mattn/vim-goimports'
+    "}}}
+    "{{{coc.nvim
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     "}}}
     "{{{fzf
     if isdirectory('/usr/local/opt/fzf')
