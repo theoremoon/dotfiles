@@ -133,15 +133,10 @@ call plug#begin('~/.vim/plugged')
     Plug 'mattn/sonictemplate-vim'
     "}}}
     "{{{vim-lsp
-    " Plug 'prabirshrestha/asyncomplete.vim'
-    " Plug 'prabirshrestha/async.vim'
-    " Plug 'prabirshrestha/vim-lsp'
-    " Plug 'prabirshrestha/asyncomplete-lsp.vim'
-    " Plug 'mattn/vim-lsp-settings'
-    " Plug 'mattn/vim-goimports'
-    "}}}
-    "{{{coc.nvim
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'prabirshrestha/vim-lsp'
+    Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'prabirshrestha/asyncomplete-lsp.vim'
+    Plug 'mattn/vim-lsp-settings'
     "}}}
     "{{{fzf
     if isdirectory('/usr/local/opt/fzf')
@@ -152,10 +147,13 @@ call plug#begin('~/.vim/plugged')
     endif
     "}}}
     "{{{ale
-    Plug 'dense-analysis/ale'
+    "Plug 'dense-analysis/ale'
     "}}}
     "{{{html/css/js
     Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'javascript', 'php', 'typescript', 'vue', 'svelte']}
+    "}}}
+    "{{{go
+    Plug 'mattn/vim-goimports'
     "}}}
 call plug#end()
 "}}}
@@ -267,32 +265,32 @@ augroup vimrc-vim
 augroup END
 "}}}
 "{{{ale
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 1
-let g:ale_lint_on_save = 1
-let g:ale_fix_on_save = 1
-let g:ale_set_baloons = 1
-let g:ale_completion_enabled = 0
-
-let g:ale_python_flake8_options = '--ignore=E'
-let g:ale_fixers = {
-      \'python': ['black'],
-      \'javascript': ['prettier'],
-      \'typescript': ['prettier'],
-      \'c': ['clang-format'],
-      \'cpp': ['clang-format'],
-      \'d': ['dfmt'],
-      \'go': ['gofmt', 'goimports'],
-      \}
-let g:ale_linters = {
-    \'python': [],
-	\ 'go': ['gofmt', 'goimports'],
-    \'javascript': ['eslint'],
-    \'typescript': ['eslint'],
-    \}
+" let g:ale_lint_on_text_changed = 'never'
+" let g:ale_lint_on_insert_leave = 1
+" let g:ale_lint_on_save = 1
+" let g:ale_fix_on_save = 1
+" let g:ale_set_baloons = 1
+" let g:ale_completion_enabled = 0
+" 
+" let g:ale_python_flake8_options = '--ignore=E'
+" let g:ale_fixers = {
+"       \'python': ['black'],
+"       \'javascript': ['prettier'],
+"       \'typescript': ['prettier'],
+"       \'c': ['clang-format'],
+"       \'cpp': ['clang-format'],
+"       \'d': ['dfmt'],
+"       \'go': ['gofmt', 'goimports'],
+"       \}
+" let g:ale_linters = {
+"     \'python': [],
+" 	\ 'go': ['gofmt', 'goimports'],
+"     \'javascript': ['eslint'],
+"     \'typescript': ['eslint'],
+"     \}
 "}}}
 "{{{vim-polyglot
-let g:polyglot_disabled = ['python', 'markdown']
+let g:polyglot_disabled = ['python', 'markdown', 'go']
 "}}}
 "{{{easymotion
 map <Leader> <Plug>(easymotion-prefix)
@@ -313,13 +311,24 @@ let g:lightline = {
 au BufNewFile,BufRead *.graphql setfiletype graphql
 "}}}
 "{{{vim-lsp
-let g:lsp_diagnostics_enabled = 0
-let g:lsp_highlights_enabled = 0
-let g:lsp_textprop_enabled = 1
-let g:lsp_text_edit_enabled = 0 "https://github.com/prabirshrestha/asyncomplete.vim/issues/156
-let g:lsp_log_file = expand('~/vim-lsp.log')
-nnoremap <Leader>r :<C-u>LspRename<CR>
+function! s:on_lsp_buffer_enabled() abort
+  setlocal omnifunc=lsp#complete
+  if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+  nmap <buffer> <leader>r <plug>(lsp-rename)
+  nmap <buffer> K         <plug>(lsp-hover)
+  nmap <buffer> <leader>] <plug>(lsp-defenition)
 
+endfunction
+
+augroup lsp_install
+  au!
+  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+"}}}
+"{{{go
+unlet! g:goimports_simplify
+"}}}
+"{{{python
 function! s:findRoot(target)
   let dir = getcwd()
   while 1
@@ -351,15 +360,8 @@ function! s:setVenv()
   endif
 endfunction
 
-set omnifunc=lsp#complete
 autocmd FileType python call s:setVenv()
 
-"}}}
-"{{{elm
-if &ft == "elm"
-    let g:ale_completion_enabled = 1
-    call ale#completion#Enable()
-endif
 "}}}
 "{{{dpp
 au BufNewFile,BufRead *dpp setfiletype d
