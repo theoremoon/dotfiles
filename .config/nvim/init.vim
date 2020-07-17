@@ -257,6 +257,24 @@ endif
 " keymappings
 nnoremap <C-p> :<C-u>Files<CR>
 
+" file open in new tab or goto such tab if file is already opening
+function! s:GotoOrOpen(command, ...)
+  for file in a:000
+    if a:command == 'e'
+      exec 'e ' . file
+    else
+      exec 'tab drop ' . file
+    endif
+  endfor
+endfunction
+command! -nargs=+ GotoOrOpen call s:GotoOrOpen(<f-args>)
+
+let g:fzf_action = {
+      \'ctrl-t': 'GotoOrOpen tab',
+      \'ctrl-v': 'vsplit',
+      \'ctrl-x': 'split'
+      \}
+let g:fzf_buffers_jump = 1
 "}}}
 "{{{vimrc
 augroup vimrc-vim
@@ -317,7 +335,6 @@ function! s:on_lsp_buffer_enabled() abort
   nmap <buffer> <leader>r <plug>(lsp-rename)
   nmap <buffer> K         <plug>(lsp-hover)
   nmap <buffer> <leader>] <plug>(lsp-defenition)
-
 endfunction
 
 augroup lsp_install
