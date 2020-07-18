@@ -341,6 +341,11 @@ augroup lsp_install
   au!
   autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
+
+let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_virtual_text_enabled = 0
+let g:lsp_highlights_enabled = 0
+let g:lsp_highlight_references_enabled = 1
 "}}}
 "{{{go
 unlet! g:goimports_simplify
