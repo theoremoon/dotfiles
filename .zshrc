@@ -41,12 +41,19 @@ zplug load
 function displayoptimize() {
   primary=$(xrandr| grep "primary" | awk '{print $1}')
   connected=$(xrandr  | grep " connected" | grep -v "primary" | awk '{print $1}')
-  nol=$(echo "${connected}" | wc -l)
-  if [[ "$nol" -gt 1 ]]; then
-    echo -e "\e[41m;TOO MANY NUMBERS OF DISPLAYS"
-  fi
+  nol=$(echo "${connected}" | sed '/^\s*$/d' | wc -l)
 
-  xrandr --output "$connected" --auto --above "$primary"
+  if [[ "$nol" = 0 ]]; then
+    xrandr --auto
+
+  elif [[ "$nol" = 1 ]]; then
+    xrandr --output "$connected" --auto --above "$primary"
+
+  else
+    echo -e "\e[41m;INVALID NUMBER OF DISPLAYS"
+    xrandr --auto
+
+  fi
 }
 
 alias writeup='export PROMPT="$ "'
