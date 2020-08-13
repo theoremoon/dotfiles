@@ -133,10 +133,12 @@ call plug#begin('~/.vim/plugged')
     Plug 'mattn/sonictemplate-vim'
     "}}}
     "{{{vim-lsp
-    Plug 'prabirshrestha/vim-lsp'
-    Plug 'prabirshrestha/asyncomplete.vim'
-    Plug 'prabirshrestha/asyncomplete-lsp.vim'
-    Plug 'mattn/vim-lsp-settings'
+    "}}}
+    "{{{LanguageClient-neovim
+    Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
     "}}}
     "{{{fzf
     if isdirectory('/usr/local/opt/fzf')
@@ -145,6 +147,9 @@ call plug#begin('~/.vim/plugged')
         Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
         Plug 'junegunn/fzf.vim'
     endif
+    "}}}
+    "{{{deoplete
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     "}}}
     "{{{ale
     "Plug 'dense-analysis/ale'
@@ -329,26 +334,44 @@ let g:lightline = {
 au BufNewFile,BufRead *.graphql setfiletype graphql
 "}}}
 "{{{vim-lsp
-function! s:on_lsp_buffer_enabled() abort
-  setlocal omnifunc=lsp#complete
-  if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-  nmap <buffer> <leader>r <plug>(lsp-rename)
-  nmap <buffer> K         <plug>(lsp-hover)
-  nmap <buffer> <leader>] <plug>(lsp-defenition)
-endfunction
+" function! s:on_lsp_buffer_enabled() abort
+"   setlocal omnifunc=lsp#complete
+"   if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+"   nmap <buffer> <leader>r <plug>(lsp-rename)
+"   nmap <buffer> K         <plug>(lsp-hover)
+"   nmap <buffer> <leader>] <plug>(lsp-defenition)
+" endfunction
+" 
+" augroup lsp_install
+"   au!
+"   autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+" augroup END
+" 
+" let g:lsp_diagnostics_echo_cursor = 1
+" let g:lsp_virtual_text_enabled = 0
+" let g:lsp_highlights_enabled = 0
+" let g:lsp_highlight_references_enabled = 1
+"}}}
+"{{{LanguageClient-neovim
+let g:LanguageClient_serverCommands = {
+    \ 'go': ['gopls'],
+    \ 'python': ['pyls'],
+    \ }
 
-augroup lsp_install
-  au!
-  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
+" note that if you are using Plug mapping you should not use `noremap` mappings.
+nmap <F5> <Plug>(lcn-menu)
+" Or map each action separately
+nmap <silent>K <Plug>(lcn-hover)
+nmap <silent><Leader>d <Plug>(lcn-definition)
+nmap <silent><Leader>r <Plug>(lcn-rename)
 
-let g:lsp_diagnostics_echo_cursor = 1
-let g:lsp_virtual_text_enabled = 0
-let g:lsp_highlights_enabled = 0
-let g:lsp_highlight_references_enabled = 1
+set omnifunc=LanguageClient#complete
+"}}}
+"{{{deoplete
+let g:deoplete#enable_at_startup = 1
 "}}}
 "{{{go
-unlet! g:goimports_simplify
+" unlet! g:goimports_simplify
 "}}}
 "{{{python
 function! s:findRoot(target)
