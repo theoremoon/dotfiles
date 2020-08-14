@@ -159,6 +159,7 @@ call plug#begin('~/.vim/plugged')
     "}}}
     "{{{go
     Plug 'mattn/vim-goimports'
+    Plug 'mattn/vim-goaddtags'
     "}}}
 call plug#end()
 "}}}
