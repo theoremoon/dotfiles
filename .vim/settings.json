@@ -1,0 +1,6 @@
+{
+    "gopls.completeUnimported": true,
+    "gopls": {
+        "completeUnimported": true
+    }
+}

@@ -358,6 +358,8 @@ let g:LanguageClient_serverCommands = {
     \ 'go': ['gopls'],
     \ 'python': ['pyls'],
     \ }
+let g:LanguageClient_settingsPath = expand("~/.vim/settings.json")
+let g:LanguageClient_loadSettings = 1
 
 " note that if you are using Plug mapping you should not use `noremap` mappings.
 nmap <F5> <Plug>(lcn-menu)
@@ -372,7 +374,8 @@ set omnifunc=LanguageClient#complete
 let g:deoplete#enable_at_startup = 1
 "}}}
 "{{{go
-" unlet! g:goimports_simplify
+let g:goimports=1
+let g:goimports_simplify=1
 "}}}
 "{{{python
 function! s:findRoot(target)
