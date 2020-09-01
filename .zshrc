@@ -78,6 +78,7 @@ export GOPATH=$HOME/go
 export PATH="$PATH:$HOME/.local/bin:$HOME/bin/:$HOME/.config/composer/vendor/bin/:$GOPATH/bin:$HOME/.dub/packages/.bin/dls-latest:$PYENV_ROOT/bin:/usr/local/go/bin:$HOME/.poetry/bin:$HOME/.cargo/bin"
 
 alias FIXCAPS="xdotool key Caps_Lock"
+alias pentab='xsetwacom --set "Wacom One by Wacom M Pen stylus" mode relative'
 function g() {
   if [ $# -eq 1 ]; then
     dir=$(ghq list --full-path | grep "/$1\$")
