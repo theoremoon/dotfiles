@@ -79,6 +79,7 @@ export PATH="$PATH:$HOME/.local/bin:$HOME/bin/:$HOME/.config/composer/vendor/bin
 
 alias FIXCAPS="xdotool key Caps_Lock"
 alias pentab='xsetwacom --set "Wacom One by Wacom M Pen stylus" mode relative'
+alias pentabr='xsetwacom --set "Wacom One by Wacom M Pen stylus" Rotate half'
 function g() {
   if [ $# -eq 1 ]; then
     dir=$(ghq list --full-path | grep "/$1\$")
