@@ -148,6 +148,10 @@ call plug#begin('~/.vim/plugged')
         Plug 'junegunn/fzf.vim'
     endif
     "}}}
+    "{{{ctrlp
+    " Plug 'ctrlpvim/ctrlp.vim'
+    " Plug 'mattn/ctrlp-matchfuzzy'
+    "}}}
     "{{{deoplete
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     "}}}
@@ -281,6 +285,11 @@ let g:fzf_action = {
       \'ctrl-x': 'split'
       \}
 let g:fzf_buffers_jump = 1
+"}}}
+"{{{ctrlp
+" let g:ctrlp_map = '<c-p>'
+" let g:ctrlp_cmd = 'CtrlP'
+" let g:ctrlp_match_func = {'match': 'ctrlp_matchfuzzy#matcher'}
 "}}}
 "{{{vimrc
 augroup vimrc-vim
