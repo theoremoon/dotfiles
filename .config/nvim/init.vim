@@ -78,6 +78,9 @@ if !isdirectory(expand("~/.vim/undodir"))
   call mkdir(expand("~/.vim/undodir"))
 endif
 "}}}
+"{{{vim-polyglot
+let g:polyglot_disabled = ['python', 'markdown', 'go']
+"}}}
 "{{{vim-plug
 if exists('$SHELL')
     set shell=$SHELL
@@ -321,9 +324,6 @@ augroup END
 "     \'javascript': ['eslint'],
 "     \'typescript': ['eslint'],
 "     \}
-"}}}
-"{{{vim-polyglot
-let g:polyglot_disabled = ['python', 'markdown', 'go']
 "}}}
 "{{{easymotion
 map <Leader> <Plug>(easymotion-prefix)
