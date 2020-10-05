@@ -28,16 +28,6 @@ setxkbmap -option ctrl:nocaps 2>/dev/null
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# zplug
-if [ ! -e ~/.zplug/init.zsh ]; then
-  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-fi
-source ~/.zplug/init.zsh
-
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-completions"
-zplug load
-
 function displayoptimize() {
   primary=$(xrandr| grep "primary" | awk '{print $1}')
   connected=$(xrandr  | grep " connected" | grep -v "primary" | awk '{print $1}')
