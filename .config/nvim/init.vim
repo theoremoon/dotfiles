@@ -108,6 +108,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'terryma/vim-multiple-cursors'
     Plug 'easymotion/vim-easymotion'
     Plug 'theoldmoon0602/vim-eval'
+    Plug 'theoldmoon0602/vim-rex'
     Plug 'mattn/gist-vim' | Plug 'mattn/webapi-vim'
     Plug 'blueyed/vim-auto-programming', {'branch': 'neovim'}
     "}}}
@@ -437,4 +438,7 @@ let g:sonictemplate_vim_template_dir = [
 augroup sage
   au! BufRead,BufNewFile *.sage setfiletype python
 augroup END
+"}}}
+"{{{vim-rex
+vnoremap <Leader>r :<C-u>call rex#rex()<CR>
 "}}}
