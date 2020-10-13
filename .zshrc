@@ -108,8 +108,13 @@ function set_windowtitle () {
 autoload -Uz add-zsh-hook
 add-zsh-hook preexec set_windowtitle
 
-function flag() {
-  X="leasto"
-  Y="134570"
-  sed -e "y/${X}/${Y}/"
-}
+flagpath="$HOME/.local/bin/flag"
+if [ ! -f "$flagpath" ]; then
+  cat <<EOF > "$flagpath"
+#!/bin/bash
+X="leasto"
+Y="134570"
+sed -e "y/${X}/${Y}/"
+EOF
+  chmod +x "$flagpath"
+fi
