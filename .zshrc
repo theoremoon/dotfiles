@@ -110,7 +110,7 @@ add-zsh-hook preexec set_windowtitle
 
 flagpath="$HOME/.local/bin/flag"
 if [ ! -f "$flagpath" ]; then
-  cat <<EOF > "$flagpath"
+  cat <<'EOF' > "$flagpath"
 #!/bin/bash
 X="leasto"
 Y="134570"
