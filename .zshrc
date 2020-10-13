@@ -107,3 +107,9 @@ function set_windowtitle () {
 }
 autoload -Uz add-zsh-hook
 add-zsh-hook preexec set_windowtitle
+
+function flag() {
+  X="leasto"
+  Y="134570"
+  cat - | sed -e 's/[{}]/&\n/' | sed -e "2y/${X}/${Y}/" | tr -d "\n"
+}
