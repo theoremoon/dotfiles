@@ -4,7 +4,7 @@
 "  ▘ ▀▘▘ ▘▘ ▘▝▀
 "
 "  My most awesome vim configuration
-"  @theoldmoon0602
+"  @theoremoon
 """
 
 "{{{ basic settings
@@ -107,8 +107,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/vim-easy-align'
     Plug 'terryma/vim-multiple-cursors'
     Plug 'easymotion/vim-easymotion'
-    Plug 'theoldmoon0602/vim-eval'
-    Plug 'theoldmoon0602/vim-rex'
+    Plug 'theoremoon/vim-eval'
+    Plug 'theoremoon/vim-rex'
     Plug 'mattn/gist-vim' | Plug 'mattn/webapi-vim'
     Plug 'blueyed/vim-auto-programming', {'branch': 'neovim'}
     "}}}
