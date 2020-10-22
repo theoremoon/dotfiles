@@ -16,6 +16,7 @@ set backspace=indent,eol,start
 set belloff=all
 set laststatus=2                             " always show status line
 set signcolumn=yes
+set cursorline
 "}}}
 "{{{ tab and indent
 set softtabstop=0                            " dont mix space and tab
@@ -136,14 +137,6 @@ call plug#begin('~/.vim/plugged')
     "{{{sonictemplate
     Plug 'mattn/sonictemplate-vim'
     "}}}
-    "{{{vim-lsp
-    "}}}
-    "{{{LanguageClient-neovim
-    Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-    "}}}
     "{{{fzf
     if isdirectory('/usr/local/opt/fzf')
         Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -151,6 +144,9 @@ call plug#begin('~/.vim/plugged')
         Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
         Plug 'junegunn/fzf.vim'
     endif
+    "}}}
+    "{{{coc.nvim
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     "}}}
     "{{{ctrlp
     " Plug 'ctrlpvim/ctrlp.vim'
@@ -214,12 +210,10 @@ noremap <Leader>t :<C-u>vs\|:term<CR>
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
 nnoremap <Leader>. :<C-u>lcd %:p:h<CR>
-imap <C-f> <Plug>(asyncomplete_force_refresh)
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-let g:asyncomplete_auto_popup = 0
 "}}}
 "{{{autoprogramming
 set completefunc=autoprogramming#complete
@@ -290,6 +284,24 @@ let g:fzf_action = {
       \}
 let g:fzf_buffers_jump = 1
 "}}}
+"{{{coc.nvim
+nmap <silent><Leader>d <Plug>(coc-definition)
+nmap <silent><Leader>i <Plug>(coc-implementation)
+nmap <silent>K :<C-u><SID>show_documentation()<CR>
+nmap <silent><Leader>r <Plug>(coc-rename)
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+let g:coc_global_extension = [
+    \ 'coc-python',
+    \]
+"}}}
 "{{{ctrlp
 " let g:ctrlp_map = '<c-p>'
 " let g:ctrlp_cmd = 'CtrlP'
@@ -343,42 +355,6 @@ let g:lightline = {
 "}}}
 "{{{graphql
 au BufNewFile,BufRead *.graphql setfiletype graphql
-"}}}
-"{{{vim-lsp
-" function! s:on_lsp_buffer_enabled() abort
-"   setlocal omnifunc=lsp#complete
-"   if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-"   nmap <buffer> <leader>r <plug>(lsp-rename)
-"   nmap <buffer> K         <plug>(lsp-hover)
-"   nmap <buffer> <leader>] <plug>(lsp-defenition)
-" endfunction
-" 
-" augroup lsp_install
-"   au!
-"   autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-" augroup END
-" 
-" let g:lsp_diagnostics_echo_cursor = 1
-" let g:lsp_virtual_text_enabled = 0
-" let g:lsp_highlights_enabled = 0
-" let g:lsp_highlight_references_enabled = 1
-"}}}
-"{{{LanguageClient-neovim
-let g:LanguageClient_serverCommands = {
-    \ 'go': ['gopls'],
-    \ 'python': ['pyls'],
-    \ }
-let g:LanguageClient_settingsPath = expand("~/.vim/settings.json")
-let g:LanguageClient_loadSettings = 1
-
-" note that if you are using Plug mapping you should not use `noremap` mappings.
-nmap <F5> <Plug>(lcn-menu)
-" Or map each action separately
-nmap <silent>K <Plug>(lcn-hover)
-nmap <silent><Leader>d <Plug>(lcn-definition)
-nmap <silent><Leader>r <Plug>(lcn-rename)
-
-set omnifunc=LanguageClient#complete
 "}}}
 "{{{deoplete
 let g:deoplete#enable_at_startup = 1
