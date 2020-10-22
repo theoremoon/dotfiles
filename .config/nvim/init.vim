@@ -152,9 +152,6 @@ call plug#begin('~/.vim/plugged')
     " Plug 'ctrlpvim/ctrlp.vim'
     " Plug 'mattn/ctrlp-matchfuzzy'
     "}}}
-    "{{{deoplete
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    "}}}
     "{{{ale
     "Plug 'dense-analysis/ale'
     "}}}
@@ -210,10 +207,15 @@ noremap <Leader>t :<C-u>vs\|:term<CR>
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
 nnoremap <Leader>. :<C-u>lcd %:p:h<CR>
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
 "}}}
 "{{{autoprogramming
 set completefunc=autoprogramming#complete
@@ -355,9 +357,6 @@ let g:lightline = {
 "}}}
 "{{{graphql
 au BufNewFile,BufRead *.graphql setfiletype graphql
-"}}}
-"{{{deoplete
-let g:deoplete#enable_at_startup = 1
 "}}}
 "{{{go
 let g:goimports=1
