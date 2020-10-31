@@ -80,7 +80,7 @@ if !isdirectory(expand("~/.vim/undodir"))
 endif
 "}}}
 "{{{vim-polyglot
-let g:polyglot_disabled = ['python', 'markdown', 'go']
+let g:polyglot_disabled = ['python', 'markdown']
 "}}}
 "{{{vim-plug
 if exists('$SHELL')
@@ -302,6 +302,7 @@ function! s:show_documentation()
 endfunction
 let g:coc_global_extension = [
     \ 'coc-python',
+    \ 'coc-go',
     \]
 "}}}
 "{{{ctrlp
