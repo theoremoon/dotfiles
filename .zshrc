@@ -119,3 +119,14 @@ sed -e "y/${X}/${Y}/"
 EOF
   chmod +x "$flagpath"
 fi
+
+function mkproj() {
+  mkdir "$1"
+  cd "$1"
+  tmux new -s "$1" -d
+  if [[ -n $TMUX ]]; then
+    tmux switch-client -t "$1"
+  else
+    tmux attach-session -t "$1"
+  fi
+}
