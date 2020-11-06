@@ -289,7 +289,7 @@ let g:fzf_buffers_jump = 1
 "{{{coc.nvim
 nmap <silent><Leader>d <Plug>(coc-definition)
 nmap <silent><Leader>i <Plug>(coc-implementation)
-nmap <silent>K :<C-u><SID>show_documentation()<CR>
+nmap <silent>K :<C-u>call <SID>show_documentation()<CR>
 nmap <silent><Leader>r <Plug>(coc-rename)
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
