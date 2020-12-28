@@ -173,7 +173,6 @@ colorscheme PaperColor
 "{{{key mappings
 let mapleader="\<Space>"
 let maplocalleader=","
-inoremap jk <Esc>
 nnoremap <Leader>w :<C-u>w<CR>
 nnoremap <Leader>q :<C-u>q<CR>
 nnoremap <Leader><Leader>q :<C-u>qa!<CR>
