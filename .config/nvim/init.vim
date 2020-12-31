@@ -79,9 +79,6 @@ if !isdirectory(expand("~/.vim/undodir"))
   call mkdir(expand("~/.vim/undodir"))
 endif
 "}}}
-"{{{vim-polyglot
-let g:polyglot_disabled = ['python', 'markdown']
-"}}}
 "{{{vim-plug
 if exists('$SHELL')
     set shell=$SHELL
@@ -104,12 +101,10 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-sleuth'
     Plug 'bronson/vim-trailing-whitespace'
-    Plug 'Raimondi/delimitMate'  " autoclose parentheses
+    " Plug 'Raimondi/delimitMate'  " autoclose parentheses
     Plug 'junegunn/vim-easy-align'
     Plug 'terryma/vim-multiple-cursors'
-    Plug 'easymotion/vim-easymotion'
     Plug 'theoremoon/vim-eval'
-    Plug 'theoremoon/vim-rex'
     Plug 'mattn/gist-vim' | Plug 'mattn/webapi-vim'
     Plug 'blueyed/vim-auto-programming', {'branch': 'neovim'}
     "}}}
@@ -123,19 +118,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'kamykn/dark-theme.vim'
     Plug 'romainl/Apprentice'
     Plug 'luochen1990/rainbow'
-    "}}}
-    "{{{filetype plugins
-    Plug 'sheerun/vim-polyglot'
-    Plug 'hail2u/vim-css3-syntax'
-    Plug 'gorodinskiy/vim-coloresque'  " colorcode like blue
-    Plug 'tpope/vim-haml'
-    Plug 'jelera/vim-javascript-syntax'
-    Plug 'jparise/vim-graphql'
-    Plug 'ElmCast/elm-vim', {'for': 'elm'}
-    Plug 'posva/vim-vue', {'for': 'vue'}
-    "}}}
-    "{{{sonictemplate
-    Plug 'mattn/sonictemplate-vim'
     "}}}
     "{{{fzf
     if isdirectory('/usr/local/opt/fzf')
@@ -157,6 +139,8 @@ call plug#begin('~/.vim/plugged')
     "}}}
     "{{{html/css/js
     Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'javascript', 'php', 'typescript', 'vue', 'svelte']}
+
+    Plug 'neovim/node-host', { 'do': 'npm install' } | Plug 'billyvg/tigris.nvim', { 'do': './install.sh' } "good syntax highlight for modern javascript
     "}}}
     "{{{go
     Plug 'mattn/vim-goimports'
@@ -165,6 +149,7 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 "}}}
 
+let g:rainbow_active=1
 filetype plugin indent on
 set t_Co=256
 set background=dark
@@ -201,6 +186,10 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 noremap <C-h> <C-w>h
+inoremap <C-y> <Esc>yya
+inoremap <expr><C-p>  pumvisible() ? "\<C-p>" : "\<Esc>pi"
+inoremap <C-w> <Esc>wwi
+inoremap <C-c> <Esc>lcw
 
 noremap <Leader>t :<C-u>vs\|:term<CR>
 noremap <Leader>h :<C-u>split<CR>
@@ -218,10 +207,6 @@ inoremap <silent><expr> <Tab>
 "}}}
 "{{{autoprogramming
 set completefunc=autoprogramming#complete
-"}}}
-"{{{terminal mode settings
-tnoremap <Esc> <C-\><C-n>
-tnoremap jk <C-\><C-n>
 "}}}
 """{{{Easy Align
 xmap ga <Plug>(EasyAlign)
@@ -340,9 +325,6 @@ augroup END
 "     \'typescript': ['eslint'],
 "     \}
 "}}}
-"{{{easymotion
-map <Leader> <Plug>(easymotion-prefix)
-"}}}
 "{{{lightline
 let g:lightline = {
       \ 'active': {
@@ -354,9 +336,6 @@ let g:lightline = {
       \   'indentation': 'SleuthIndicator',
       \ },
       \ }
-"}}}
-"{{{graphql
-au BufNewFile,BufRead *.graphql setfiletype graphql
 "}}}
 "{{{go
 let g:goimports=1
@@ -403,12 +382,6 @@ au BufNewFile,BufRead *dpp setfiletype d
 "{{{ parcel serve
 autocmd FileType html,javascript,css,vue,elm,svelte setl backupcopy=yes
 "}}}
-"{{{sonictemplate
-let g:sonictemplate_vim_template_dir = [
-\ '$HOME/.vim/template'
-\]
-
-"}}}
 "{{{sagemath
 augroup sage
   au! BufRead,BufNewFile *.sage setfiletype python
@@ -416,4 +389,7 @@ augroup END
 "}}}
 "{{{vim-rex
 vnoremap <Leader>r :<C-u>call rex#rex()<CR>
+"}}}
+"{{{tigris
+let g:tigris#enabled = 1
 "}}}
