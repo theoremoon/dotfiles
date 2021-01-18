@@ -251,20 +251,8 @@ endif
 " keymappings
 nnoremap <C-p> :<C-u>Files<CR>
 
-" file open in new tab or goto such tab if file is already opening
-function! s:GotoOrOpen(command, ...)
-  for file in a:000
-    if a:command == 'e'
-      exec 'e ' . file
-    else
-      exec 'tab drop ' . file
-    endif
-  endfor
-endfunction
-command! -nargs=+ GotoOrOpen call s:GotoOrOpen(<f-args>)
-
 let g:fzf_action = {
-      \'ctrl-t': 'GotoOrOpen tab',
+      \'ctrl-t': 'tab split',
       \'ctrl-v': 'vsplit',
       \'ctrl-x': 'split'
       \}
