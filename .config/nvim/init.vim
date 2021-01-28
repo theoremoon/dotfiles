@@ -375,9 +375,6 @@ augroup sage
   au! BufRead,BufNewFile *.sage setfiletype python
 augroup END
 "}}}
-"{{{vim-rex
-vnoremap <Leader>r :<C-u>call rex#rex()<CR>
-"}}}
 "{{{tigris
 let g:tigris#enabled = 1
 "}}}
