@@ -37,7 +37,7 @@ function displayoptimize() {
     xrandr --auto
 
   elif [[ "$nol" = 1 ]]; then
-    xrandr --output "$connected" --auto --above "$primary"
+    xrandr --output "$connected" --auto --left-of "$primary"
 
   else
     echo -e "\e[41m;INVALID NUMBER OF DISPLAYS"
