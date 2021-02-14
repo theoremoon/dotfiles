@@ -143,7 +143,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'neovim/node-host', { 'do': 'npm install' } | Plug 'billyvg/tigris.nvim', { 'do': './install.sh' } "good syntax highlight for modern javascript
     "}}}
     "{{{go
-    Plug 'mattn/vim-goimports'
+    " Plug 'mattn/vim-goimports'
     Plug 'mattn/vim-goaddtags'
     "}}}
 call plug#end()
@@ -263,6 +263,11 @@ nmap <silent><Leader>d <Plug>(coc-definition)
 nmap <silent><Leader>i <Plug>(coc-implementation)
 nmap <silent>K :<C-u>call <SID>show_documentation()<CR>
 nmap <silent><Leader>r <Plug>(coc-rename)
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+set formatexpr=CocAction('formatSelected')
+command! -nargs=0 GoImport :call CocAction('runCommand', 'editor.action.organizeImport')
+nmap I <Cmd>GoImport<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
