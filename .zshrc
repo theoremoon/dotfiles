@@ -86,6 +86,13 @@ function _g() {
   _values '' $(ghq list --full-path | xargs -I@ basename @)
 }
 compdef _g g
+
+function __c_g() {
+  zle -U $(ghq list --full-path | fzf)
+}
+zle -N __c_g
+bindkey "^[g" __c_g
+
 alias pyenvinit='eval "$(pyenv init -)"'
 
 function build() {
@@ -130,3 +137,4 @@ function mkproj() {
     tmux attach-session -t "$1"
   fi
 }
+
