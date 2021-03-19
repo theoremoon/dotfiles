@@ -108,4 +108,9 @@ noremap <C-h> <C-w>h
 """{{{fzf
 nnoremap <C-p> :<C-u>Files<CR>
 "}}}
-
+"{{{
+nmap <buffer>K <plug>(lsp-hover)
+nmap <buffer><Leader>r <plug>(lsp-rename)
+nmap <buffer><Leader>d <plug>(lsp-definition)
+nmap <buffer><Leader>a <plug>(lsp-code-action)
+"}
