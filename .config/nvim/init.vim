@@ -115,3 +115,18 @@ nmap <buffer><Leader>r <plug>(lsp-rename)
 nmap <buffer><Leader>d <plug>(lsp-definition)
 nmap <buffer><Leader>a <plug>(lsp-code-action)
 "}
+"""{{{lsp
+let g:lsp_settings = {
+\   'pyls-all': {
+\     'workspace_config': {
+\       'pyls': {
+\           'plugins': {
+\               'pycodestyle': {
+\                   'ignore': ['E302', 'E305', 'E203', 'E201', 'E117', 'E501']
+\               }
+\           }
+\       }
+\     }
+\   },
+\}
+"}}}
