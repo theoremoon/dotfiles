@@ -122,7 +122,7 @@ let g:lsp_settings = {
 \       'pyls': {
 \           'plugins': {
 \               'pycodestyle': {
-\                   'ignore': ['E302', 'E305', 'E203', 'E201', 'E117', 'E501']
+\                   'ignore': ['E117', 'E201', 'E203', 'E301', 'E302', 'E305', 'E501', 'E741']
 \               }
 \           }
 \       }
