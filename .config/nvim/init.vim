@@ -109,13 +109,12 @@ noremap <C-h> <C-w>h
 """{{{fzf
 nnoremap <C-p> :<C-u>Files<CR>
 "}}}
-"{{{
+"""{{{lsp
 nmap <buffer>K <plug>(lsp-hover)
 nmap <buffer><Leader>r <plug>(lsp-rename)
 nmap <buffer><Leader>d <plug>(lsp-definition)
 nmap <buffer><Leader>a <plug>(lsp-code-action)
-"}
-"""{{{lsp
+nmap <buffer><Leader>f <plug>(lsp-document-format)
 let g:lsp_settings = {
 \   'pyls-all': {
 \     'workspace_config': {
