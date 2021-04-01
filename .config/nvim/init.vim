@@ -76,13 +76,14 @@ call plug#begin('~/.vim/plugged')
   Plug 'prabirshrestha/asyncomplete.vim'
   Plug 'prabirshrestha/asyncomplete-lsp.vim'
   Plug 'petRUShka/vim-sage'
+  Plug 'theoremoon/cryptohack-color.vim'
 call plug#end()
 "}}}
 
 filetype plugin indent on
 set t_Co=256
 set background=dark
-colorscheme delek
+colorscheme cryptohack
 syntax on
 
 "{{{keymap
