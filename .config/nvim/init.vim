@@ -78,7 +78,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'prabirshrestha/asyncomplete-lsp.vim'
   Plug 'petRUShka/vim-sage'
   Plug 'mattn/emmet-vim'
-  Plug '~/ghq/github.com/theoremoon/cryptohack-color.vim'
+  Plug 'theoremoon/cryptohack-color.vim'
 call plug#end()
 "}}}
 
