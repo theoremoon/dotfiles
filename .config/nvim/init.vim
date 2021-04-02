@@ -60,6 +60,7 @@ endif
 call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-sleuth'
+  Plug 'sheerun/vim-polyglot'
   Plug 'terryma/vim-multiple-cursors'
   Plug 'itchyny/lightline.vim'
   if isdirectory('/usr/local/opt/fzf')
@@ -76,12 +77,14 @@ call plug#begin('~/.vim/plugged')
   Plug 'prabirshrestha/asyncomplete.vim'
   Plug 'prabirshrestha/asyncomplete-lsp.vim'
   Plug 'petRUShka/vim-sage'
-  Plug 'theoremoon/cryptohack-color.vim'
+  Plug 'mattn/emmet-vim'
+  Plug '~/ghq/github.com/theoremoon/cryptohack-color.vim'
 call plug#end()
 "}}}
 
 filetype plugin indent on
 set t_Co=256
+set termguicolors
 set background=dark
 colorscheme cryptohack
 syntax on
