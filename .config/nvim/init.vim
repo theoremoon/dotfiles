@@ -79,6 +79,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'petRUShka/vim-sage'
   Plug 'mattn/emmet-vim'
   Plug 'theoremoon/cryptohack-color.vim'
+  Plug 'theoremoon/CTF.vim'
 call plug#end()
 "}}}
 
@@ -101,6 +102,8 @@ nnoremap <Leader>p "+p
 nnoremap <Leader><CR> :<C-u>noh<CR>
 vmap < <gv
 vmap > >gv
+nnoremap <C-Left> gT
+nnoremap <C-Right> gt
 
 inoremap <C-a> <C-o>^
 inoremap <C-e> <End>
@@ -133,3 +136,5 @@ let g:lsp_settings = {
 \   },
 \}
 "}}}
+
+
