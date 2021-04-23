@@ -128,7 +128,7 @@ let g:lsp_settings = {
 \       'pyls': {
 \           'plugins': {
 \               'pycodestyle': {
-\                   'ignore': ['E117', 'E201', 'E203', 'E225', 'E293', 'E301', 'E302', 'E305', 'E501', 'E741', ]
+\                   'ignore': ['E117', 'E201', 'E203', 'E225', 'E226', 'E227', 'E293', 'E301', 'E302', 'E305', 'E501', 'E741', ]
 \               }
 \           }
 \       }
@@ -136,5 +136,4 @@ let g:lsp_settings = {
 \   },
 \}
 "}}}
-
-
+autocmd BufNewFile,BufRead *.sage setlocal filetype=sage
