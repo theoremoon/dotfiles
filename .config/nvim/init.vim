@@ -69,17 +69,18 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
     Plug 'junegunn/fzf.vim'
   endif
-  Plug 'prabirshrestha/vim-lsp'
-  Plug 'mattn/vim-lsp-settings'
-  Plug 'mattn/vim-goimports'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  " Plug 'prabirshrestha/vim-lsp'
+  " Plug 'mattn/vim-lsp-settings'
+  " Plug 'prabirshrestha/asyncomplete.vim'
+  " Plug 'prabirshrestha/asyncomplete-lsp.vim'
   Plug 'pbrisbin/vim-mkdir'
   Plug 'mattn/vim-sonictemplate'
-  Plug 'prabirshrestha/asyncomplete.vim'
-  Plug 'prabirshrestha/asyncomplete-lsp.vim'
   Plug 'petRUShka/vim-sage'
   Plug 'mattn/emmet-vim'
   Plug 'theoremoon/cryptohack-color.vim'
   Plug 'theoremoon/CTF.vim'
+  Plug 'mattn/vim-goimports'
 call plug#end()
 "}}}
 
@@ -117,23 +118,44 @@ noremap <C-h> <C-w>h
 nnoremap <C-p> :<C-u>Files<CR>
 "}}}
 """{{{lsp
-nmap <buffer>K <plug>(lsp-hover)
-nmap <buffer><Leader>r <plug>(lsp-rename)
-nmap <buffer><Leader>d <plug>(lsp-definition)
-nmap <buffer><Leader>a <plug>(lsp-code-action)
-nmap <buffer><Leader>f <plug>(lsp-document-format)
-let g:lsp_settings = {
-\   'pyls-all': {
-\     'workspace_config': {
-\       'pyls': {
-\           'plugins': {
-\               'pycodestyle': {
-\                   'ignore': ['E117', 'E201', 'E203', 'E225', 'E226', 'E227', 'E231', 'E293', 'E301', 'E302', 'E305', 'E402', 'E501', 'E741', ]
-\               }
-\           }
-\       }
-\     }
-\   },
-\}
+" nmap <buffer>K <plug>(lsp-hover)
+" nmap <buffer><Leader>r <plug>(lsp-rename)
+" nmap <buffer><Leader>d <plug>(lsp-definition)
+" nmap <buffer><Leader>a <plug>(lsp-code-action)
+" nmap <buffer><Leader>f <plug>(lsp-document-format)
+" let g:lsp_settings = {
+" \   'pyls-all': {
+" \     'workspace_config': {
+" \       'pyls': {
+" \           'plugins': {
+" \               'pycodestyle': {
+" \                   'ignore': ['E117', 'E201', 'E203', 'E225', 'E226', 'E227', 'E231', 'E293', 'E301', 'E302', 'E305', 'E402', 'E501', 'E741', ]
+" \               }
+" \           }
+" \       }
+" \     }
+" \   },
+" \}
+"}}}
+"{{{coc
+nmap <buffer>K :<C-u>call show_documentation()<CR>
+nmap <buffer><Leader>d <plug>(coc-definition)
+
+nmap <buffer><Leader>r <plug>(coc-rename)
+nmap <buffer><Leader>a <plug>(coc-codeaction-selected)
+xmap <buffer><Leader>a <plug>(coc-codeaction-selected)
+nmap <buffer><Leader>f <plug>(coc-format-selected)
+xmap <buffer><Leader>f <plug>(coc-format-selected)
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endf
+let g:coc_global_extensions = ['coc-python']
 "}}}
 autocmd BufNewFile,BufRead *.sage setlocal filetype=sage
