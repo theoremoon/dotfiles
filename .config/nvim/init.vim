@@ -138,7 +138,7 @@ nnoremap <C-p> :<C-u>Files<CR>
 " \}
 "}}}
 "{{{coc
-nmap <buffer>K :<C-u>call show_documentation()<CR>
+nmap <buffer>K :<C-u>call <SID>show_documentation()<CR>
 nmap <buffer><Leader>d <plug>(coc-definition)
 
 nmap <buffer><Leader>r <plug>(coc-rename)
