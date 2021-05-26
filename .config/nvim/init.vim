@@ -156,6 +156,6 @@ function! s:show_documentation()
     execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endf
-let g:coc_global_extensions = ['coc-python']
+let g:coc_global_extensions = ['coc-python', 'coc-go']
 "}}}
 autocmd BufNewFile,BufRead *.sage setlocal filetype=sage
