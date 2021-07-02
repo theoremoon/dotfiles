@@ -1,6 +1,7 @@
 set nocompatible
 set laststatus=2
 set cursorline
+set number
 
 set softtabstop=0
 set tabstop=4
