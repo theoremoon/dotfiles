@@ -1,6 +1,13 @@
 {
-    "gopls.completeUnimported": true,
-    "gopls": {
-        "completeUnimported": true
-    }
+   "pylsp-all": {
+     "workspace_config": {
+       "pylsp": {
+           "plugins": {
+               "pycodestyle": {
+                   "ignore": ["E117", "E201", "E203", "E225", "E226", "E227", "E231", "E293", "E301", "E302", "E305", "E402", "E501", "E741"]
+               }
+           }
+       }
+     }
+   }
 }

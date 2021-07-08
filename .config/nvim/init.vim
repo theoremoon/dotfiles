@@ -73,8 +73,8 @@ call plug#begin('~/.vim/plugged')
   " Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'prabirshrestha/vim-lsp'
   Plug 'mattn/vim-lsp-settings'
-  Plug 'prabirshrestha/asyncomplete.vim'
-  Plug 'prabirshrestha/asyncomplete-lsp.vim'
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'lighttiger2505/deoplete-vim-lsp'
   Plug 'pbrisbin/vim-mkdir'
   Plug 'mattn/vim-sonictemplate'
   Plug 'petRUShka/vim-sage'
@@ -124,19 +124,8 @@ nmap <buffer><Leader>r <plug>(lsp-rename)
 nmap <buffer><Leader>d <plug>(lsp-definition)
 nmap <buffer><Leader>a <plug>(lsp-code-action)
 nmap <buffer><Leader>f <plug>(lsp-document-format)
-let g:lsp_settings = {
-\   'pyls-all': {
-\     'workspace_config': {
-\       'pyls': {
-\           'plugins': {
-\               'pycodestyle': {
-\                   'ignore': ['E117', 'E201', 'E203', 'E225', 'E226', 'E227', 'E231', 'E293', 'E301', 'E302', 'E305', 'E402', 'E501', 'E741', ]
-\               }
-\           }
-\       }
-\     }
-\   },
-\}
+let g:lsp_settings_global_settings_dir = expand("~/.vim/")
+setlocal omnifunc=lsp#complete
 "}}}
 "{{{coc
 " nmap <buffer>K :<C-u>call <SID>show_documentation()<CR>
@@ -160,3 +149,6 @@ let g:lsp_settings = {
 " let g:coc_global_extensions = ['coc-pyright', 'coc-jedi', 'coc-go']
 "}}}
 autocmd BufNewFile,BufRead *.sage setlocal filetype=sage
+"{{{deoplete
+let g:deoplete#enable_at_startup = 1
+"}}}
