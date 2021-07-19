@@ -141,7 +141,8 @@ bindsym $mod+$i3-wm.binding.look_selector exec $i3-wm.program.look_selector
 
 ## Launch // Screenshot
 bindsym Print exec scrot -u -z '/tmp/%Y-%m-%d_%H_%M_%S.png' -e 'xclip -selection clipboard -t image/png $f'
-bindsym $mod+Shift+Print exec "sleep 0.2; scrot --select -z '/tmp/%Y-%m-%d_%H_%M_%S.png' -e 'xclip -selection clipboard -t image/png $f' 2> /tmp/log"
+# bindsym $mod+Shift+Print exec "sleep 0.2; scrot --select -z '/tmp/%Y-%m-%d_%H_%M_%S.png' -e 'xclip -selection clipboard -t image/png $f' 2> /tmp/log"
+bindsym $mod+Shift+Print exec "sleep 0.2; maim --select | tee $(date +'/tmp/%Y-%m-%d_%H_%M_%S.png') | xclip -selection clipboard -t image/png"
 
 ###############################################################################
 # Window and Workspace Navigation
