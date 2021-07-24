@@ -152,3 +152,15 @@ autocmd BufNewFile,BufRead *.sage setlocal filetype=sage
 "{{{deoplete
 let g:deoplete#enable_at_startup = 1
 "}}}
+"{{{lightline
+let g:lightline = {
+\ 'colorscheme': 'default',
+\ 'active': {
+\   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified'] ],
+\   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'fileformat', 'fileencoding', 'filetype', 'sleuth' ] ],
+\ },
+\ 'component_function': {
+\   'sleuth': 'SleuthIndicator',
+\ },
+\ }
+"}}}
