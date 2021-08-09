@@ -119,11 +119,11 @@ noremap <C-h> <C-w>h
 nnoremap <C-p> :<C-u>Files<CR>
 "}}}
 """{{{lsp
-nmap <buffer>K <plug>(lsp-hover)
-nmap <buffer><Leader>r <plug>(lsp-rename)
-nmap <buffer><Leader>d <plug>(lsp-definition)
-nmap <buffer><Leader>a <plug>(lsp-code-action)
-nmap <buffer><Leader>f <plug>(lsp-document-format)
+nmap K <plug>(lsp-hover)
+nmap <Leader>r <plug>(lsp-rename)
+nmap <Leader>d <plug>(lsp-definition)
+nmap <Leader>a <plug>(lsp-code-action)
+nmap <Leader>f <plug>(lsp-document-format)
 let g:lsp_settings_global_settings_dir = expand("~/.vim/")
 setlocal omnifunc=lsp#complete
 "}}}
