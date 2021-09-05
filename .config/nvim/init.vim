@@ -70,11 +70,11 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
     Plug 'junegunn/fzf.vim'
   endif
-  " Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'prabirshrestha/vim-lsp'
-  Plug 'mattn/vim-lsp-settings'
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'lighttiger2505/deoplete-vim-lsp'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  " Plug 'prabirshrestha/vim-lsp'
+  " Plug 'mattn/vim-lsp-settings'
+  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  " Plug 'lighttiger2505/deoplete-vim-lsp'
   Plug 'pbrisbin/vim-mkdir'
   Plug 'mattn/vim-sonictemplate'
   Plug 'petRUShka/vim-sage'
@@ -118,39 +118,38 @@ noremap <C-h> <C-w>h
 """{{{fzf
 nnoremap <C-p> :<C-u>Files<CR>
 "}}}
-"""{{{lsp
-nmap K <plug>(lsp-hover)
-nmap <Leader>r <plug>(lsp-rename)
-nmap <Leader>d <plug>(lsp-definition)
-nmap <Leader>a <plug>(lsp-code-action)
-nmap <Leader>f <plug>(lsp-document-format)
-let g:lsp_settings_global_settings_dir = expand("~/.vim/")
-setlocal omnifunc=lsp#complete
+"{{{lsp
+" nmap K <plug>(lsp-hover)
+" nmap <Leader>r <plug>(lsp-rename)
+" nmap <Leader>d <plug>(lsp-definition)
+" nmap <Leader>a <plug>(lsp-code-action)
+" nmap <Leader>f <plug>(lsp-document-format)
+" let g:lsp_settings_global_settings_dir = expand("~/.vim/")
 "}}}
 "{{{coc
-" nmap <buffer>K :<C-u>call <SID>show_documentation()<CR>
-" nmap <buffer><Leader>d <plug>(coc-definition)
-" 
-" nmap <buffer><Leader>r <plug>(coc-rename)
-" nmap <buffer><Leader>a <plug>(coc-codeaction-selected)
-" xmap <buffer><Leader>a <plug>(coc-codeaction-selected)
-" nmap <buffer><Leader>f <plug>(coc-format-selected)
-" xmap <buffer><Leader>f <plug>(coc-format-selected)
-" 
-" function! s:show_documentation()
-"   if (index(['vim','help'], &filetype) >= 0)
-"     execute 'h '.expand('<cword>')
-"   elseif (coc#rpc#ready())
-"     call CocActionAsync('doHover')
-"   else
-"     execute '!' . &keywordprg . " " . expand('<cword>')
-"   endif
-" endf
-" let g:coc_global_extensions = ['coc-pyright', 'coc-jedi', 'coc-go']
+nmap <buffer>K :<C-u>call <SID>show_documentation()<CR>
+nmap <buffer><Leader>d <plug>(coc-definition)
+
+nmap <buffer><Leader>r <plug>(coc-rename)
+nmap <buffer><Leader>a <plug>(coc-codeaction-selected)
+xmap <buffer><Leader>a <plug>(coc-codeaction-selected)
+nmap <buffer><Leader>f <plug>(coc-format-selected)
+xmap <buffer><Leader>f <plug>(coc-format-selected)
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endf
+let g:coc_global_extensions = ['coc-pyright', 'coc-jedi', 'coc-go']
 "}}}
 autocmd BufNewFile,BufRead *.sage setlocal filetype=sage
 "{{{deoplete
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 "}}}
 "{{{lightline
 let g:lightline = {
