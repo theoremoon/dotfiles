@@ -142,3 +142,4 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 
 export PATH="$HOME/.poetry/bin:$PATH"
 eval "$(starship init zsh)"
+alias "?"="starship explain"
