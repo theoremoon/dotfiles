@@ -1,32 +1,35 @@
-# automatically install zplug
-[ ! -f ~/.zplug/init.zsh ] && curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-source ~/.zplug/init.zsh
+# automatically install zinit
+[ ! -f ~/.zinit/bin/zinit.zsh ] && sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
+source ~/.zinit/bin/zinit.zsh
 
 # install tools
 case ${OSTYPE} in
   darwin*)
-    zplug "junegunn/fzf", from:gh-r, as:command, rename-to:fzf, use:"*darwin*amd64*"
-    zplug "BurntSushi/ripgrep", from:gh-r, as:command, rename-to:rg, use:"*x86_64-apple-darwin*"
-    zplug "x-motemen/ghq", from:gh-r, as:command, rename-to:ghq, use:"*darwin_amd64*"
+    zinit ice from"gh-r" as"program" bpick"*darwin*amd64*"
+    zinit light "junegunn/fzf"
+
+    zinit ice from"gh-r" as"program" bpick"*x86_64-apple-darwin*" pick"**/rg"
+    zinit light "BurntSushi/ripgrep"
+
+    zinit ice from"gh-r" as"program" bpick"*darwin_amd64*" pick"**/ghq"
+    zinit light "x-motemen/ghq"
     ;;
   linux*)
-    zplug "junegunn/fzf", from:gh-r, as:command, rename-to:fzf, use:"*linux*amd64*"
-    zplug "BurntSushi/ripgrep", from:gh-r, as:command, rename-to:rg, use:"*x86_64*linux-musl*"
-    zplug "x-motemen/ghq", from:gh-r, as:command, rename-to:ghq, use:"*linux_amd64*"
+    zinit ice from"gh-r" as"program" bpick"*linux*amd64*"
+    zinit light "junegunn/fzf"
+
+    zinit ice from"gh-r" as"program" bpick"*x86_64*linux-musl*" pick"**/rg"
+    zinit light "BurntSushi/ripgrep"
+
+    zinit ice from"gh-r" as"program" bpick"*linux*amd64*" pick"**/ghq"
+    zinit light "x-motemen/ghq"
     ;;
 esac
-zplug mafredri/zsh-async, from:github
-zplug 'sindresorhus/pure', use:pure.zsh, from:github, as:theme
 
-zplug "zsh-users/zsh-syntax-highlighting"
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-if ! zplug check --verbose; then
-    printf "install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
-zplug load
+zinit ice pick"async.zsh" src"pure.zsh" # with zsh-async library that's bundled with it.
+zinit light sindresorhus/pure
+
+zinit light "zsh-users/zsh-syntax-highlighting"
 # hint: zplug update to update tools
 
 # check dotfiles update
