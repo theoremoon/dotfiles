@@ -138,8 +138,8 @@ command! XGrep call s:grep_select()
 nnoremap ? :<C-u>Grep<CR>
 vnoremap ? :<C-u>Grep<CR>
 
-nnoremap <C-p>       :<C-u>FzfPreviewProjectFilesRpc<CR>
-nnoremap <C-S-p>     :<C-u>FzfPreviewFromResourcesRpc project_mru git<CR>
+nnoremap <C-P>       :<C-u>FzfPreviewProjectFilesRpc<CR>
+nnoremap <C-p>       :<C-u>FzfPreviewDirectoryFilesRpc<CR>
 nnoremap <Leader>s   :<C-u>FzfPreviewGitStatusRpc<CR>
 nnoremap <Leader>g   :<C-u>FzfPreviewGitActionsRpc<CR>
 nnoremap <C-g>       :<C-u>FzfPreviewAllBuffersRpc<CR>

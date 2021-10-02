@@ -23,6 +23,9 @@ case ${OSTYPE} in
 
     zinit ice from"gh-r" as"program" bpick"*linux*amd64*" pick"**/ghq"
     zinit light "x-motemen/ghq"
+
+    zinit ice from"gh-r" as"program" bpick"*x86_64*linux-gnu*" pick"**/bat"
+    zinit light "sharkdp/bat"
     ;;
 esac
 
