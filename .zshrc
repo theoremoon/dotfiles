@@ -1,3 +1,37 @@
+# automatically install zplug
+[ ! -f ~/.zplug/init.zsh ] && curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+source ~/.zplug/init.zsh
+
+# install tools
+case ${OSTYPE} in
+  darwin*)
+    zplug "junegunn/fzf", from:gh-r, as:command, rename-to:fzf, use:"*darwin*amd64*"
+    zplug "BurntSushi/ripgrep", from:gh-r, as:command, rename-to:rg, use:"*x86_64-apple-darwin*"
+    zplug "x-motemen/ghq", from:gh-r, as:command, rename-to:ghq, use:"*darwin_amd64*"
+    ;;
+  linux*)
+    zplug "junegunn/fzf", from:gh-r, as:command, rename-to:fzf, use:"*linux*amd64*"
+    zplug "BurntSushi/ripgrep", from:gh-r, as:command, rename-to:rg, use:"*x86_64*linux-musl*"
+    zplug "x-motemen/ghq", from:gh-r, as:command, rename-to:ghq, use:"*linux_amd64*"
+    ;;
+esac
+
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+if ! zplug check --verbose; then
+    printf "install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+zplug load
+# hint: zplug update to update tools
+
+# check dotfiles update
+if [[ `cd ~/dotfiles && git status --porcelain` ]]; then
+  echo -e "\e[41m ~/dotfiles is updated"
+fi
+
+
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=10000
@@ -17,59 +51,19 @@ compinit
 autoload -Uz colors
 colors
 # End of lines added by compinstall
-
+ 
 export EDITOR=nvim
 alias vim=nvim
 alias ls='ls --color=auto'
-alias fsnew='dotnet new console -lang="F#" -o'
-alias fsrun='dotnet run'
 setxkbmap -layout jp
 setxkbmap -option ctrl:nocaps 2>/dev/null
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-function displayoptimize() {
-  primary=$(xrandr| grep "primary" | awk '{print $1}')
-  connected=$(xrandr  | grep " connected" | grep -v "primary" | awk '{print $1}')
-  nol=$(echo "${connected}" | sed '/^\s*$/d' | wc -l)
-
-  if [[ "$nol" = 0 ]]; then
-    xrandr --auto
-
-  elif [[ "$nol" = 1 ]]; then
-    xrandr --output "$connected" --auto --above "$primary"
-
-  else
-    echo -e "\e[41m;INVALID NUMBER OF DISPLAYS"
-    xrandr --auto
-
-  fi
-}
-
-alias writeup='export PROMPT="$ "'
-export PROMPT="[%?]%{$fg[green]%}%3~ %{$reset_color%}%"
-
-
-# check dotfiles update
-if [[ `cd ~/dotfiles && git status --porcelain` ]]; then
-  echo -e "\e[41m ~/dotfiles is updated"
-fi
-python ~/sada_phrase/sada.py 2>/dev/null
-
-
-export PYENV_ROOT="$HOME/.pyenv"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-eval $(opam env 2>/dev/null)
-
-export GO111MODULE=on
-export GOPATH=$HOME/go
-export PATH="$PATH:$HOME/.local/bin:$HOME/bin/:$HOME/.config/composer/vendor/bin/:$GOPATH/bin:$HOME/.dub/packages/.bin/dls-latest:$PYENV_ROOT/bin:/usr/local/go/bin:$HOME/.poetry/bin:$HOME/.cargo/bin"
 
 alias FIXCAPS="xdotool key Caps_Lock"
 alias pentab='xsetwacom --set "Wacom One by Wacom M Pen stylus" mode relative'
 alias pentabr='xsetwacom --set "Wacom One by Wacom M Pen stylus" Rotate half'
+
+# ghq fzf integration. fast cd to git project
 function g() {
   if [ $# -eq 1 ]; then
     dir=$(ghq list --full-path | grep "/$1\$")
@@ -87,59 +81,17 @@ function _g() {
 }
 compdef _g g
 
+# M-g to copy project path to prombt
 function __c_g() {
   zle -U $(ghq list --full-path | fzf)
 }
 zle -N __c_g
 bindkey "^[g" __c_g
 
-alias pyenvinit='eval "$(pyenv init -)"'
-
-function build() {
-  cat $(ls | grep "^build") | bash /dev/stdin "$@" <<'DOC'
-if type "$1" 2>/dev/null >/dev/null; then
-    f="$1"
-    shift
-    set -x
-    "$f" "$@"
-fi
-DOC
-}
-
-alias d='cd $(find . -type d | fzf)'
+# go
+export GO111MODULE=on
+export GOPATH=$HOME/go
+export PATH="$PATH:$HOME/.local/bin:$HOME/bin/:$HOME/.config/composer/vendor/bin/:$GOPATH/bin:$HOME/.dub/packages/.bin/dls-latest:$PYENV_ROOT/bin:/usr/local/go/bin:$HOME/.poetry/bin:$HOME/.cargo/bin"
 alias goinit='go mod init $(pwd | grep -Po "\w+\.\w+\/.+\z")'
 
-function set_windowtitle () {
-  echo -ne "\033]0;${1}\007"
-}
-autoload -Uz add-zsh-hook
-add-zsh-hook preexec set_windowtitle
 
-flagpath="$HOME/.local/bin/flag"
-if [ ! -f "$flagpath" ]; then
-  mkdir "$HOME/.local/bin"
-  cat <<'EOF' > "$flagpath"
-#!/bin/bash
-X="leasto"
-Y="134570"
-sed -e "y/${X}/${Y}/"
-EOF
-  chmod +x "$flagpath"
-fi
-
-function mkproj() {
-  mkdir "$1"
-  cd "$1"
-  tmux new -s "$1" -d
-  if [[ -n $TMUX ]]; then
-    tmux switch-client -t "$1"
-  else
-    tmux attach-session -t "$1"
-  fi
-}
-
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
-
-export PATH="$HOME/.poetry/bin:$PATH"
-eval "$(starship init zsh)"
-alias "?"="starship explain"
