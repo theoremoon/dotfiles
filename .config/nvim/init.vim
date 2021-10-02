@@ -67,21 +67,17 @@ call plug#begin('~/.vim/plugged')
   if isdirectory('/usr/local/opt/fzf')
     Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
   else
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-    Plug 'junegunn/fzf.vim'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
   endif
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  " Plug 'prabirshrestha/vim-lsp'
-  " Plug 'mattn/vim-lsp-settings'
-  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  " Plug 'lighttiger2505/deoplete-vim-lsp'
+  Plug 'tpope/vim-fugitive'
   Plug 'pbrisbin/vim-mkdir'
   Plug 'mattn/vim-sonictemplate'
   Plug 'petRUShka/vim-sage'
   Plug 'mattn/emmet-vim'
   Plug 'theoremoon/cryptohack-color.vim'
   Plug 'theoremoon/CTF.vim'
-  Plug 'mattn/vim-goimports'
 call plug#end()
 "}}}
 
@@ -115,16 +111,40 @@ noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 noremap <C-h> <C-w>h
 "}}}
-"""{{{fzf
-nnoremap <C-p> :<C-u>Files<CR>
-"}}}
-"{{{lsp
-" nmap K <plug>(lsp-hover)
-" nmap <Leader>r <plug>(lsp-rename)
-" nmap <Leader>d <plug>(lsp-definition)
-" nmap <Leader>a <plug>(lsp-code-action)
-" nmap <Leader>f <plug>(lsp-document-format)
-" let g:lsp_settings_global_settings_dir = expand("~/.vim/")
+"{{{fzf-preview
+function! s:grep_word()
+  let word = expand('<cword>')
+  call fzf_preview#rpc#command('FzfPreviewProjectGrep', word)
+endf
+function! s:get_visual_selection()
+    " Why is this not a built-in Vim script function?!
+    let [line_start, column_start] = getpos("'<")[1:2]
+    let [line_end, column_end] = getpos("'>")[1:2]
+    let lines = getline(line_start, line_end)
+    if len(lines) == 0
+        return ''
+    endif
+    let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
+    let lines[0] = lines[0][column_start - 1:]
+    return join(lines, "\n")
+endfunction
+function! s:grep_select()
+  let word = get_visual_selection()
+  call fzf_preview#rpc#command('FzfPreviewProjectGrep', word)
+endf
+
+command! Grep call s:grep_word()
+command! XGrep call s:grep_select()
+nnoremap ? :<C-u>Grep<CR>
+vnoremap ? :<C-u>Grep<CR>
+
+nnoremap <C-p>       :<C-u>FzfPreviewProjectFilesRpc<CR>
+nnoremap <C-S-p>     :<C-u>FzfPreviewFromResourcesRpc project_mru git<CR>
+nnoremap <Leader>s   :<C-u>FzfPreviewGitStatusRpc<CR>
+nnoremap <Leader>g   :<C-u>FzfPreviewGitActionsRpc<CR>
+nnoremap <C-g>       :<C-u>FzfPreviewAllBuffersRpc<CR>
+nnoremap <Leader>/   :<C-u>FzfPreviewLinesRpc --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
+nnoremap <Leader>*   :<C-u>FzfPreviewLinesRpc --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
 "}}}
 "{{{coc
 nmap <buffer>K :<C-u>call <SID>show_documentation()<CR>
@@ -148,9 +168,6 @@ endf
 let g:coc_global_extensions = ['coc-pyright', 'coc-jedi', 'coc-go']
 "}}}
 autocmd BufNewFile,BufRead *.sage setlocal filetype=sage
-"{{{deoplete
-" let g:deoplete#enable_at_startup = 1
-"}}}
 "{{{lightline
 let g:lightline = {
 \ 'colorscheme': 'default',
