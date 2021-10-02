@@ -15,7 +15,10 @@ case ${OSTYPE} in
     zplug "x-motemen/ghq", from:gh-r, as:command, rename-to:ghq, use:"*linux_amd64*"
     ;;
 esac
+zplug mafredri/zsh-async, from:github
+zplug 'sindresorhus/pure', use:pure.zsh, from:github, as:theme
 
+zplug "zsh-users/zsh-syntax-highlighting"
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 if ! zplug check --verbose; then
     printf "install? [y/N]: "
@@ -45,19 +48,18 @@ setopt nobeep
 bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-
 autoload -Uz compinit
 compinit
 autoload -Uz colors
 colors
 # End of lines added by compinstall
  
+# general
 export EDITOR=nvim
 alias vim=nvim
 alias ls='ls --color=auto'
 setxkbmap -layout jp
 setxkbmap -option ctrl:nocaps 2>/dev/null
-
 
 alias FIXCAPS="xdotool key Caps_Lock"
 alias pentab='xsetwacom --set "Wacom One by Wacom M Pen stylus" mode relative'
