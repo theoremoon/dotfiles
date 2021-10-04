@@ -40,6 +40,9 @@ if [[ `cd ~/dotfiles && git status --porcelain` ]]; then
   echo -e "\e[41m ~/dotfiles is updated"
 fi
 
+# optionals
+[ -d ~/.zsh ] && find ~/.zsh/ -type f -exec source {} +
+
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
@@ -64,8 +67,10 @@ colors
 export EDITOR=nvim
 alias vim=nvim
 alias ls='ls --color=auto'
-setxkbmap -layout jp
-setxkbmap -option ctrl:nocaps 2>/dev/null
+if builtin command -v setxkbmap > /dev/null; then
+  setxkbmap -layout jp
+  setxkbmap -option ctrl:nocaps 2>/dev/null
+fi
 
 alias FIXCAPS="xdotool key Caps_Lock"
 alias pentab='xsetwacom --set "Wacom One by Wacom M Pen stylus" mode relative'
