@@ -66,7 +66,6 @@ colors
 # general
 export EDITOR=nvim
 alias vim=nvim
-alias ls='ls --color=auto'
 if builtin command -v setxkbmap > /dev/null; then
   setxkbmap -layout jp
   setxkbmap -option ctrl:nocaps 2>/dev/null
