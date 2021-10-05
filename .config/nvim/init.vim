@@ -68,8 +68,8 @@ call plug#begin('~/.vim/plugged')
     Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
   else
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
   endif
+  Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'tpope/vim-fugitive'
   Plug 'pbrisbin/vim-mkdir'
@@ -138,13 +138,12 @@ command! XGrep call s:grep_select()
 nnoremap ? :<C-u>Grep<CR>
 vnoremap ? :<C-u>Grep<CR>
 
-nnoremap <C-P>       :<C-u>FzfPreviewProjectFilesRpc<CR>
-nnoremap <C-p>       :<C-u>FzfPreviewDirectoryFilesRpc<CR>
-nnoremap <Leader>s   :<C-u>FzfPreviewGitStatusRpc<CR>
-nnoremap <Leader>g   :<C-u>FzfPreviewGitActionsRpc<CR>
-nnoremap <C-g>       :<C-u>FzfPreviewAllBuffersRpc<CR>
-nnoremap <Leader>/   :<C-u>FzfPreviewLinesRpc --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
-nnoremap <Leader>*   :<C-u>FzfPreviewLinesRpc --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
+nnoremap <S-C-p>     :<C-u>CocCommand fzf-preview.ProjectFiles<CR>
+nnoremap <C-p>       :<C-u>CocCommand fzf-preview.DirectoryFiles<CR>
+nnoremap <Leader>s   :<C-u>CocCommand fzf-preview.GitStatusRpc<CR>
+nnoremap <Leader>g   :<C-u>CocCommand fzf-preview.GitActionsRpc<CR>
+nnoremap <Leader>/   :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
+nnoremap <Leader>*   :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
 "}}}
 "{{{coc
 nmap <buffer>K :<C-u>call <SID>show_documentation()<CR>
@@ -165,7 +164,7 @@ function! s:show_documentation()
     execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endf
-let g:coc_global_extensions = ['coc-pyright', 'coc-jedi', 'coc-go']
+let g:coc_global_extensions = ['coc-pyright', 'coc-jedi', 'coc-go', 'coc-tsserver', 'coc-fzf-preview']
 "}}}
 autocmd BufNewFile,BufRead *.sage setlocal filetype=sage
 "{{{lightline
