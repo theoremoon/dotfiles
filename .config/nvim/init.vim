@@ -75,6 +75,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-rhubarb'
   Plug 'pbrisbin/vim-mkdir'
   Plug 'mattn/vim-sonictemplate'
   Plug 'petRUShka/vim-sage'
@@ -136,7 +137,7 @@ function! s:get_visual_selection()
     return join(lines, "\n")
 endfunction
 function! s:grep_select()
-  let word = get_visual_selection()
+  let word = s:get_visual_selection()
   call fzf_preview#rpc#command('FzfPreviewProjectGrep', word)
 endf
 

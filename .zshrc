@@ -19,6 +19,9 @@ case ${OSTYPE} in
 
     zinit ice from"gh-r" as"program" bpick"*darwin_amd64*" pick"**/ghq"
     zinit light "x-motemen/ghq"
+
+    zinit ice from"gh-r" as"program" bpick"*macOS_amd64.tar.gz" pick"**/gh"
+    zinit light "cli/cli"
     ;;
   linux*)
     zinit ice from"gh-r" as"program" bpick"*linux*amd64*"
@@ -35,6 +38,9 @@ case ${OSTYPE} in
 
     zinit ice from"gh-r" as"program" bpick"*linux*amd64*" pick"**/ghq"
     zinit light "x-motemen/ghq"
+
+    zinit ice from"gh-r" as"program" bpick"*linux*amd64.tar.gz" pick"**/ghq"
+    zinit light "cli/cli"
     ;;
 esac
 
