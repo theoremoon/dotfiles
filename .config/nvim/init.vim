@@ -64,12 +64,15 @@ call plug#begin('~/.vim/plugged')
   Plug 'sheerun/vim-polyglot'
   Plug 'terryma/vim-multiple-cursors'
   Plug 'itchyny/lightline.vim'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   if isdirectory('/usr/local/opt/fzf')
     Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
   else
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   endif
   Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'tpope/vim-fugitive'
   Plug 'pbrisbin/vim-mkdir'
@@ -111,6 +114,10 @@ noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 noremap <C-h> <C-w>h
 "}}}
+"{{{telescope.nvim
+nnoremap <C-p> <cmd>Telescope find_files<cr>
+command! Grep Telescope live_grep
+"}}}
 "{{{fzf-preview
 function! s:grep_word()
   let word = expand('<cword>')
@@ -133,18 +140,14 @@ function! s:grep_select()
   call fzf_preview#rpc#command('FzfPreviewProjectGrep', word)
 endf
 
-command! Grep call s:grep_word()
-command! XGrep call s:grep_select()
-nnoremap ? :<C-u>Grep<CR>
-vnoremap ? :<C-u>Grep<CR>
+command! WGrep call s:grep_word()
+command! VGrep call s:grep_select()
+nnoremap ? :<C-u>WGrep<CR>
+vnoremap ? :<C-u>VGrep<CR>
 
-nnoremap <S-C-p>     :<C-u>CocCommand fzf-preview.ProjectFiles<CR>
-nnoremap <C-p>       :<C-u>CocCommand fzf-preview.DirectoryFiles<CR>
-nnoremap <Leader>s   :<C-u>CocCommand fzf-preview.GitStatusRpc<CR>
-nnoremap <Leader>g   :<C-u>CocCommand fzf-preview.GitActionsRpc<CR>
-nnoremap <Leader>/   :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
-nnoremap <Leader>*   :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
-"}}}
+nnoremap <Leader>s <cmd>CocCommand fzf-preview.GitStatus<CR>
+ 
+" "}}}
 "{{{coc
 nmap <buffer>K :<C-u>call <SID>show_documentation()<CR>
 nmap <buffer><Leader>d <plug>(coc-definition)

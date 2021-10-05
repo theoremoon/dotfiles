@@ -11,6 +11,12 @@ case ${OSTYPE} in
     zinit ice from"gh-r" as"program" bpick"*x86_64-apple-darwin*" pick"**/rg"
     zinit light "BurntSushi/ripgrep"
 
+    zinit ice from"gh-r" as"program" bpick"*x86_64*apple-darwin*" pick"**/bat"
+    zinit light "sharkdp/bat"
+
+    zinit ice from"gh-r" as"program" bpick"*x86_64*apple-darwin*" pick"**/fd"
+    zinit light "sharkdp/fd"
+
     zinit ice from"gh-r" as"program" bpick"*darwin_amd64*" pick"**/ghq"
     zinit light "x-motemen/ghq"
     ;;
@@ -21,11 +27,14 @@ case ${OSTYPE} in
     zinit ice from"gh-r" as"program" bpick"*x86_64*linux-musl*" pick"**/rg"
     zinit light "BurntSushi/ripgrep"
 
-    zinit ice from"gh-r" as"program" bpick"*linux*amd64*" pick"**/ghq"
-    zinit light "x-motemen/ghq"
-
     zinit ice from"gh-r" as"program" bpick"*x86_64*linux-gnu*" pick"**/bat"
     zinit light "sharkdp/bat"
+
+    zinit ice from"gh-r" as"program" bpick"*x86_64*linux-gnu*" pick"**/bat"
+    zinit light "sharkdp/fd"
+
+    zinit ice from"gh-r" as"program" bpick"*linux*amd64*" pick"**/ghq"
+    zinit light "x-motemen/ghq"
     ;;
 esac
 
