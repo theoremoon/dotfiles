@@ -118,36 +118,11 @@ noremap <C-h> <C-w>h
 "{{{telescope.nvim
 nnoremap <C-p> <cmd>Telescope find_files<cr>
 command! Grep Telescope live_grep
+nnoremap ? <cmd>Telescope grep_string<CR>
+nnoremap <Leader>g <cmd>Telescope live_grep<CR>
 "}}}
 "{{{fzf-preview
-function! s:grep_word()
-  let word = expand('<cword>')
-  call fzf_preview#rpc#command('FzfPreviewProjectGrep', word)
-endf
-function! s:get_visual_selection()
-    " Why is this not a built-in Vim script function?!
-    let [line_start, column_start] = getpos("'<")[1:2]
-    let [line_end, column_end] = getpos("'>")[1:2]
-    let lines = getline(line_start, line_end)
-    if len(lines) == 0
-        return ''
-    endif
-    let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
-    let lines[0] = lines[0][column_start - 1:]
-    return join(lines, "\n")
-endfunction
-function! s:grep_select()
-  let word = s:get_visual_selection()
-  call fzf_preview#rpc#command('FzfPreviewProjectGrep', word)
-endf
-
-command! WGrep call s:grep_word()
-command! VGrep call s:grep_select()
-nnoremap ? :<C-u>WGrep<CR>
-vnoremap ? :<C-u>VGrep<CR>
-
 nnoremap <Leader>s <cmd>CocCommand fzf-preview.GitStatus<CR>
- 
 " "}}}
 "{{{coc
 nmap <buffer>K :<C-u>call <SID>show_documentation()<CR>
