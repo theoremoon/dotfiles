@@ -33,13 +33,13 @@ case ${OSTYPE} in
     zinit ice from"gh-r" as"program" bpick"*x86_64*linux-gnu*" pick"**/bat"
     zinit light "sharkdp/bat"
 
-    zinit ice from"gh-r" as"program" bpick"*x86_64*linux-gnu*" pick"**/bat"
+    zinit ice from"gh-r" as"program" bpick"*x86_64*linux-gnu*" pick"**/fd"
     zinit light "sharkdp/fd"
 
     zinit ice from"gh-r" as"program" bpick"*linux*amd64*" pick"**/ghq"
     zinit light "x-motemen/ghq"
 
-    zinit ice from"gh-r" as"program" bpick"*linux*amd64.tar.gz" pick"**/ghq"
+    zinit ice from"gh-r" as"program" bpick"*linux*amd64.tar.gz" pick"**/gh"
     zinit light "cli/cli"
     ;;
 esac
