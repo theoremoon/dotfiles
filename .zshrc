@@ -56,7 +56,7 @@ if [[ `cd ~/dotfiles && git status --porcelain` ]]; then
 fi
 
 # optionals
-[ -d ~/.zsh ] && find ~/.zsh/ -type f -exec source {} +
+[ -d ~/.zsh ] && ls ~/.zsh/*.zsh | while read f; do source "$f"; done;
 
 
 # Lines configured by zsh-newuser-install
