@@ -117,6 +117,7 @@ noremap <C-h> <C-w>h
 "}}}
 "{{{telescope.nvim
 nnoremap <C-p> <cmd>Telescope find_files<cr>
+nnoremap <C-f> <cmd>Telescope oldfiles<cr>
 command! Grep Telescope live_grep
 nnoremap ? <cmd>Telescope grep_string<CR>
 nnoremap <Leader>g <cmd>Telescope live_grep<CR>
@@ -125,14 +126,13 @@ nnoremap <Leader>g <cmd>Telescope live_grep<CR>
 nnoremap <Leader>s <cmd>CocCommand fzf-preview.GitStatus<CR>
 " "}}}
 "{{{coc
-nmap <buffer>K :<C-u>call <SID>show_documentation()<CR>
-nmap <buffer><Leader>d <plug>(coc-definition)
+nmap K :<C-u>call <SID>show_documentation()<CR>
+nmap <Leader>d <plug>(coc-definition)
 
-nmap <buffer><Leader>r <plug>(coc-rename)
-nmap <buffer><Leader>a <plug>(coc-codeaction-selected)
-xmap <buffer><Leader>a <plug>(coc-codeaction-selected)
-nmap <buffer><Leader>f <plug>(coc-format-selected)
-xmap <buffer><Leader>f <plug>(coc-format-selected)
+nmap <Leader>r <plug>(coc-rename)
+nmap <Leader>a <plug>(coc-codeaction-selected)
+xmap <Leader>a <plug>(coc-codeaction-selected)
+nmap <Leader>f <plug>(coc-format-selected)
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)

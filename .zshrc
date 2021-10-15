@@ -89,6 +89,7 @@ fi
 alias FIXCAPS="xdotool key Caps_Lock"
 alias pentab='xsetwacom --set "Wacom One by Wacom M Pen stylus" mode relative'
 alias pentabr='xsetwacom --set "Wacom One by Wacom M Pen stylus" Rotate half'
+alias writeup='export PS1="$ "';
 
 # ghq fzf integration. fast cd to git project
 function g() {
