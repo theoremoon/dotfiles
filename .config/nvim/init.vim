@@ -80,6 +80,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'mattn/vim-sonictemplate'
   Plug 'petRUShka/vim-sage'
   Plug 'mattn/emmet-vim'
+  Plug 'mattn/vim-goimports'
   Plug 'theoremoon/cryptohack-color.vim'
   Plug 'theoremoon/CTF.vim'
 call plug#end()
@@ -157,4 +158,8 @@ let g:lightline = {
 \   'sleuth': 'SleuthIndicator',
 \ },
 \ }
+"}}}
+"{{{goimports
+let g:goimports = 1
+let g:goimports_simplify = 1
 "}}}
