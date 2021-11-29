@@ -124,6 +124,8 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 noremap <C-h> <C-w>h
+" 選択した文字列のファイルをC-tで開く
+vnoremap <C-t> <C-w>gf
 "}}}
 "{{{telescope.nvim
 nnoremap <C-p> <cmd>Telescope find_files<cr>
@@ -173,12 +175,13 @@ let g:goimports = 1
 let g:goimports_simplify = 1
 "}}}
 "{{{defx.nvim
+nnoremap <Leader>f :<C-u>Defx<CR>
 autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
   " Define mappings
   nnoremap <silent><buffer><expr> <CR>
   \ defx#is_directory() ?
-  \ defx#do_action('open_tree', 'recursive:10')
+  \ defx#do_action('open_tree', 'recursive:10') : 
   \ defx#do_action('drop')
   nnoremap <silent><buffer><expr> o
   \ defx#do_action('open', 'tabnew')
