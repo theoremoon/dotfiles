@@ -41,6 +41,9 @@ case ${OSTYPE} in
 
     zinit ice from"gh-r" as"program" bpick"*linux*amd64.tar.gz" pick"**/gh"
     zinit light "cli/cli"
+
+    zinit ice from"gh-r" as"program" bpick"*linux*amd64.tar.gz" pick"**/txeh"
+    zinit light "txn2/txeh"
     ;;
 esac
 
