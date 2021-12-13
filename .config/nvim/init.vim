@@ -89,9 +89,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'mattn/vim-sonictemplate'
   Plug 'petRUShka/vim-sage'
   Plug 'mattn/emmet-vim'
-  Plug 'mattn/vim-goimports'
   Plug 'theoremoon/cryptohack-color.vim'
   Plug 'theoremoon/CTF.vim'
+
+  Plug 'mattn/vim-goimports'
 call plug#end()
 "}}}
 
@@ -142,7 +143,7 @@ nmap <Leader>d <plug>(coc-definition)
 nmap <Leader>r <plug>(coc-rename)
 nmap <Leader>a <plug>(coc-codeaction-selected)
 xmap <Leader>a <plug>(coc-codeaction-selected)
-nmap <Leader>f <plug>(coc-format-selected)
+xmap <Leader>f <plug>(coc-format-selected)
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
