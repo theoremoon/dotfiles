@@ -83,6 +83,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'roxma/vim-hug-neovim-rpc'
   endif
 
+  Plug 'haya14busa/vim-auto-programming'
+  Plug 'airblade/vim-gitgutter'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rhubarb'
   Plug 'pbrisbin/vim-mkdir'
@@ -91,6 +93,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'mattn/emmet-vim'
   Plug 'theoremoon/cryptohack-color.vim'
   Plug 'theoremoon/CTF.vim'
+
 
   Plug 'mattn/vim-goimports'
 call plug#end()
@@ -136,7 +139,7 @@ nnoremap ? <cmd>Telescope grep_string<CR>
 nnoremap <Leader>g <cmd>Telescope live_grep<CR>
 "}}}
 "{{{fzf-preview
-nnoremap <Leader>s <cmd>CocCommand fzf-preview.GitStatus<CR>
+" nnoremap <Leader>s <cmd>CocCommand fzf-preview.GitStatus<CR>
 " "}}}
 "{{{coc
 nmap K :<C-u>call <SID>show_documentation()<CR>
@@ -200,4 +203,11 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> cd
   \ defx#do_action('change_vim_cwd')
 endfunction
+"}}}
+"{{{vim-auto-programming
+set completefunc=autoprogramming#complete
+"}}}
+"{{{vim-gitgutter
+nmap <Leader>s <Plug>(GitGutterStageHunk)
+nmap <Leader>u <Plug>(GitGutterUndoHunk)
 "}}}
