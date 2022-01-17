@@ -159,7 +159,7 @@ function! s:show_documentation()
     execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endf
-let g:coc_global_extensions = ['coc-pyright', 'coc-jedi', 'coc-go', 'coc-tsserver', 'coc-fzf-preview']
+let g:coc_global_extensions = ['coc-pyright', 'coc-jedi', 'coc-go', 'coc-tsserver', 'coc-fzf-preview', 'coc-eslint']
 "}}}
 autocmd BufNewFile,BufRead *.sage setlocal filetype=sage
 "{{{lightline
