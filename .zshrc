@@ -1,50 +1,73 @@
 # automatically install zinit
-[ ! -f ~/.zinit/bin/zinit.zsh ] && sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
-source ~/.zinit/bin/zinit.zsh
+[ ! -f ~/.local/share/zinit/zinit.git/zinit.zsh ] && sh -c "$(curl -fsSL https://git.io/zinit-install)"
+source ~/.local/share/zinit/zinit.git/zinit.zsh
 
 # install tools
 case ${OSTYPE} in
-  darwin*)
-    zinit ice from"gh-r" as"program" bpick"*darwin*amd64*"
-    zinit light "junegunn/fzf"
+darwin*)
+    case ${CPUTYPE} in
+    x86_64)
+        zinit ice from"gh-r" as"program" bpick"*darwin*amd64*"
+        zinit light "junegunn/fzf"
 
-    zinit ice from"gh-r" as"program" bpick"*x86_64-apple-darwin*" pick"**/rg"
-    zinit light "BurntSushi/ripgrep"
+        zinit ice from"gh-r" as"program" bpick"*x86_64-apple-darwin*" pick"**/rg"
+        zinit light "BurntSushi/ripgrep"
 
-    zinit ice from"gh-r" as"program" bpick"*x86_64*apple-darwin*" pick"**/bat"
-    zinit light "sharkdp/bat"
+        zinit ice from"gh-r" as"program" bpick"*x86_64*apple-darwin*" pick"**/bat"
+        zinit light "sharkdp/bat"
 
-    zinit ice from"gh-r" as"program" bpick"*x86_64*apple-darwin*" pick"**/fd"
-    zinit light "sharkdp/fd"
+        zinit ice from"gh-r" as"program" bpick"*x86_64*apple-darwin*" pick"**/fd"
+        zinit light "sharkdp/fd"
 
-    zinit ice from"gh-r" as"program" bpick"*darwin_amd64*" pick"**/ghq"
-    zinit light "x-motemen/ghq"
+        zinit ice from"gh-r" as"program" bpick"*darwin_amd64*" pick"**/ghq"
+        zinit light "x-motemen/ghq"
 
-    zinit ice from"gh-r" as"program" bpick"*macOS_amd64.tar.gz" pick"**/gh"
-    zinit light "cli/cli"
+        zinit ice from"gh-r" as"program" bpick"*macOS_amd64.tar.gz" pick"**/gh"
+        zinit light "cli/cli"
+        ;;
+    arm64)
+        zinit ice from"gh-r" as"program" bpick"*darwin*arm64*"
+        zinit light "junegunn/fzf"
+
+        zinit ice from"gh-r" as"program" bpick"*aarch64-apple-darwin*" pick"**/rg"
+        zinit light "microsoft/ripgrep-prebuilt"
+
+        # zinit ice from"gh-r" as"program" bpick"*x86_64*apple-darwin*" pick"**/bat"
+        # zinit light "sharkdp/bat"
+
+        # zinit ice from"gh-r" as"program" bpick"*x86_64*apple-darwin*" pick"**/fd"
+        # zinit light "sharkdp/fd"
+
+        # zinit ice from"gh-r" as"program" bpick"*darwin_amd64*" pick"**/ghq"
+        # zinit light "x-motemen/ghq"
+
+        # zinit ice from"gh-r" as"program" bpick"*macOS_amd64.tar.gz" pick"**/gh"
+        # zinit light "cli/cli"
+        ;;
+    esac
     ;;
-  linux*)
-    zinit ice from"gh-r" as"program" bpick"*linux*amd64*"
-    zinit light "junegunn/fzf"
+linux*)
+zinit ice from"gh-r" as"program" bpick"*linux*amd64*"
+zinit light "junegunn/fzf"
 
-    zinit ice from"gh-r" as"program" bpick"*x86_64*linux-musl*" pick"**/rg"
-    zinit light "BurntSushi/ripgrep"
+zinit ice from"gh-r" as"program" bpick"*x86_64*linux-musl*" pick"**/rg"
+zinit light "BurntSushi/ripgrep"
 
-    zinit ice from"gh-r" as"program" bpick"*x86_64*linux-gnu*" pick"**/bat"
-    zinit light "sharkdp/bat"
+zinit ice from"gh-r" as"program" bpick"*x86_64*linux-gnu*" pick"**/bat"
+zinit light "sharkdp/bat"
 
-    zinit ice from"gh-r" as"program" bpick"*x86_64*linux-gnu*" pick"**/fd"
-    zinit light "sharkdp/fd"
+zinit ice from"gh-r" as"program" bpick"*x86_64*linux-gnu*" pick"**/fd"
+zinit light "sharkdp/fd"
 
-    zinit ice from"gh-r" as"program" bpick"*linux*amd64*" pick"**/ghq"
-    zinit light "x-motemen/ghq"
+zinit ice from"gh-r" as"program" bpick"*linux*amd64*" pick"**/ghq"
+zinit light "x-motemen/ghq"
 
-    zinit ice from"gh-r" as"program" bpick"*linux*amd64.tar.gz" pick"**/gh"
-    zinit light "cli/cli"
+zinit ice from"gh-r" as"program" bpick"*linux*amd64.tar.gz" pick"**/gh"
+zinit light "cli/cli"
 
-    zinit ice from"gh-r" as"program" bpick"*linux*amd64.tar.gz" pick"**/txeh"
-    zinit light "txn2/txeh"
-    ;;
+zinit ice from"gh-r" as"program" bpick"*linux*amd64.tar.gz" pick"**/txeh"
+zinit light "txn2/txeh"
+;;
 esac
 
 zinit ice pick"async.zsh" src"pure.zsh" # with zsh-async library that's bundled with it.
@@ -134,3 +157,26 @@ export PATH="$PATH:$HOME/.local/bin:$HOME/bin/:$HOME/.config/composer/vendor/bin
 alias goinit='go mod init $(pwd | grep -Po "\w+\.\w+\/.+\z")'
 
 
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
+
+### End of Zinit's installer chunk
+
+### Added by Zinit's installer
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
+fi
+
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
