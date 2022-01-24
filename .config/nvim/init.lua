@@ -110,6 +110,7 @@ require('lualine').setup {
   options = {
     icons_enabled = false,
     theme = 'auto', -- from current colorscheme
+    component_separators = { left = '|', right = '|'},
   }
 }
 require('indent_blankline').setup()
@@ -147,6 +148,9 @@ require('nvim-treesitter.configs').setup {
 -- nvim-cmp
 local cmp = require('cmp')
 cmp.setup {
+  completion = {
+    autocomplete = false,
+  },
   mapping = {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-n>'] = cmp.mapping.select_next_item(),
@@ -161,8 +165,6 @@ cmp.setup {
     ['<Tab>'] = function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
       else
         fallback()
       end
@@ -170,8 +172,6 @@ cmp.setup {
     ['<S-Tab>'] = function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
       else
         fallback()
       end
@@ -185,6 +185,7 @@ cmp.setup {
     { name = 'rg' },
   },
 }
+vim.api.nvim_set_keymap('i', '<C-x><C-o>', [[<Cmd>lua require('cmp').complete()<CR>]], { noremap = true, silent = true })
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- lsp

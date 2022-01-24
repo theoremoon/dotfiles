@@ -2,8 +2,8 @@
 	email = theoldmoon0602@gmail.com
 	name = theoremoon
 
-[include]
-	path = ~/.company-gitconfig
+# [include]
+# 	path = ~/.company-gitconfig
 
 [core]
 	editor = nvim
