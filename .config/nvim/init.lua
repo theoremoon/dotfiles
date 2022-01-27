@@ -194,8 +194,7 @@ local lspconfig = require('lspconfig')
 local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    local opts = { noremap=true, silent=true }
-    vim.api.nvim_buf_set_keymap('n', 'K', '<cmd>lua vim.slp.buf.hover()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', { noremap=true, silent=true })
 end
 
 -- nvim-lspconfigでデフォルトの設定が用意されているので適宜上書きしつつそれを使う
