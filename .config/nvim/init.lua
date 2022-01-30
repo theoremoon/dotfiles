@@ -12,6 +12,7 @@ vim.o.ignorecase = true
 vim.o.updatetime = 200
 vim.o.splitright = true
 vim.o.termguicolors = true
+vim.o.undofile = true
 vim.o.directory = vim.fn.expand '~/.vim/swapdir'
 vim.o.undodir = vim.fn.expand '~/.vim/undodir'
 -- shada(viminfo)の設定はデフォルトに任せてしまう
@@ -149,7 +150,7 @@ require('nvim-treesitter.configs').setup {
 local cmp = require('cmp')
 cmp.setup {
   completion = {
-    autocomplete = false,
+    autocomplete = true,
   },
   mapping = {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
@@ -182,7 +183,6 @@ cmp.setup {
     { name = 'buffer' },
     { name = 'path' },
     { name = 'treesitter' },
-    { name = 'rg' },
   },
 }
 vim.api.nvim_set_keymap('i', '<C-x><C-o>', [[<Cmd>lua require('cmp').complete()<CR>]], { noremap = true, silent = true })
@@ -195,15 +195,27 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', { noremap=true, silent=true })
+    vim.api.nvim_buf_set_keymap(bufnr, 'i', '<C-n>', [[<Cmd>lua require('cmp').complete()<CR>]], { noremap = true, silent = true })
 end
 
 -- nvim-lspconfigでデフォルトの設定が用意されているので適宜上書きしつつそれを使う
 -- 設定している項目はneovim組み込みのlsp clientのものなのでそちらのドキュメントを見る
 -- nvim-lspconfigは自動で.gitやtsconfig.jsonを探してlanguage serverを起動してくれる
-lspconfig.tsserver.setup {
-    on_attach = on_attach,
-    flags = {
-        debounce_text_changes = 200, -- 最低でも200msごとに情報を更新する
-    },
-    capabilities = capabilities
-}
+if vim.fn.executable('tsserver') == 1 then
+  lspconfig.tsserver.setup {
+      on_attach = on_attach,
+      flags = {
+          debounce_text_changes = 200, -- 最低でも200msごとに情報を更新する
+      },
+      capabilities = capabilities
+  }
+end
+if vim.fn.executable('pyright-langserver') == 1 then
+  lspconfig.pyright.setup {
+      on_attach = on_attach,
+      flags = {
+          debounce_text_changes = 200, -- 最低でも200msごとに情報を更新する
+      },
+      capabilities = capabilities
+  }
+end
