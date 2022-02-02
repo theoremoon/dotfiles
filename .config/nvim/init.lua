@@ -55,6 +55,7 @@ require('packer').startup(function()
   use 'pbrisbin/vim-mkdir'
   use 'numToStr/Comment.nvim'
   use 'terryma/vim-multiple-cursors'
+  use 'junegunn/vim-easy-align'
   use 'theoremoon/CTF.vim'
 
   use 'nvim-treesitter/nvim-treesitter'
@@ -115,6 +116,11 @@ require('lualine').setup {
   }
 }
 require('indent_blankline').setup()
+
+-- easyalign
+vim.api.nvim_set_keymap('x', 'ga', '<Plug>(EasyAlign)', { noremap = false, silent = false })
+vim.api.nvim_set_keymap('n', 'ga', '<Plug>(EasyAlign)', { noremap = false, silent = false })
+
 -- vim-gitgutter
 vim.api.nvim_set_keymap('n', '<leader>s', '<Plug>(GitGutterStageHunk)', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('n', '<leader>u', '<Plug>(GitGutterUndoHunk)', { noremap = true, silent = false })
