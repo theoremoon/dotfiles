@@ -63,9 +63,7 @@ require('packer').startup(function()
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'ray-x/cmp-treesitter'
-  use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-path'
-  use 'lukas-reineke/cmp-rg'
+  use 'quangnguyen30192/cmp-nvim-tags'
 
   use 'dense-analysis/ale'
 
@@ -122,8 +120,24 @@ vim.api.nvim_set_keymap('x', 'ga', '<Plug>(EasyAlign)', { noremap = false, silen
 vim.api.nvim_set_keymap('n', 'ga', '<Plug>(EasyAlign)', { noremap = false, silent = false })
 
 -- vim-gitgutter
-vim.api.nvim_set_keymap('n', '<leader>s', '<Plug>(GitGutterStageHunk)', { noremap = true, silent = false })
-vim.api.nvim_set_keymap('n', '<leader>u', '<Plug>(GitGutterUndoHunk)', { noremap = true, silent = false })
+function _G.GitGutterNextHunkCycle()
+    local current_window = 0
+    local initialrow, initialcol = unpack(vim.api.nvim_win_get_cursor(current_window))
+
+    vim.fn['gitgutter#hunk#next_hunk'](1)
+    local afterrow, _ = unpack(vim.api.nvim_win_get_cursor(current_window))
+    if afterrow == initialrow then
+        vim.api.nvim_win_set_cursor(current_window, {1, 0})
+        vim.fn['gitgutter#hunk#next_hunk'](1)
+        local afterrow2, _ = unpack(vim.api.nvim_win_get_cursor(current_window))
+        if afterrow2 == 1 then
+            vim.api.nvim_win_set_cursor(current_window, {1, 0})
+        end
+    end
+end
+vim.api.nvim_set_keymap('n', '<leader>s', '<cmd>GitGutterStageHunk<CR>', { noremap = true, silent = false })
+vim.api.nvim_set_keymap('n', '<leader>u', '<cmd>GitGutterUndoHunk<CR>', { noremap = true, silent = false })
+vim.api.nvim_set_keymap('n', '<leader>n', '<cmd>lua GitGutterNextHunkCycle()<CR>', { noremap = true, silent = false })
 
 -- telescope
 require('telescope').setup {
@@ -185,10 +199,9 @@ cmp.setup {
     end,
   },
   sources = {
-    { name = 'nvim_lsp' },
-    { name = 'buffer' },
-    { name = 'path' },
-    { name = 'treesitter' },
+    { name = 'nvim_lsp',   priority=100, kind='LSP' },
+    { name = 'tags',       priority=90,  kind='TAG' },
+    { name = 'treesitter', priority=80,  kind='TS' },
   },
 }
 vim.api.nvim_set_keymap('i', '<C-x><C-o>', [[<Cmd>lua require('cmp').complete()<CR>]], { noremap = true, silent = true })
