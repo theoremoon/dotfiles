@@ -15,6 +15,7 @@ vim.o.termguicolors = true
 vim.o.undofile = true
 vim.o.directory = vim.fn.expand '~/.vim/swapdir'
 vim.o.undodir = vim.fn.expand '~/.vim/undodir'
+vim.o.tags = vim.fn.expand 'ctags;~'
 -- shada(viminfo)の設定はデフォルトに任せてしまう
 
 if vim.fn.isdirectory(vim.fn.expand '~/.vim/swapdir') ~= 1 then
@@ -103,6 +104,14 @@ vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', { noremap = true, silent = true 
 vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
+
+-- small utils
+function _G.copybufname_to_clipboard()
+  local bufname = string.sub(vim.api.nvim_buf_get_name(0), string.len(vim.loop.cwd()) + 2)
+  vim.fn['setreg']('+', bufname)
+  print(bufname)
+end
+vim.api.nvim_add_user_command('CopyBufName', 'lua copybufname_to_clipboard()', {})
 
 -- plugins
 require('Comment').setup()
