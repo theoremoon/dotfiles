@@ -42,7 +42,7 @@ require('packer').startup(function()
 
   use 'nvim-lualine/lualine.nvim'
   use 'lukas-reineke/indent-blankline.nvim'
-  -- use 'theoremoon/cryptohack-color.vim'
+  use 'theoremoon/cryptohack-color.vim'
   use 'mjlbach/onedark.nvim' 
 
   use 'tpope/vim-fugitive'
@@ -70,7 +70,8 @@ require('packer').startup(function()
 
   use 'petRUShka/vim-sage'
 end)
-vim.cmd('colorscheme onedark')
+-- vim.cmd('colorscheme onedark')
+vim.cmd('colorscheme cryptohack')
 
 -- keymaps
 vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
@@ -175,6 +176,15 @@ require('nvim-treesitter.configs').setup {
     enable = true,
   }
 }
+
+-- ALE
+vim.g['ale_linters'] = {
+  typescriptreact = {'eslint', 'tsserver'},
+}
+vim.g['ale_fixers'] = {
+  typescriptreact = {'prettier', 'eslint'},
+}
+
 -- nvim-cmp
 local cmp = require('cmp')
 cmp.setup {
@@ -224,6 +234,9 @@ local on_attach = function(client, bufnr)
 
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', { noremap=true, silent=true })
     vim.api.nvim_buf_set_keymap(bufnr, 'i', '<C-n>', [[<Cmd>lua require('cmp').complete()<CR>]], { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>a', [[<Cmd>lua vim.lsp.buf.code_action()<CR>]], { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>r', [[<Cmd>lua vim.lsp.buf.rename()<CR>]], { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>f', [[<Cmd>lua vim.lsp.buf.formatting()<CR>]], { noremap = true, silent = true })
 end
 
 -- nvim-lspconfigでデフォルトの設定が用意されているので適宜上書きしつつそれを使う
