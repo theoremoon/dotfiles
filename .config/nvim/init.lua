@@ -179,9 +179,11 @@ require('nvim-treesitter.configs').setup {
 
 -- ALE
 vim.g['ale_linters'] = {
+  typescript = {'eslint', 'tsserver'},
   typescriptreact = {'eslint', 'tsserver'},
 }
 vim.g['ale_fixers'] = {
+  typescript = {'prettier', 'eslint'},
   typescriptreact = {'prettier', 'eslint'},
 }
 
@@ -242,7 +244,7 @@ end
 -- nvim-lspconfigでデフォルトの設定が用意されているので適宜上書きしつつそれを使う
 -- 設定している項目はneovim組み込みのlsp clientのものなのでそちらのドキュメントを見る
 -- nvim-lspconfigは自動で.gitやtsconfig.jsonを探してlanguage serverを起動してくれる
-if vim.fn.executable('tsserver') == 1 then
+if vim.fn.executable('typescript-language-server') == 1 then
   lspconfig.tsserver.setup {
       on_attach = on_attach,
       flags = {
