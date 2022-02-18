@@ -53,6 +53,7 @@ require('packer').startup(function()
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
   use 'tpope/vim-surround'
+  use 'tpope/vim-sleuth'
   use 'pbrisbin/vim-mkdir'
   use 'numToStr/Comment.nvim'
   use 'terryma/vim-multiple-cursors'
@@ -65,6 +66,7 @@ require('packer').startup(function()
   use 'hrsh7th/cmp-nvim-lsp'
   use 'ray-x/cmp-treesitter'
   use 'quangnguyen30192/cmp-nvim-tags'
+  use 'hrsh7th/vim-vsnip'
 
   use 'dense-analysis/ale'
 
@@ -190,6 +192,11 @@ vim.g['ale_fixers'] = {
 -- nvim-cmp
 local cmp = require('cmp')
 cmp.setup {
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end
+  },
   completion = {
     autocomplete = true,
   },
@@ -223,6 +230,7 @@ cmp.setup {
     { name = 'nvim_lsp',   priority=100, kind='LSP' },
     { name = 'tags',       priority=90,  kind='TAG' },
     { name = 'treesitter', priority=80,  kind='TS' },
+    { name = 'vsnip',      priority=70,  kind='SNIP' },
   },
 }
 vim.api.nvim_set_keymap('i', '<C-x><C-o>', [[<Cmd>lua require('cmp').complete()<CR>]], { noremap = true, silent = true })
