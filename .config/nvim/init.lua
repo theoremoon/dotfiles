@@ -247,6 +247,7 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>a', [[<Cmd>lua vim.lsp.buf.code_action()<CR>]], { noremap = true, silent = true })
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>r', [[<Cmd>lua vim.lsp.buf.rename()<CR>]], { noremap = true, silent = true })
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>f', [[<Cmd>lua vim.lsp.buf.formatting()<CR>]], { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>d', [[<Cmd>lua vim.lsp.buf.definition()<CR>]], { noremap = true, silent = true })
 end
 
 -- nvim-lspconfigでデフォルトの設定が用意されているので適宜上書きしつつそれを使う
