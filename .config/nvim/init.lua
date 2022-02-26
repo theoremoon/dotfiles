@@ -3,6 +3,7 @@ vim.o.compatible = false
 vim.o.number = true
 vim.o.signcolumn = 'yes'
 
+vim.o.cursorline = true
 vim.o.mouse = 'a'
 vim.o.breakindent = true
 vim.o.expandtab = true
@@ -125,7 +126,14 @@ require('lualine').setup {
     component_separators = { left = '|', right = '|'},
   }
 }
-require('indent_blankline').setup()
+
+vim.cmd [[highlight IndentBlanklineIndent1 guifg=#333333 gui=nocombine]]
+require('indent_blankline').setup {
+  char_highlight_list = {
+    "IndentBlanklineIndent1",
+  },
+  show_current_context = true,
+}
 
 -- easyalign
 vim.api.nvim_set_keymap('x', 'ga', '<Plug>(EasyAlign)', { noremap = false, silent = false })
