@@ -196,6 +196,7 @@ vim.g['ale_fixers'] = {
   typescript = {'prettier', 'eslint'},
   typescriptreact = {'prettier', 'eslint'},
 }
+vim.g['ale_fix_on_save'] = 1
 
 -- nvim-cmp
 local cmp = require('cmp')
