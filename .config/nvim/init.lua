@@ -45,6 +45,7 @@ require('packer').startup(function()
   use 'lukas-reineke/indent-blankline.nvim'
   use 'theoremoon/cryptohack-color.vim'
   use 'mjlbach/onedark.nvim' 
+  use 'sheerun/vim-polyglot'
 
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
@@ -60,6 +61,7 @@ require('packer').startup(function()
   use 'terryma/vim-multiple-cursors'
   use 'junegunn/vim-easy-align'
   use 'theoremoon/CTF.vim'
+  use 'mattn/emmet-vim'
 
   use 'nvim-treesitter/nvim-treesitter'
   use 'neovim/nvim-lspconfig'
@@ -195,6 +197,7 @@ vim.g['ale_linters'] = {
 vim.g['ale_fixers'] = {
   typescript = {'prettier', 'eslint'},
   typescriptreact = {'prettier', 'eslint'},
+  go = {'gofmt', 'goimports'},
 }
 vim.g['ale_fix_on_save'] = 1
 
@@ -273,6 +276,15 @@ if vim.fn.executable('typescript-language-server') == 1 then
 end
 if vim.fn.executable('pyright-langserver') == 1 then
   lspconfig.pyright.setup {
+      on_attach = on_attach,
+      flags = {
+          debounce_text_changes = 200, -- 最低でも200msごとに情報を更新する
+      },
+      capabilities = capabilities
+  }
+end
+if vim.fn.executable('gopls') == 1 then
+  lspconfig.gopls.setup {
       on_attach = on_attach,
       flags = {
           debounce_text_changes = 200, -- 最低でも200msごとに情報を更新する
