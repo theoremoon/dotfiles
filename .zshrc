@@ -24,6 +24,7 @@ darwin*)
 
         zinit ice from"gh-r" as"program" bpick"*macOS_amd64.tar.gz" pick"**/gh"
         zinit light "cli/cli"
+
         ;;
     arm64)
         zinit ice from"gh-r" as"program" bpick"*darwin*arm64*"
@@ -67,6 +68,9 @@ zinit light "cli/cli"
 
 zinit ice from"gh-r" as"program" bpick"*linux*amd64.tar.gz" pick"**/txeh"
 zinit light "txn2/txeh"
+
+zinit ice from"gh-r" as"program" bpick"*x86_64*linux-gnu*" pick"**/delta"
+zinit light "dandavison/delta"
 ;;
 esac
 
