@@ -117,7 +117,10 @@ function _G.copybufname_to_clipboard()
   vim.fn['setreg']('+', bufname)
   print(bufname)
 end
-vim.api.nvim_add_user_command('CopyBufName', 'lua copybufname_to_clipboard()', {})
+-- vim.api.nvim_add_user_command('CopyBufName', 'lua copybufname_to_clipboard()', {})
+vim.cmd [[
+  command! CopyBufName lua copybufname_to_clipboard()
+]]
 
 -- plugins
 require('Comment').setup()
