@@ -63,6 +63,17 @@ require('packer').startup(function()
   use 'theoremoon/CTF.vim'
   use 'mattn/emmet-vim'
 
+	use({ "github/copilot.vim", cmd = { "Copilot" } })
+	use({
+		"zbirenbaum/copilot.lua",
+		after = "copilot.vim",
+		config = function()
+			vim.schedule(function()
+				require("copilot")
+			end)
+		end,
+	})
+
   use 'nvim-treesitter/nvim-treesitter'
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-cmp'
@@ -70,6 +81,9 @@ require('packer').startup(function()
   use 'ray-x/cmp-treesitter'
   use 'quangnguyen30192/cmp-nvim-tags'
   use 'hrsh7th/vim-vsnip'
+  use { "zbirenbaum/copilot-cmp",
+    after = { "copilot.lua", "nvim-cmp" },
+  }
 
   use 'dense-analysis/ale'
 
@@ -243,6 +257,7 @@ cmp.setup {
   },
   sources = {
     { name = 'nvim_lsp',   priority=100, kind='LSP' },
+    { name = 'copilot',    priority=95,  kind='COPILOT' },
     { name = 'tags',       priority=90,  kind='TAG' },
     { name = 'treesitter', priority=80,  kind='TS' },
     { name = 'vsnip',      priority=70,  kind='SNIP' },
