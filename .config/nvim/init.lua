@@ -85,7 +85,7 @@ require('packer').startup(function()
     after = { "copilot.lua", "nvim-cmp" },
   }
   use { 'theoremoon/cmp-auto-programming',
-    reqires = {
+    requires = {
       "nvim-lua/plenary.nvim",
       "neovim/nvim-lspconfig",
     }
