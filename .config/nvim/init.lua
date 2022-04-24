@@ -84,7 +84,7 @@ require('packer').startup(function()
   use { "zbirenbaum/copilot-cmp",
     after = { "copilot.lua", "nvim-cmp" },
   }
-  use { 'theoremoon/cmp-auto-programing',
+  use { 'theoremoon/cmp-auto-programming',
     reqires = {
       "nvim-lua/plenary.nvim",
       "neovim/nvim-lspconfig",
