@@ -84,6 +84,12 @@ require('packer').startup(function()
   use { "zbirenbaum/copilot-cmp",
     after = { "copilot.lua", "nvim-cmp" },
   }
+  use { 'theoremoon/cmp-auto-programing',
+    reqires = {
+      "nvim-lua/plenary.nvim",
+      "neovim/nvim-lspconfig",
+    }
+  }
 
   use 'dense-analysis/ale'
 
@@ -256,11 +262,12 @@ cmp.setup {
     end,
   },
   sources = {
-    { name = 'nvim_lsp',   priority=100, kind='LSP' },
-    { name = 'copilot',    priority=95,  kind='COPILOT' },
-    { name = 'tags',       priority=90,  kind='TAG' },
-    { name = 'treesitter', priority=80,  kind='TS' },
-    { name = 'vsnip',      priority=70,  kind='SNIP' },
+    { name = 'nvim_lsp',         priority=100, kind='LSP' },
+    { name = 'copilot',          priority=95,  kind='COPILOT' },
+    { name = 'tags',             priority=90,  kind='TAG' },
+    { name = 'auto_programming', priority=85,  kind='AUTO' },
+    { name = 'treesitter',       priority=80,  kind='TS' },
+    { name = 'vsnip',            priority=70,  kind='SNIP' },
   },
 }
 vim.api.nvim_set_keymap('i', '<C-x><C-o>', [[<Cmd>lua require('cmp').complete()<CR>]], { noremap = true, silent = true })
