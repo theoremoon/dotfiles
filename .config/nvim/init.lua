@@ -98,6 +98,14 @@ end)
 -- vim.cmd('colorscheme onedark')
 vim.cmd('colorscheme cryptohack')
 
+-- sage
+vim.cmd [[
+  augroup sage
+    autocmd!
+    autocmd BufNewFile,BufRead *.sage set filetype=python
+  augroup end
+]]
+
 -- keymaps
 vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
 vim.g.mapleader = ' '
