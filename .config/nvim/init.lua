@@ -307,20 +307,12 @@ if vim.fn.executable('typescript-language-server') == 1 then
       capabilities = capabilities
   }
 end
-if vim.fn.executable('pyright-langserver') == 1 then
-  lspconfig.pyright.setup {
+if vim.fn.executable('pylsp') == 1 then
+  lspconfig.pylsp.setup {
       on_attach = on_attach,
       flags = {
           debounce_text_changes = 200, -- 最低でも200msごとに情報を更新する
       },
-      before_init = function(_, config)
-        local util = require('lspconfig/util')
-        local p = vim.fn.trim(vim.fn.system("poetry env info -p"))
-        if p ~= '' then
-          -- なんでvenvPathじゃだめなんだろうなぁ
-          config.settings.python.pythonPath = util.path.join(p, "bin", "python")
-        end
-      end,
       capabilities = capabilities,
   }
 end
