@@ -1,0 +1,15 @@
+
+## Launch // Screenshot
+bindsym Print exec scrot -u -z '/tmp/%Y-%m-%d_%H_%M_%S.png' -e 'xclip -selection clipboard -t image/png $f'
+# bindsym $mod+Shift+Print exec "sleep 0.2; scrot --select -z '/tmp/%Y-%m-%d_%H_%M_%S.png' -e 'xclip -selection clipboard -t image/png $f' 2> /tmp/log"
+bindsym $mod+Shift+Print exec "sleep 0.2; maim --select | tee $(date +'/tmp/%Y-%m-%d_%H_%M_%S.png') | xclip -selection clipboard -t image/png"
+
+
+## Launch // Application // <> d ##
+bindsym $mod+d exec --no-startup-id $i3-wm.program.launcher.app -t $ilia.stylesheet
+
+## Launch // Command // <><Shift> d ##
+bindsym $mod+Shift+d exec --no-startup-id $i3-wm.program.launcher.cmd -t $ilia.stylesheet
+
+set_from_resource $i3-wm.gaps.focus_follows_mouse i3-wm.gaps.focus_follows_mouse yes
+focus_follows_mouse $i3-wm.gaps.focus_follows_mouse
