@@ -122,6 +122,8 @@ alias pentab='xsetwacom --set "Wacom One by Wacom M Pen stylus" mode relative'
 alias pentabr='xsetwacom --set "Wacom One by Wacom M Pen stylus" Rotate half'
 alias writeup='export PS1="$ "';
 
+export FZF_DEFAULT_OPTS="-e"
+
 # fzf history selector
 function select-history() {
   BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
