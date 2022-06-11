@@ -13,3 +13,9 @@ bindsym $mod+Shift+d exec --no-startup-id $i3-wm.program.launcher.cmd -t $ilia.s
 
 set_from_resource $i3-wm.gaps.focus_follows_mouse i3-wm.gaps.focus_follows_mouse yes
 focus_follows_mouse $i3-wm.gaps.focus_follows_mouse
+
+
+bindsym $mod+Left workspace prev_on_output
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right workspace next_on_output
