@@ -224,11 +224,13 @@ require('nvim-treesitter.configs').setup {
 vim.g['ale_linters'] = {
   typescript = {'eslint', 'tsserver'},
   typescriptreact = {'eslint', 'tsserver'},
+  perl = {'perlcritic'},
 }
 vim.g['ale_fixers'] = {
   typescript = {'prettier', 'eslint'},
   typescriptreact = {'prettier', 'eslint'},
   go = {'gofmt', 'goimports'},
+  perl = {'perltidy'},
 }
 vim.g['ale_fix_on_save'] = 1
 
