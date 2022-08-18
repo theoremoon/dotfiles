@@ -63,9 +63,10 @@ require('packer').startup(function()
   use 'theoremoon/CTF.vim'
   use 'mattn/emmet-vim'
 
-	use({ "github/copilot.vim", cmd = { "Copilot" } })
+	use "github/copilot.vim"
 	use({
 		"zbirenbaum/copilot.lua",
+    event = { "InsertEnter" },
 		after = "copilot.vim",
 		config = function()
 			vim.schedule(function()
@@ -74,6 +75,7 @@ require('packer').startup(function()
 		end,
 	})
 
+  use 'onsails/lspkind.nvim'
   use 'nvim-treesitter/nvim-treesitter'
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-cmp'
@@ -86,7 +88,6 @@ require('packer').startup(function()
   }
   use { 'theoremoon/cmp-auto-programming',
     requires = {
-      "nvim-lua/plenary.nvim",
       "neovim/nvim-lspconfig",
     }
   }
@@ -235,15 +236,19 @@ vim.g['ale_fixers'] = {
 vim.g['ale_fix_on_save'] = 1
 
 -- nvim-cmp
+local has_words_before = function()
+  if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
+end
+
+local lspkind = require('lspkind')
 local cmp = require('cmp')
 cmp.setup {
   snippet = {
     expand = function(args)
       vim.fn["vsnip#anonymous"](args.body)
     end
-  },
-  completion = {
-    autocomplete = true,
   },
   mapping = {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
@@ -257,8 +262,8 @@ cmp.setup {
       select = true,
     },
     ['<Tab>'] = function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
+      if cmp.visible() and has_words_before() then
+        cmp.select_next_item({behavior = cmp.SelectBehavior.Select })
       else
         fallback()
       end
@@ -272,18 +277,31 @@ cmp.setup {
     end,
   },
   sources = {
-    { name = 'nvim_lsp',         priority=100, kind='LSP' },
-    { name = 'copilot',          priority=95,  kind='COPILOT' },
-    { name = 'tags',             priority=90,  kind='TAG' },
-    { name = 'auto_programming', priority=85,  kind='AUTO' },
-    { name = 'treesitter',       priority=80,  kind='TS' },
-    { name = 'vsnip',            priority=70,  kind='SNIP' },
+    { name = 'nvim_lsp' },
+    { name = 'copilot' },
+    { name = 'tags', },
+    { name = 'auto_programming'},
+    { name = 'treesitter'},
+    { name = 'vsnip'},
+  },
+  formatting = {
+    format = lspkind.cmp_format({
+        mode = 'symbol_text',
+        menu = ({
+            nvim_lsp         = "[LSP]",
+            copilot          = "[COPILOT]",
+            tags             = "[TAG]",
+            auto_programming = "[AUTO]",
+            treesitter       = "[TS]",
+        }),
+    })
   },
 }
 vim.api.nvim_set_keymap('i', '<C-x><C-o>', [[<Cmd>lua require('cmp').complete()<CR>]], { noremap = true, silent = true })
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- lsp
+vim.lsp.set_log_level("ERROR")
 vim.o.completeopt = "menuone,noinsert"
 local lspconfig = require('lspconfig')
 local on_attach = function(client, bufnr)
