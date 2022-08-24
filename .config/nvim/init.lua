@@ -80,6 +80,7 @@ require('packer').startup(function()
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
   use 'ray-x/cmp-treesitter'
   use 'quangnguyen30192/cmp-nvim-tags'
   use 'hrsh7th/vim-vsnip'
@@ -279,8 +280,9 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'copilot' },
+    { name = 'buffer' },
     { name = 'tags', },
-    { name = 'auto_programming'},
+    -- { name = 'auto_programming'},
     { name = 'treesitter'},
     { name = 'vsnip'},
   },
@@ -290,6 +292,7 @@ cmp.setup {
         menu = ({
             nvim_lsp         = "[LSP]",
             copilot          = "[COPILOT]",
+            buffer           = "[BUF]",
             tags             = "[TAG]",
             auto_programming = "[AUTO]",
             treesitter       = "[TS]",
