@@ -279,7 +279,7 @@ cmp.setup {
   },
   sources = {
     { name = 'nvim_lsp' },
-    { name = 'copilot' },
+    -- { name = 'copilot' },
     { name = 'buffer' },
     { name = 'tags', },
     -- { name = 'auto_programming'},
@@ -304,7 +304,7 @@ vim.api.nvim_set_keymap('i', '<C-x><C-o>', [[<Cmd>lua require('cmp').complete()<
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- lsp
-vim.lsp.set_log_level("ERROR")
+vim.lsp.set_log_level(vim.log.levels.ERROR)
 vim.o.completeopt = "menuone,noinsert"
 local lspconfig = require('lspconfig')
 local on_attach = function(client, bufnr)
