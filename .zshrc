@@ -157,6 +157,14 @@ function __c_g() {
 zle -N __c_g
 bindkey "^[g" __c_g
 
+# M-^ to rise directory up
+function __rise_dir() {
+  cd ..
+  zle reset-prompt
+}
+zle -N __rise_dir
+bindkey "^[u" __rise_dir
+
 # go
 export GO111MODULE=on
 export GOPATH=$HOME/go
