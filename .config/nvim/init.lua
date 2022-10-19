@@ -63,18 +63,6 @@ require('packer').startup(function()
   use 'theoremoon/CTF.vim'
   use 'mattn/emmet-vim'
 
-	use "github/copilot.vim"
-	use({
-		"zbirenbaum/copilot.lua",
-    event = { "InsertEnter" },
-		after = "copilot.vim",
-		config = function()
-			vim.schedule(function()
-				require("copilot")
-			end)
-		end,
-	})
-
   use 'onsails/lspkind.nvim'
   use 'nvim-treesitter/nvim-treesitter'
   use 'neovim/nvim-lspconfig'
@@ -84,9 +72,6 @@ require('packer').startup(function()
   use 'ray-x/cmp-treesitter'
   use 'quangnguyen30192/cmp-nvim-tags'
   use 'hrsh7th/vim-vsnip'
-  use { "zbirenbaum/copilot-cmp",
-    after = { "copilot.lua", "nvim-cmp" },
-  }
   use { 'theoremoon/cmp-auto-programming',
     requires = {
       "neovim/nvim-lspconfig",
@@ -279,7 +264,6 @@ cmp.setup {
   },
   sources = {
     { name = 'nvim_lsp' },
-    -- { name = 'copilot' },
     { name = 'buffer' },
     { name = 'tags', },
     -- { name = 'auto_programming'},
@@ -291,7 +275,6 @@ cmp.setup {
         mode = 'symbol_text',
         menu = ({
             nvim_lsp         = "[LSP]",
-            copilot          = "[COPILOT]",
             buffer           = "[BUF]",
             tags             = "[TAG]",
             auto_programming = "[AUTO]",
@@ -348,3 +331,4 @@ if vim.fn.executable('gopls') == 1 then
       capabilities = capabilities
   }
 end
+
