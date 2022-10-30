@@ -71,6 +71,9 @@ zinit light "txn2/txeh"
 
 zinit ice from"gh-r" as"program" bpick"*x86_64*linux-gnu*" pick"**/delta"
 zinit light "dandavison/delta"
+
+zinit ice from"gh-r" as"program" bpick"*x86_64*linux*" pick"**/hx"
+zinit light "helix-editor/helix"
 ;;
 esac
 
@@ -170,4 +173,3 @@ export GO111MODULE=on
 export GOPATH=$HOME/go
 export PATH="$PATH:$HOME/.local/bin:$HOME/bin/:$HOME/.config/composer/vendor/bin/:$GOPATH/bin:$HOME/.dub/packages/.bin/dls-latest:$PYENV_ROOT/bin:/usr/local/go/bin:$HOME/.poetry/bin:$HOME/.cargo/bin"
 alias goinit='go mod init $(pwd | grep -Po "\w+\.\w+\/.+\z")'
-
