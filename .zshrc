@@ -71,9 +71,6 @@ zinit light "txn2/txeh"
 
 zinit ice from"gh-r" as"program" bpick"*x86_64*linux-gnu*" pick"**/delta"
 zinit light "dandavison/delta"
-
-zinit ice from"gh-r" as"program" bpick"*x86_64*linux*" pick"**/hx"
-zinit light "helix-editor/helix"
 ;;
 esac
 
