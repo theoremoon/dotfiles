@@ -62,6 +62,7 @@ require('packer').startup(function()
   use 'junegunn/vim-easy-align'
   use 'theoremoon/CTF.vim'
   use 'mattn/emmet-vim'
+  use 'soramugi/auto-ctags.vim'
 
   use 'onsails/lspkind.nvim'
   use 'nvim-treesitter/nvim-treesitter'
@@ -196,6 +197,7 @@ require('telescope').load_extension 'fzf'
 vim.api.nvim_set_keymap('n', '<C-p>', [[<cmd>lua require('telescope.builtin').find_files({previewer = false})<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-f>', [[<cmd>lua require('telescope.builtin').oldfiles({previewer = false})<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>g', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>s', [[<cmd>lua require('telescope.builtin').grep_string()<CR>]], { noremap = true, silent = true })
 
 -- nvim-treesitter
 require('nvim-treesitter.configs').setup {
@@ -206,6 +208,9 @@ require('nvim-treesitter.configs').setup {
     enable = true,
   }
 }
+
+-- auto-ctags
+vim.g.auto_ctags_tags_name = 'ctags'
 
 -- ALE
 vim.g['ale_linters'] = {
@@ -265,7 +270,7 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'buffer' },
-    { name = 'tags', },
+    -- { name = 'tags', },
     -- { name = 'auto_programming'},
     { name = 'treesitter'},
     { name = 'vsnip'},
