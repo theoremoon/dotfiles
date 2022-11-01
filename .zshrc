@@ -170,3 +170,12 @@ export GO111MODULE=on
 export GOPATH=$HOME/go
 export PATH="$PATH:$HOME/.local/bin:$HOME/bin/:$HOME/.config/composer/vendor/bin/:$GOPATH/bin:$HOME/.dub/packages/.bin/dls-latest:$PYENV_ROOT/bin:/usr/local/go/bin:$HOME/.poetry/bin:$HOME/.cargo/bin"
 alias goinit='go mod init $(pwd | grep -Po "\w+\.\w+\/.+\z")'
+
+function get_sleep() {
+  TOKEN="${XDG_CONFIG_HOME:-$HOME/.config}/oura/token"
+  start_date=$(date +"%Y-%m-%d" --date yesterday)
+  end_date=$(date +"%Y-%m-%d" )
+  
+  curl -sSL "https://api.ouraring.com/v2/usercollection/sleep?start_date=${start_date}&end_date=${end_date}" \
+    -H "Authorization: Bearer $(cat $TOKEN)" | jq ".data[0].bedtime_start,.data[-1].bedtime_end"
+}
