@@ -172,10 +172,10 @@ export PATH="$PATH:$HOME/.local/bin:$HOME/bin/:$HOME/.config/composer/vendor/bin
 alias goinit='go mod init $(pwd | grep -Po "\w+\.\w+\/.+\z")'
 
 function get_sleep() {
+  OFFSET=${1:-0}
   TOKEN="${XDG_CONFIG_HOME:-$HOME/.config}/oura/token"
-  start_date=$(date +"%Y-%m-%d" --date yesterday)
-  end_date=$(date +"%Y-%m-%d" )
+  start_date=$(date +"%Y-%m-%d" --date "today+$((-1-$OFFSET)) day")
+  end_date=$(date +"%Y-%m-%d"  --date "today+$((0-$OFFSET)) day")
   
-  curl -sSL "https://api.ouraring.com/v2/usercollection/sleep?start_date=${start_date}&end_date=${end_date}" \
-    -H "Authorization: Bearer $(cat $TOKEN)" | jq ".data[0].bedtime_start,.data[-1].bedtime_end"
+  curl -sSL "https://api.ouraring.com/v2/usercollection/sleep?start_date=${start_date}&end_date=${end_date}" -H "Authorization: Bearer $(cat $TOKEN)" | jq ".data[0].bedtime_start,.data[-1].bedtime_end"
 }
