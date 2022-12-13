@@ -79,7 +79,8 @@ require('packer').startup(function()
     }
   }
 
-  use 'dense-analysis/ale'
+  use 'dense-analysis/ale' 
+  use 'theoremoon/ale-linter-perl-use-heuristic'
 
   use 'petRUShka/vim-sage'
 end)
@@ -216,7 +217,7 @@ vim.g.auto_ctags_tags_name = 'ctags'
 vim.g['ale_linters'] = {
   typescript = {'eslint', 'tsserver'},
   typescriptreact = {'eslint', 'tsserver'},
-  perl = {'perlcritic'},
+  perl = {'perlcritic', 'use-heuristic'},
 }
 vim.g['ale_fixers'] = {
   typescript = {'prettier', 'eslint'},
@@ -250,7 +251,7 @@ cmp.setup {
     ['<C-e>'] = cmp.mapping.close(),
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
+      select = false,
     },
     ['<Tab>'] = function(fallback)
       if cmp.visible() and has_words_before() then
