@@ -79,6 +79,24 @@ require('packer').startup(function()
       "neovim/nvim-lspconfig",
     }
   }
+  use {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+      })
+    end,
+  }
+  use {
+    "zbirenbaum/copilot-cmp",
+    after = { "copilot.lua" },
+    config = function ()
+      require("copilot_cmp").setup()
+    end
+  }
 
   use 'dense-analysis/ale' 
   use 'theoremoon/ale-linter-perl-use-heuristic'
@@ -254,22 +272,23 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
       select = false,
     },
-    ['<Tab>'] = function(fallback)
+    ['<Tab>'] = vim.schedule_wrap(function(fallback)
       if cmp.visible() and has_words_before() then
         cmp.select_next_item({behavior = cmp.SelectBehavior.Select })
       else
         fallback()
       end
-    end,
-    ['<S-Tab>'] = function(fallback)
+    end),
+    ['<S-Tab>'] = vim.schedule_wrap(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
       else
         fallback()
       end
-    end,
+    end),
   },
   sources = {
+    { name = 'copilot' },
     { name = 'nvim_lsp' },
     { name = 'buffer' },
     -- { name = 'tags', },
@@ -281,6 +300,7 @@ cmp.setup {
     format = lspkind.cmp_format({
         mode = 'symbol_text',
         menu = ({
+            copilot         = "[AI]",
             nvim_lsp         = "[LSP]",
             buffer           = "[BUF]",
             tags             = "[TAG]",
