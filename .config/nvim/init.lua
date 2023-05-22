@@ -46,6 +46,7 @@ require('packer').startup(function()
   use 'theoremoon/cryptohack-color.vim'
   use 'mjlbach/onedark.nvim' 
   use 'sheerun/vim-polyglot'
+  use 'prisma/vim-prisma'
 
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
