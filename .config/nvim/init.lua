@@ -310,6 +310,9 @@ cmp.setup {
         }),
     })
   },
+  experimental = {
+    ghost_text = true,
+  },
 }
 vim.api.nvim_set_keymap('i', '<C-x><C-o>', [[<Cmd>lua require('cmp').complete()<CR>]], { noremap = true, silent = true })
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
