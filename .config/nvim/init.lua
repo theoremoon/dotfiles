@@ -148,7 +148,7 @@ vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', { noremap = true, silent = true 
 vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<leader>b', ':<C-u>GitBlameOpenCommitURL', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>b', ':<C-u>GitBlameOpenCommitURL<CR>', { noremap = true, silent = true })
 
 -- small utils
 function _G.copybufname_to_clipboard()
