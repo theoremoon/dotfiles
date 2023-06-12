@@ -41,3 +41,5 @@ end
 vim.keymap.set({"n"}, "K", '<CMD>lua _G.show_docs()<CR>', {silent = true, noremap = true})
 vim.keymap.set({"n"}, "<leader>a", "<Plug>(coc-codeaction-cursor)", { silent = true, noremap = true })
 vim.keymap.set({"x"}, "<leader>a", "<Plug>(coc-codeaction-selected)", { silent = true, noremap = true })
+vim.keymap.set({"n"}, "<leader>r", "<Plug>(coc-rename)", { silent = true, noremap = true })
+vim.keymap.set({"n"}, "gd", "<Plug>(coc-implementation)", { silent = true, noremap = true })
