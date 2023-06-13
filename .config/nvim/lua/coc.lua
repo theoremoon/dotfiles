@@ -49,9 +49,12 @@ vim.keymap.set({"n"}, "gd", "<Plug>(coc-implementation)", { silent = true, norem
 
 -- ALE
 vim.g['ale_linters'] = {
-  perl = {'perlcritic', 'use-heuristic'},
+    perl = {'perlcritic', 'use-heuristic'},
 }
 vim.g['ale_fixers'] = {
-  perl = {'perltidy'},
+    typescript = {'prettier'},
+    typescriptreact = {'prettier'},
+    perl = {'perltidy'},
 }
 vim.g['ale_fix_on_save'] = 1
+vim.g['ale_linters_explicit'] = 1
