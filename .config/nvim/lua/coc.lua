@@ -8,6 +8,9 @@ local Plug = vim.fn['plug#']
 vim.call('plug#begin')
   Plug('neoclide/coc.nvim', {branch ='release'})
   Plug "github/copilot.vim"
+
+  Plug 'dense-analysis/ale'
+  Plug 'theoremoon/ale-linter-perl-use-heuristic'
 vim.call('plug#end')
 
 vim.g.coc_global_extensions = {
@@ -43,3 +46,12 @@ vim.keymap.set({"n"}, "<leader>a", "<Plug>(coc-codeaction-cursor)", { silent = t
 vim.keymap.set({"x"}, "<leader>a", "<Plug>(coc-codeaction-selected)", { silent = true, noremap = true })
 vim.keymap.set({"n"}, "<leader>r", "<Plug>(coc-rename)", { silent = true, noremap = true })
 vim.keymap.set({"n"}, "gd", "<Plug>(coc-implementation)", { silent = true, noremap = true })
+
+-- ALE
+vim.g['ale_linters'] = {
+  perl = {'perlcritic', 'use-heuristic'},
+}
+vim.g['ale_fixers'] = {
+  perl = {'perltidy'},
+}
+vim.g['ale_fix_on_save'] = 1
