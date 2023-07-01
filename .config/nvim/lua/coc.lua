@@ -17,6 +17,7 @@ vim.g.coc_global_extensions = {
     'coc-tsserver',
     'coc-eslint',
     'coc-prettier',
+    'coc-go',
 }
 
 
@@ -55,6 +56,7 @@ vim.g['ale_fixers'] = {
     typescript = {'prettier'},
     typescriptreact = {'prettier'},
     perl = {'perltidy'},
+    go = { 'gofmt', 'goimports' },
 }
 vim.g['ale_fix_on_save'] = 1
 vim.g['ale_linters_explicit'] = 1
