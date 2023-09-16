@@ -23,11 +23,11 @@ vim.call('plug#begin')
   Plug 'theoremoon/ale-linter-perl-use-heuristic'
 vim.call('plug#end')
 
-require("copilot").setup({
-  suggestion = { enabled = false },
-  panel = { enabled = false },
-})
-require("copilot_cmp").setup()
+-- require("copilot").setup({
+--   suggestion = { enabled = false },
+--   panel = { enabled = false },
+-- })
+-- require("copilot_cmp").setup()
 
 -- ALE
 vim.g['ale_linters'] = {
