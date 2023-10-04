@@ -185,7 +185,7 @@ function get_eol() {
     return
   fi
   source /etc/os-release
-  eol=$(grep -F "22.10" /usr/share/distro-info/ubuntu.csv | cut -d, -f 6)
+  eol=$(grep -F "$VERSION_ID" /usr/share/distro-info/ubuntu.csv | cut -d, -f 6)
   d=$(( ($(date +%s -d "$eol") - $(date +%s)) / 86400 ))
   if [[ "$d" -lt 30 ]]; then
     echo -e "\e[31;1m EOL of ${VERSION} is coming (${eol})"
