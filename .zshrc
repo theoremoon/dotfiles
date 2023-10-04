@@ -83,7 +83,7 @@ zinit light "zsh-users/zsh-syntax-highlighting"
 
 # check dotfiles update
 if [[ `cd ~/dotfiles && git status --porcelain` ]]; then
-  echo -e "\e[41m ~/dotfiles is updated"
+  echo -e "\e[40;1m ~/dotfiles is updated"
 fi
 
 # optionals
@@ -179,3 +179,16 @@ function get_sleep() {
   
   curl -sSL "https://api.ouraring.com/v2/usercollection/sleep?start_date=${start_date}&end_date=${end_date}" -H "Authorization: Bearer $(cat $TOKEN)" | jq ".data[0].bedtime_start,.data[-1].bedtime_end"
 }
+
+function get_eol() {
+  if [[ "$OSTYPE" != "linux-gnu" ]]; then
+    return
+  fi
+  source /etc/os-release
+  eol=$(grep -F "22.10" /usr/share/distro-info/ubuntu.csv | cut -d, -f 6)
+  d=$(( ($(date +%s -d "$eol") - $(date +%s)) / 86400 ))
+  if [[ "$d" -lt 30 ]]; then
+    echo -e "\e[31;1m EOL of ${VERSION} is coming (${eol})"
+  fi
+}
+get_eol
