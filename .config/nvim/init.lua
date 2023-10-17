@@ -48,13 +48,7 @@ require('jetpack.packer').add {
   },
   {'lukas-reineke/indent-blankline.nvim',
       config = function()
-          vim.cmd [[highlight IndentBlanklineIndent1 guifg=#333333 gui=nocombine]]
-          require('indent_blankline').setup {
-            char_highlight_list = {
-              "IndentBlanklineIndent1",
-            },
-            show_current_context = true,
-          }
+          require('ibl').setup()
       end
   },
   {'theoremoon/cryptohack-color.vim'},
