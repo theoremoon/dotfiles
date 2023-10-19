@@ -181,6 +181,9 @@ function get_sleep() {
 }
 
 function get_eol() {
+  if [[ "${RANDOM:1:2}" != "00" ]]; then
+    return
+  fi
   if [[ "$OSTYPE" != "linux-gnu" ]]; then
     return
   fi
