@@ -102,12 +102,6 @@ setopt extendedglob notify
 setopt nobeep
 bindkey -e
 # End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-autoload -Uz compinit
-compinit
-autoload -Uz colors
-colors
-# End of lines added by compinstall
  
 # general
 export EDITOR=nvim
@@ -181,9 +175,6 @@ function get_sleep() {
 }
 
 function get_eol() {
-  if [[ "${RANDOM:1:2}" != "00" ]]; then
-    return
-  fi
   if [[ "$OSTYPE" != "linux-gnu" ]]; then
     return
   fi
