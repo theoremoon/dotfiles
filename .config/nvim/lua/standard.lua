@@ -36,8 +36,8 @@ vim.g['ale_linters'] = {
   perl = {'perlcritic', 'use-heuristic'},
 }
 vim.g['ale_fixers'] = {
-  typescript = {'prettier', 'eslint'},
-  typescriptreact = {'prettier', 'eslint'},
+  typescript = {'prettier', 'eslint', 'deno'},
+  typescriptreact = {'prettier', 'eslint', 'deno'},
   go = {'gofmt', 'goimports'},
   perl = {'perltidy'},
 }
@@ -121,6 +121,7 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', { noremap=true, silent=true })
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'E', '<cmd>lua vim.diagnostic.open_float()<CR>', { noremap=true, silent=true })
     vim.api.nvim_buf_set_keymap(bufnr, 'i', '<C-n>', [[<Cmd>lua require('cmp').complete()<CR>]], { noremap = true, silent = true })
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>a', [[<Cmd>lua vim.lsp.buf.code_action()<CR>]], { noremap = true, silent = true })
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>r', [[<Cmd>lua vim.lsp.buf.rename()<CR>]], { noremap = true, silent = true })
@@ -134,6 +135,18 @@ end
 if vim.fn.executable('typescript-language-server') == 1 then
   lspconfig.tsserver.setup {
       on_attach = on_attach,
+      flags = {
+          debounce_text_changes = 200, -- 最低でも200msごとに情報を更新する
+      },
+      capabilities = capabilities
+  }
+end
+if vim.fn.executable('deno') == 1 then
+  lspconfig.denols.setup {
+      on_attach = function(client, bufnr)
+        on_attach(client, bufnr)
+        vim.cmd [[LspStop tsserver]]
+      end,
       flags = {
           debounce_text_changes = 200, -- 最低でも200msごとに情報を更新する
       },
