@@ -192,7 +192,7 @@ vim.cmd [[
 vim.env.COCVIMRC = vim.fn.stdpath("config") .. "/lua/coc.lua"
 vim.env.STANDARD = vim.fn.stdpath("config") .. "/lua/standard.lua"
 
-local use_coc = false
+local use_coc = true
 if use_coc then
     require("coc")
 else
