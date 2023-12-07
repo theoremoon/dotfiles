@@ -7,7 +7,7 @@ end
 local Plug = vim.fn['plug#']
 vim.call('plug#begin')
   Plug('neoclide/coc.nvim', {branch ='release'})
-  -- Plug "github/copilot.vim"
+  Plug "github/copilot.vim"
 
   Plug 'dense-analysis/ale'
   Plug 'theoremoon/ale-linter-perl-use-heuristic'
