@@ -20,6 +20,11 @@ vim.g.coc_global_extensions = {
     'coc-go',
 }
 
+vim.g.copilot_filetypes = {
+    yaml = true,
+    xml = true,
+}
+
 
 -- Some servers have issues with backup files, see #649
 vim.opt.backup = false
@@ -51,12 +56,14 @@ vim.keymap.set({"n"}, "gd", "<Plug>(coc-implementation)", { silent = true, norem
 -- ALE
 vim.g['ale_linters'] = {
     perl = {'perlcritic', 'use-heuristic'},
+    python = { 'pylint' },
 }
 vim.g['ale_fixers'] = {
     typescript = {'prettier'},
     typescriptreact = {'prettier'},
     perl = {'perltidy'},
     go = { 'gofmt', 'goimports' },
+    python = { 'black' },
 }
 vim.g['ale_fix_on_save'] = 1
 vim.g['ale_linters_explicit'] = 1

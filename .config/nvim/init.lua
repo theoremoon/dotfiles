@@ -46,16 +46,17 @@ require('jetpack.packer').add {
           }
       end
   },
-  {'lukas-reineke/indent-blankline.nvim',
-      config = function()
-          require('ibl').setup()
-      end
-  },
+  --{'lukas-reineke/indent-blankline.nvim',
+  --    config = function()
+  --        require('ibl').setup()
+  --    end
+  --},
   {'theoremoon/cryptohack-color.vim'},
   {'mjlbach/onedark.nvim' },
 
   {'sheerun/vim-polyglot'},
   {'prisma/vim-prisma'},
+  {'rust-lang/rust.vim'},
 
   {'tpope/vim-fugitive'},
   {'tpope/vim-rhubarb'},
@@ -84,6 +85,7 @@ require('jetpack.packer').add {
   {'f-person/git-blame.nvim'},
   { 'petRUShka/vim-sage'},
 
+  { 'dylnmc/synstack.vim' },
   {'tpope/vim-surround'},
   {'tpope/vim-sleuth'},
   {'pbrisbin/vim-mkdir'},
@@ -154,6 +156,7 @@ vim.api.nvim_set_keymap('v', '<leader>y', '"+y', { noremap = true, silent = true
 vim.api.nvim_set_keymap('v', '<leader>p', '"+p', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>p', '"+p', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader><CR>', ':<C-u>noh<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>h', '<plug>(SynStack)', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('v', '<', '<gv', { noremap = false, silent = true })
 vim.api.nvim_set_keymap('v', '>', '>gv', { noremap = false, silent = true })
