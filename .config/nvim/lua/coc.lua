@@ -18,6 +18,7 @@ vim.g.coc_global_extensions = {
     'coc-eslint',
     'coc-prettier',
     'coc-go',
+    'coc-svelte',
 }
 
 vim.g.copilot_filetypes = {

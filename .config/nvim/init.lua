@@ -57,6 +57,7 @@ require('jetpack.packer').add {
   {'sheerun/vim-polyglot'},
   {'prisma/vim-prisma'},
   {'rust-lang/rust.vim'},
+  {'evanleck/vim-svelte'},
 
   {'tpope/vim-fugitive'},
   {'tpope/vim-rhubarb'},
