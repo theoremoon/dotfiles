@@ -81,6 +81,10 @@ zinit light sindresorhus/pure
 zinit light "zsh-users/zsh-syntax-highlighting"
 # hint: zplug update to update tools
 
+# completions
+zinit ice as"completion" wait"0" lucid atinit"zpcompinit"
+zinit snippet https://github.com/theoremoon/go-task-completion/blob/main/_task
+
 # check dotfiles update
 if [[ `cd ~/dotfiles && git status --porcelain` ]]; then
   echo -e "\e[40;1m ~/dotfiles is updated"
