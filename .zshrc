@@ -155,6 +155,13 @@ function __c_g() {
 zle -N __c_g
 bindkey "^[g" __c_g
 
+# M-f to fill the file path to prompt
+function __c_f() {
+  zle -U $(fd | fzf)
+}
+zle -N __c_f
+bindkey "^[f" __c_f
+
 # M-^ to rise directory up
 function __rise_dir() {
   cd ..
