@@ -57,7 +57,6 @@ require('jetpack.packer').add {
   {'sheerun/vim-polyglot'},
   {'prisma/vim-prisma'},
   {'rust-lang/rust.vim'},
-  {'evanleck/vim-svelte'},
 
   {'tpope/vim-fugitive'},
   {'tpope/vim-rhubarb'},
@@ -132,7 +131,8 @@ require('jetpack.packer').add {
   { 'nvim-treesitter/nvim-treesitter',
     config =function()
       require('nvim-treesitter.configs').setup {
-        hightlight = {
+        ensure_installed = { "typescript", "css", "html", "svelte" },
+        highlight = {
           enable = true,
         },
         indent = {
