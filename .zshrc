@@ -33,6 +33,9 @@ darwin*)
         zinit ice from"gh-r" as"program" bpick"*aarch64-apple-darwin*" pick"**/rg"
         zinit light "microsoft/ripgrep-prebuilt"
 
+        zinit ice from"gh-r" as"program" bpick"*aarch64-apple-darwin*" pick"**/delta"
+        zinit light "dandavison/delta"
+
         # zinit ice from"gh-r" as"program" bpick"*x86_64*apple-darwin*" pick"**/bat"
         # zinit light "sharkdp/bat"
 
@@ -169,6 +172,15 @@ function __rise_dir() {
 }
 zle -N __rise_dir
 bindkey "^[u" __rise_dir
+
+function __c_b() {
+  branch=$(git branch --format="%(refname:short)" --sort=-committerdate | fzf)
+  if [ -n "$branch" ]; then
+    git switch "$branch"
+  fi
+}
+zle -N __c_b
+bindkey "^[b" __c_b
 
 # go
 export GO111MODULE=on
