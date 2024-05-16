@@ -56,7 +56,7 @@ require('jetpack.packer').add {
 
   {'sheerun/vim-polyglot'},
   {'prisma/vim-prisma'},
-  {'rust-lang/rust.vim'},
+  {'petRUShka/vim-sage'},
 
   {'tpope/vim-fugitive'},
   {'tpope/vim-rhubarb'},
@@ -83,7 +83,6 @@ require('jetpack.packer').add {
       end
   },
   {'f-person/git-blame.nvim'},
-  { 'petRUShka/vim-sage'},
 
   { 'dylnmc/synstack.vim' },
   {'tpope/vim-surround'},
@@ -139,6 +138,14 @@ require('jetpack.packer').add {
           enable = true,
         }
       }
+    end,
+  },
+
+  { 'stevearc/oil.nvim',
+    config = function()
+      require("oil").setup({
+        default_file_explorer = true,
+      })
     end,
   },
 }
