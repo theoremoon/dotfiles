@@ -173,14 +173,14 @@ function __rise_dir() {
 zle -N __rise_dir
 bindkey "^[u" __rise_dir
 
-function __c_b() {
+function __c_s() {
   branch=$(git branch --format="%(refname:short)" --sort=-committerdate | fzf)
   if [ -n "$branch" ]; then
     git switch "$branch"
   fi
 }
-zle -N __c_b
-bindkey "^[b" __c_b
+zle -N __c_s
+bindkey "^[s" __c_s
 
 # go
 export GO111MODULE=on
@@ -209,3 +209,15 @@ function get_eol() {
   fi
 }
 get_eol
+
+function sage-docker() {
+  if [[ $# -eq 0 ]]; then
+    docker run --network=host --platform linux/x86_64 --rm -it -v "$(pwd):/work" -w /work sage bash
+  elif [[ "$1" =~ \.py$ ]]; then
+    docker run --network=host --platform linux/x86_64 --rm -it -v "$(pwd):/work" -w /work sage python3 $@
+  elif [[ "$1" =~ \.sage$ ]]; then
+    docker run --network=host --platform linux/x86_64 --rm -it -v "$(pwd):/work" -w /work sage sage $@
+  else
+    docker run --network=host --platform linux/x86_64 --rm -it -v "$(pwd):/work" -w /work sage $@
+  fi
+}
