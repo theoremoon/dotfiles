@@ -31,7 +31,7 @@ font pango:Noto Sans CJK JP 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec xfce4-terminal
+bindsym $mod+Return exec /user/bin/x-terminal-emulator
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -176,9 +176,9 @@ bindsym XF86MonBrightnessUp exec "sudo tee /sys/class/backlight/intel_backlight/
 bindsym XF86MonBrightnessDown exec "sudo tee /sys/class/backlight/intel_backlight/brightness <<< $((`cat /sys/class/backlight/intel_backlight/brightness` - 50))"
 
 bindsym Print exec scrot -u -z '/tmp/%Y-%m-%d_%H_%M_%S.png' -e 'xclip -selection clipboard -t image/png $f'
-bindsym $mod+Shift+Print exec "sleep 0.2; scrot --select -z '/tmp/%Y-%m-%d_%H_%M_%S.png' -e 'xclip -selection clipboard -t image/png $f' 2> /tmp/log"
+bindsym $mod+Shift+Print exec "sleep 0.2; maim --select | tee $(date +'/tmp/%Y-%m-%d_%H_%M_%S.png') | xclip -selection clipboard -t image/png"
 exec --no-startup-id fcitx-autostart
 exec --no-startup-id nm-applet
-exec xfce4-terminal
+exec /usr/bin/x-terminal-emulator
 exec --no-startup-id "feh --bg-scale /opt/wallpaper.png"
 exec --no-startup-id "zsh -c 'source ~/.zshrc; displayoptimize'"
