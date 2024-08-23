@@ -93,6 +93,14 @@ if [[ `cd ~/dotfiles && git status --porcelain` ]]; then
   echo -e "\e[40;1m ~/dotfiles is updated"
 fi
 
+# RPROMPT
+RPROMPT='[%D{%H:%M:%S}]'
+function re-prompt() {
+  zle .reset-prompt
+  zle .accept-line
+}
+zle -N accept-line re-prompt  # update date on execute command
+
 # optionals
 [ -d ~/.zsh ] && ls ~/.zsh/*.zsh | while read f; do source "$f"; done;
 
