@@ -159,6 +159,21 @@ function _g() {
 }
 compdef _g g
 
+function c() {
+  CTFDIR=$(ghq list --full-path | grep theoremoon/ctf)
+  
+
+  if [ $# -eq 1 ]; then
+    dir=$(cd $CTFDIR && fd -d 2 -t dir | grep "/$1\$")
+  else
+    dir=$(cd $CTFDIR && fd -d 2 -t dir | tac | fzf)
+  fi
+
+  if [ -n "$dir" ]; then
+    cd "$CTFDIR" && cd "$dir"
+  fi
+}
+
 # M-g to copy project path to prombt
 function __c_g() {
   zle -U $(ghq list --full-path | fzf)
@@ -225,6 +240,14 @@ function sage-docker() {
     docker run --network=host --platform linux/x86_64 --rm -it -v "$(pwd):/work" -w /work sage python3 $@
   elif [[ "$1" =~ \.sage$ ]]; then
     docker run --network=host --platform linux/x86_64 --rm -it -v "$(pwd):/work" -w /work sage sage $@
+  elif [[ "$1" == "socat" ]]; then
+    if [[ "$2" =~ \.py$ ]]; then
+      exec sage-docker socat TCP-L:9999,fork,reuseaddr EXEC:"'python3 $2'"
+    elif [[ "$2" =~ \.sage$ ]]; then
+      exec sage-docker socat TCP-L:9999,fork,reuseaddr EXEC:"'sage $2'"
+    else
+      docker run --platform linux/x86_64 --rm -p 9999:9999 -it -v "$(pwd):/work" -w /work sage $@
+    fi
   else
     docker run --network=host --platform linux/x86_64 --rm -it -v "$(pwd):/work" -w /work sage $@
   fi
