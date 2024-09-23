@@ -94,7 +94,7 @@ if [[ `cd ~/dotfiles && git status --porcelain` ]]; then
 fi
 
 # RPROMPT
-RPROMPT='[%D{%H:%M:%S}]'
+PROMPT="[%D{%H:%M:%S}] $PROMPT"
 function re-prompt() {
   zle .reset-prompt
   zle .accept-line
