@@ -53,16 +53,18 @@ vim.keymap.set({"n"}, "K", '<CMD>lua _G.show_docs()<CR>', {silent = true, norema
 vim.keymap.set({"n"}, "<leader>a", "<Plug>(coc-codeaction-cursor)", { silent = true, noremap = true })
 vim.keymap.set({"x"}, "<leader>a", "<Plug>(coc-codeaction-selected)", { silent = true, noremap = true })
 vim.keymap.set({"n"}, "<leader>r", "<Plug>(coc-rename)", { silent = true, noremap = true })
-vim.keymap.set({"n"}, "gd", "<Plug>(coc-implementation)", { silent = true, noremap = true })
+vim.keymap.set({"n"}, "gd", "<Plug>(coc-definition)", { silent = true, noremap = true })
+vim.keymap.set({"n"}, "gn", "<Plug>(coc-diagnostic-next)", { silent = true, noremap = true })
 
 -- ALE
 vim.g['ale_linters'] = {
     perl = {'perlcritic', 'use-heuristic'},
     python = { 'pylint' },
+    typescript = {'eslint'},
 }
 vim.g['ale_fixers'] = {
-    typescript = {'prettier'},
-    typescriptreact = {'prettier'},
+    typescript = {'prettier', 'eslint'},
+    typescriptreact = {'prettier', 'eslint'},
     perl = {'perltidy'},
     go = { 'gofmt', 'goimports' },
     python = { 'black' },
