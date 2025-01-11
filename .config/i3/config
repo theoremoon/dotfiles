@@ -31,7 +31,7 @@ font pango:Noto Sans CJK JP 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec /user/bin/x-terminal-emulator
+bindsym $mod+Return exec /usr/bin/x-terminal-emulator
 
 # kill focused window
 bindsym $mod+Shift+q kill
