@@ -2,6 +2,8 @@
 [ ! -f ~/.local/share/zinit/zinit.git/zinit.zsh ] && sh -c "$(curl -fsSL https://git.io/zinit-install)"
 source ~/.local/share/zinit/zinit.git/zinit.zsh
 
+autoload -Uz compinit && compinit
+
 # install tools
 case ${OSTYPE} in
 darwin*)
@@ -42,11 +44,11 @@ darwin*)
         # zinit ice from"gh-r" as"program" bpick"*x86_64*apple-darwin*" pick"**/fd"
         # zinit light "sharkdp/fd"
 
-        # zinit ice from"gh-r" as"program" bpick"*darwin_amd64*" pick"**/ghq"
-        # zinit light "x-motemen/ghq"
+        zinit ice from"gh-r" as"program" bpick"*darwin_arm64*" pick"**/ghq"
+        zinit light "x-motemen/ghq"
 
-        # zinit ice from"gh-r" as"program" bpick"*macOS_amd64.tar.gz" pick"**/gh"
-        # zinit light "cli/cli"
+        zinit ice from"gh-r" as"program" bpick"*macOS_arm64.zip" pick"**/gh"
+        zinit light "cli/cli"
         ;;
     esac
     ;;

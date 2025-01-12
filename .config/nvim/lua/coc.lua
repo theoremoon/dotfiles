@@ -61,6 +61,7 @@ vim.g['ale_linters'] = {
     perl = {'perlcritic', 'use-heuristic'},
     python = { 'pylint' },
     typescript = {'eslint'},
+    typescriptreact = {'eslint'},
 }
 vim.g['ale_fixers'] = {
     typescript = {'prettier', 'eslint'},
@@ -70,4 +71,5 @@ vim.g['ale_fixers'] = {
     python = { 'black' },
 }
 vim.g['ale_fix_on_save'] = 1
+vim.g['ale_lint_on_save'] = 1
 vim.g['ale_linters_explicit'] = 1
