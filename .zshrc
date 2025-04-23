@@ -41,8 +41,8 @@ darwin*)
         # zinit ice from"gh-r" as"program" bpick"*x86_64*apple-darwin*" pick"**/bat"
         # zinit light "sharkdp/bat"
 
-        # zinit ice from"gh-r" as"program" bpick"*x86_64*apple-darwin*" pick"**/fd"
-        # zinit light "sharkdp/fd"
+        zinit ice from"gh-r" as"program" bpick"*aarch64*apple-darwin*" pick"**/fd"
+        zinit light "sharkdp/fd"
 
         zinit ice from"gh-r" as"program" bpick"*darwin_arm64*" pick"**/ghq"
         zinit light "x-motemen/ghq"
@@ -254,3 +254,5 @@ function sage-docker() {
     docker run --network=host --platform linux/x86_64 --rm -it -v "$(pwd):/work" -w /work sage $@
   fi
 }
+
+[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
