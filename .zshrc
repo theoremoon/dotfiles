@@ -235,24 +235,5 @@ function get_eol() {
 }
 get_eol
 
-function sage-docker() {
-  if [[ $# -eq 0 ]]; then
-    docker run --network=host --platform linux/x86_64 --rm -it -v "$(pwd):/work" -w /work sage bash
-  elif [[ "$1" =~ \.py$ ]]; then
-    docker run --network=host --platform linux/x86_64 --rm -it -v "$(pwd):/work" -w /work sage python3 $@
-  elif [[ "$1" =~ \.sage$ ]]; then
-    docker run --network=host --platform linux/x86_64 --rm -it -v "$(pwd):/work" -w /work sage sage $@
-  elif [[ "$1" == "socat" ]]; then
-    if [[ "$2" =~ \.py$ ]]; then
-      exec sage-docker socat TCP-L:9999,fork,reuseaddr EXEC:"'python3 $2'"
-    elif [[ "$2" =~ \.sage$ ]]; then
-      exec sage-docker socat TCP-L:9999,fork,reuseaddr EXEC:"'sage $2'"
-    else
-      docker run --platform linux/x86_64 --rm -p 9999:9999 -it -v "$(pwd):/work" -w /work sage $@
-    fi
-  else
-    docker run --network=host --platform linux/x86_64 --rm -it -v "$(pwd):/work" -w /work sage $@
-  fi
-}
-
 [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
+
