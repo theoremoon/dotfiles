@@ -145,31 +145,16 @@ bindkey '^r' select-history
 
 # ghq fzf integration. fast cd to git project
 function g() {
-  if [ $# -eq 1 ]; then
-    dir=$(ghq list --full-path | grep "/$1\$")
-  else
-    dir=$(ghq list --full-path | fzf)
-  fi
-
+  local root=$(ghq root)
+  local dir=$(ghq list | fzf)
   if [ -n "$dir" ]; then
-    cd "$dir"
+    cd "$root/$dir"
   fi
 }
-
-function _g() {
-  _values '' $(ghq list --full-path | xargs -I@ basename @)
-}
-compdef _g g
 
 function c() {
   CTFDIR=$(ghq list --full-path | grep theoremoon/ctf)
-  
-
-  if [ $# -eq 1 ]; then
-    dir=$(cd $CTFDIR && fd -d 2 -t dir | grep "/$1\$")
-  else
-    dir=$(cd $CTFDIR && fd -d 2 -t dir | tac | fzf)
-  fi
+  local dir=$(cd $CTFDIR && fd -d 2 -t dir | tac | fzf)
 
   if [ -n "$dir" ]; then
     cd "$CTFDIR" && cd "$dir"
@@ -213,15 +198,6 @@ export GOPATH=$HOME/go
 export PATH="$PATH:$HOME/.local/bin:$HOME/bin/:$HOME/.config/composer/vendor/bin/:$GOPATH/bin:$HOME/.dub/packages/.bin/dls-latest:$PYENV_ROOT/bin:/usr/local/go/bin:$HOME/.poetry/bin:$HOME/.cargo/bin"
 alias goinit='go mod init $(pwd | grep -Po "\w+\.\w+\/.+\z")'
 
-function get_sleep() {
-  OFFSET=${1:-0}
-  TOKEN="${XDG_CONFIG_HOME:-$HOME/.config}/oura/token"
-  start_date=$(date +"%Y-%m-%d" --date "today+$((-1-$OFFSET)) day")
-  end_date=$(date +"%Y-%m-%d"  --date "today+$((0-$OFFSET)) day")
-  
-  curl -sSL "https://api.ouraring.com/v2/usercollection/sleep?start_date=${start_date}&end_date=${end_date}" -H "Authorization: Bearer $(cat $TOKEN)" | jq ".data[0].bedtime_start,.data[-1].bedtime_end"
-}
-
 function get_eol() {
   if [[ "$OSTYPE" != "linux-gnu" ]]; then
     return
@@ -234,6 +210,3 @@ function get_eol() {
   fi
 }
 get_eol
-
-[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
-
