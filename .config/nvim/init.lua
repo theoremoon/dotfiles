@@ -28,17 +28,16 @@ end
 
 
 vim.pack.add({
-  'https://github.com/airblade/vim-gitgutter',
-  'https://github.com/f-person/git-blame.nvim',
-  'https://github.com/ibhagwan/fzf-lua',
-  'https://github.com/junegunn/vim-easy-align',
-  'https://github.com/mattn/emmet-vim',
-  'https://github.com/tpope/vim-fugitive',
-  'https://github.com/tpope/vim-rhubarb',
-  'https://github.com/tpope/vim-sleuth',
-  'https://github.com/tpope/vim-surround',
+  { src = 'https://github.com/airblade/vim-gitgutter', version = '21c977e8597c468c7dc76001389b0b430d46a4b0' },
+  { src = 'https://github.com/f-person/git-blame.nvim', version = '5c536e2d4134d064aa3f41575280bc8a2a0e03d7' },
+  { src = 'https://github.com/ibhagwan/fzf-lua', version = '3ff77862f6c62f7b850668435ae43aa026de8758' },
+  { src = 'https://github.com/junegunn/vim-easy-align', version = '9815a55dbcd817784458df7a18acacc6f82b1241' },
+  { src = 'https://github.com/mattn/emmet-vim', version = '92ef2f74f4093edc99db5e9e4cf7e40116a85bd6' },
+  { src = 'https://github.com/tpope/vim-rhubarb', version = '5496d7c94581c4c9ad7430357449bb57fc59f501' },
+  { src = 'https://github.com/tpope/vim-sleuth', version = 'be69bff86754b1aa5adcbb527d7fcd1635a84080' },
+  { src = 'https://github.com/tpope/vim-surround', version = '3d188ed2113431cf8dac77be61b842acb64433d9' },
 
-  'https://github.com/dense-analysis/ale',
+  { src = 'https://github.com/dense-analysis/ale', version = '2a3af30fb6a725ec7215435369b310b1d2dc4c09' },
   'https://github.com/theoremoon/ale-linter-perl-use-heuristic',
 
   'https://github.com/theoremoon/CTF.vim',
