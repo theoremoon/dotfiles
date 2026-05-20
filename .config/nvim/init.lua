@@ -26,129 +26,24 @@ if vim.fn.isdirectory(vim.fn.expand '~/.vim/undodir') ~= 1 then
   vim.fn.execute('!mkdir -p ' .. (vim.fn.expand '~/.vim/undodir'))
 end
 
-local jetpack_install_path = vim.fn.stdpath 'data' .. '/site/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim'
-if vim.fn.empty(vim.fn.glob(jetpack_install_path)) > 0 then
-  vim.fn.execute('!curl -fL --create-dirs https://raw.githubusercontent.com/tani/vim-jetpack/master/plugin/jetpack.vim -o ' .. jetpack_install_path)
-end
 
--- JetpackSync
-vim.cmd('packadd vim-jetpack')
-require('jetpack.packer').add {
-  {'tani/vim-jetpack'}, -- bootstrap
-  {'nvim-lualine/lualine.nvim',
-      config = function()
-          require('lualine').setup {
-              options = {
-                  icons_enabled = false,
-                  theme = 'auto', -- from current colorscheme
-                  component_separators = { left = '|', right = '|'},
-              }
-          }
-      end
-  },
-  --{'lukas-reineke/indent-blankline.nvim',
-  --    config = function()
-  --        require('ibl').setup()
-  --    end
-  --},
-  {'theoremoon/cryptohack-color.vim'},
-  {'mjlbach/onedark.nvim' },
+vim.pack.add({
+  'https://github.com/airblade/vim-gitgutter',
+  'https://github.com/f-person/git-blame.nvim',
+  'https://github.com/ibhagwan/fzf-lua',
+  'https://github.com/junegunn/vim-easy-align',
+  'https://github.com/mattn/emmet-vim',
+  'https://github.com/tpope/vim-fugitive',
+  'https://github.com/tpope/vim-rhubarb',
+  'https://github.com/tpope/vim-sleuth',
+  'https://github.com/tpope/vim-surround',
 
-  {'sheerun/vim-polyglot'},
-  {'prisma/vim-prisma'},
-  {'petRUShka/vim-sage'},
+  'https://github.com/dense-analysis/ale',
+  'https://github.com/theoremoon/ale-linter-perl-use-heuristic',
 
-  {'tpope/vim-fugitive'},
-  {'tpope/vim-rhubarb'},
-  {'airblade/vim-gitgutter',
-      config = function()
-          function _G.GitGutterNextHunkCycle()
-             local current_window = 0
-              local initialrow, initialcol = unpack(vim.api.nvim_win_get_cursor(current_window))
-
-              vim.fn['gitgutter#hunk#next_hunk'](1)
-              local afterrow, _ = unpack(vim.api.nvim_win_get_cursor(current_window))
-              if afterrow == initialrow then
-                  vim.api.nvim_win_set_cursor(current_window, {1, 0})
-                  vim.fn['gitgutter#hunk#next_hunk'](1)
-                  local afterrow2, _ = unpack(vim.api.nvim_win_get_cursor(current_window))
-                  if afterrow2 == 1 then
-                      vim.api.nvim_win_set_cursor(current_window, {1, 0})
-                  end
-              end
-          end
-          vim.api.nvim_set_keymap('n', '<leader>s', '<cmd>GitGutterStageHunk<CR>', { noremap = true, silent = false })
-          vim.api.nvim_set_keymap('n', '<leader>u', '<cmd>GitGutterUndoHunk<CR>', { noremap = true, silent = false })
-          vim.api.nvim_set_keymap('n', '<leader>n', '<cmd>lua GitGutterNextHunkCycle()<CR>', { noremap = true, silent = false })
-      end
-  },
-  {'f-person/git-blame.nvim'},
-
-  { 'dylnmc/synstack.vim' },
-  {'tpope/vim-surround'},
-  {'tpope/vim-sleuth'},
-  {'pbrisbin/vim-mkdir'},
-  {'numToStr/Comment.nvim', config = function() require('Comment').setup() end },
-  {'terryma/vim-multiple-cursors'},
-  {'junegunn/vim-easy-align',
-      config = function()
-          vim.api.nvim_set_keymap('x', 'ga', '<Plug>(EasyAlign)', { noremap = false, silent = false })
-          vim.api.nvim_set_keymap('n', 'ga', '<Plug>(EasyAlign)', { noremap = false, silent = false })
-      end
-  },
-  {'theoremoon/CTF.vim'},
-  {'mattn/emmet-vim'},
-  {'soramugi/auto-ctags.vim',
-      config = function()
-          vim.g.auto_ctags_tags_name = 'ctags'
-      end,
-  },
-
-  { 'nvim-telescope/telescope.nvim',
-    requires = { 'nvim-lua/plenary.nvim' },
-    config = function()
-      require('telescope').setup {
-        defaults = {
-          file_ignore_patterns = { "node_modules" },
-          mappings = {
-            i = {
-              ['<C-u>'] = false,
-              ['<C-d>'] = false,
-            },
-          },
-        },
-      }
-      require('telescope').load_extension 'fzf'
-      vim.api.nvim_set_keymap('n', '<C-p>', [[<cmd>lua require('telescope.builtin').find_files({previewer = false})<CR>]], { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', '<C-f>', [[<cmd>lua require('telescope.builtin').oldfiles({previewer = false})<CR>]], { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', '<leader>g', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', '<leader>s', [[<cmd>lua require('telescope.builtin').grep_string()<CR>]], { noremap = true, silent = true })
-    end,
-  },
-  { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
-
-  { 'nvim-treesitter/nvim-treesitter',
-    config =function()
-      require('nvim-treesitter.configs').setup {
-        ensure_installed = { "typescript", "css", "html", "svelte" },
-        highlight = {
-          enable = true,
-        },
-        indent = {
-          enable = true,
-        }
-      }
-    end,
-  },
-
-  { 'stevearc/oil.nvim',
-    config = function()
-      require("oil").setup({
-        default_file_explorer = false,
-      })
-    end,
-  },
-}
+  'https://github.com/theoremoon/CTF.vim',
+  'https://github.com/theoremoon/cryptohack-color.vim',
+})
 vim.cmd('colorscheme cryptohack')
 
 -- keymaps
@@ -187,6 +82,32 @@ vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true, silent = true 
 
 vim.api.nvim_set_keymap('n', '<leader>b', ':<C-u>GitBlameOpenCommitURL<CR>', { noremap = true, silent = true })
 
+vim.api.nvim_set_keymap('n', '<C-p>', [[<cmd>lua require('fzf-lua').files()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-f>', [[<cmd>lua require('fzf-lua').resume()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>g', [[<cmd>lua require('fzf-lua').live_grep_native()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>s', [[<cmd>lua require('fzf-lua').grep_cword()<CR>]], { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('x', 'ga', '<Plug>(EasyAlign)', { noremap = false, silent = false })
+vim.api.nvim_set_keymap('n', 'ga', '<Plug>(EasyAlign)', { noremap = false, silent = false })
+
+vim.api.nvim_set_keymap('n', '<leader>n', '<cmd>GitGutterNextHunkCycle<CR>', { noremap = false, silent = false })
+
+function _G.GitGutterNextHunkCycle()
+  local current_window = 0
+  local initialrow, initialcol = unpack(vim.api.nvim_win_get_cursor(current_window))
+
+  vim.fn['gitgutter#hunk#next_hunk'](1)
+  local afterrow, _ = unpack(vim.api.nvim_win_get_cursor(current_window))
+  if afterrow == initialrow then
+    vim.api.nvim_win_set_cursor(current_window, {1, 0})
+    vim.fn['gitgutter#hunk#next_hunk'](1)
+    local afterrow2, _ = unpack(vim.api.nvim_win_get_cursor(current_window))
+    if afterrow2 == 1 then
+      vim.api.nvim_win_set_cursor(current_window, {1, 0})
+    end
+  end
+end
+
 -- small utils
 function _G.copybufname_to_clipboard()
   local bufname = string.sub(vim.api.nvim_buf_get_name(0), string.len(vim.loop.cwd()) + 2)
@@ -197,16 +118,16 @@ vim.cmd [[
   command! CopyBufName lua copybufname_to_clipboard()
 ]]
 
-
---------
-
-vim.env.COCVIMRC = vim.fn.stdpath("config") .. "/lua/coc.lua"
-vim.env.STANDARD = vim.fn.stdpath("config") .. "/lua/standard.lua"
-
-local use_coc = true
-if use_coc then
-    require("coc")
-else
-    require("standard")
-end
-
+-- ALE
+vim.g['ale_linters'] = {
+  typescript = {'eslint', 'tsserver'},
+  typescriptreact = {'eslint', 'tsserver'},
+  perl = {'perlcritic', 'use-heuristic'},
+}
+vim.g['ale_fixers'] = {
+  typescript = {'prettier', 'eslint', 'deno'},
+  typescriptreact = {'prettier', 'eslint', 'deno'},
+  go = {'gofmt', 'goimports'},
+  perl = {'perltidy'},
+}
+vim.g['ale_fix_on_save'] = 1

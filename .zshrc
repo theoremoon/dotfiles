@@ -1,3 +1,7 @@
+if [ ! -f ~/.zshrc.zwc -o ~/.zshrc -nt ~/.zshrc.zwc ]; then
+   zcompile ~/.zshrc
+fi
+
 # automatically install zinit
 [ ! -f ~/.local/share/zinit/zinit.git/zinit.zsh ] && sh -c "$(curl -fsSL https://git.io/zinit-install)"
 source ~/.local/share/zinit/zinit.git/zinit.zsh
